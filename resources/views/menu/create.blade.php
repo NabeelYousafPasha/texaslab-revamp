@@ -99,7 +99,6 @@
         document.addEventListener("alpine:init", () => {
             Alpine.data("form", () => ({
 
-                // highlightjs
                 codeArr: [],
                 toggleCode(name) {
                     if (this.codeArr.includes(name)) {

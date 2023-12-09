@@ -18,6 +18,7 @@
 </head>
 <body>
     <div id="app">
+        
         <main class="py-4">
             <app-component></app-component>
         </main>

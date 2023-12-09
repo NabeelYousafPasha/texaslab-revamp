@@ -1,8 +1,6 @@
-{{-- @extends('layouts.home') --}}
-{{-- @section('content') --}}
 <x-layout.default>
     <script src="/assets/js/simple-datatables.js"></script>
-    <div x-data="basic">
+    <div>
         <div class="panel flex items-center overflow-x-auto whitespace-nowrap p-3 text-primary">
             <div class="mb-5">
                 <div class="flex items-center justify-center gap-2">
@@ -46,7 +44,7 @@
                                                     </div>
                                                     <div class="md:col-span-2">
                                                         <label for="appointmentTest">Tests</label>
-                                                        <select id="appointmentTest" class="tests form-input"
+                                                        <select id="appointmentTest" multiple class="tests"
                                                             name="test">
                                                             <option selected>Please Select Test</option>
                                                             <option value="covidtest">Covid Test</option>
@@ -89,13 +87,13 @@
                                                 </div>
                                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                                                     <div>
-                                                        <label for="mail">Email</label>
-                                                        <input id="mail" type="email" placeholder="Enter Email"
+                                                        <label for="email">Email</label>
+                                                        <input id="email" type="email" placeholder="Enter Email"
                                                             class="form-input" name="email" />
                                                     </div>
                                                     <div>
-                                                        <label for="customLname">Phone Number</label>
-                                                        <input id="customLname" type="text"
+                                                        <label for="phone">Phone Number</label>
+                                                        <input id="phone" type="text"
                                                             placeholder="Enter Phone Number" class="form-input"
                                                             name="phoneNumber" />
                                                     </div>
@@ -225,12 +223,11 @@
         </table>
     </div>
     </div>
-{{-- @endsection --}}
+    <link rel='stylesheet' type='text/css' href='{{ Vite::asset('resources/css/nice-select2.css') }}'>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="/assets/js/nice-select2.js"></script>
     <script>
         let table = new DataTable('#appointmenttable');
@@ -289,6 +286,14 @@
                 });
             });
         });
+        $('#dob').mask('00/00/0000');
+        $('#phone').mask('000-000-0000');
+        document.addEventListener("alpine:init", () => {
+            var els = document.querySelectorAll(".tests");
+            els.forEach(function(select) {
+                NiceSelect.bind(select);
+            });
+        });
         // document.addEventListener("DOMContentLoaded", function(e) {
         //     var els = document.querySelectorAll(".gender");
         //     els.forEach(function(select) {
@@ -330,6 +335,4 @@
         //     });
         // });
     </script>
-
-
 </x-layout.default>
