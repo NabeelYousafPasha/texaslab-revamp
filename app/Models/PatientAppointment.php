@@ -3,81 +3,128 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-// use PDF;
-
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PatientAppointment extends Model
 {
+
+    protected $fillable = [
+        'patient_id',
+    ];
+
     protected $casts = [
         'panel_tests' => 'json',
         'single_tests' => 'json',
         'other_tests' => 'json',
         'icd_codes' => 'json',
-        // 'hl7resultpdf'=> 'json',
     ];
 
-    public function patient()
-    {
-        return $this->belongsTo('App\models\Patient', 'patient_id');
-    }
-
     /**
-     * Used to create relation between location and patient
-     *
+     * |--------------------------------------------------------------------------
+     * | BOOT
+     * |--------------------------------------------------------------------------
      */
-    public function location()
-    {
-        return $this->belongsTo('App\Location', 'locationId');
-    }
-
-
-    public function getAppointmentAttribute($value)
-    {
-        return \Carbon\Carbon::parse($value)->format('m/d/Y');
-    }
-
-
-    public function setAppointmentAttribute($value)
-    {
-        $this->attributes['appointment'] = \Carbon\Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
-    }
-
-    public function test()
-    {
-        return $this->belongsTo('App\Test', 'single_test');
-    }
-
-    public function icdCodes()
-    {
-        return $this->belongsTo('App\IcdCode', 'icd_codes');
-    }
-
-    public function paneltest()
-    {
-        return $this->belongsTo('App\PatientAppointment', 'panel_tests');
-    }
-
-    public function resultStatus()
-    {
-        return $this->belongsTo('App\ResultStatus', 'result_id');
-    }
-
-    public function PatientLocation()
-    {
-        return $this->belongsTo('App\ResultStatus', 'patientLocationId');
-    }
-
-
     protected static function boot()
     {
         parent::boot();
 
+        // @todo - use observer
         static::created(function ($obj) {
             $obj->sample_id = 'TL' . $obj->id;
             $obj->save();
         });
     }
 
+
+    /**
+     * |--------------------------------------------------------------------------
+     * | ACCESSORS & MUTATORS
+     * |--------------------------------------------------------------------------
+     */
+    public function getAppointmentAttribute($value)
+    {
+        return Carbon::parse($value)->format('m/d/Y');
+    }
+
+    public function setAppointmentAttribute($value)
+    {
+        $this->attributes['appointment'] = Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
+    }
+
+    /**
+     * @return Attribute
+     */
+    protected function appointment(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::parse($value)->format('m/d/Y'),
+            set: fn ($value) => Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d'),
+        );
+    }
+
+    /**
+     * |--------------------------------------------------------------------------
+     * | RELATIONSHIPS
+     * |--------------------------------------------------------------------------
+     */
+
+    /**
+     * @return BelongsTo
+     */
+    public function patient(): BelongsTo
+    {
+        return $this->belongsTo(Patient::class, 'patient_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class, 'locationId');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function test(): BelongsTo
+    {
+        return $this->belongsTo(Test::class, 'single_test');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function icdCodes(): BelongsTo
+    {
+        return $this->belongsTo(IcdCode::class, 'icd_codes');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function paneltest(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'panel_tests');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function resultStatus(): BelongsTo
+    {
+        return $this->belongsTo(ResultStatus::class, 'result_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function PatientLocation(): BelongsTo
+    {
+        return $this->belongsTo(ResultStatus::class, 'patientLocationId');
+    }
 
 }

@@ -66,9 +66,13 @@
                                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                                                     <div>
                                                         <label for="Fname">First Name</label>
-                                                        <input id="Fname" type="text"
-                                                            placeholder="Enter First Name" class="form-input"
-                                                            name="firstName" />
+                                                        <input
+                                                            id="Fname"
+                                                            type="text"
+                                                            placeholder="Enter First Name"
+                                                            class="form-input"
+                                                            name="first_name"
+                                                        />
                                                     </div>
                                                     <div>
                                                         <label for="Lname">Last name</label>
