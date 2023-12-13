@@ -135,5 +135,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/menu/create', [MenuItemController::class, 'create'])->name('menu.create');
     Route::post('/menu', [MenuItemController::class, 'store'])->name('menu.store');
     Route::get('/admin/patient-appointments', [DataController::class, 'patientAppointment'])->name('patientAppointment');
+
+    // for ajax, it is better to rely on api/v1 routes
     Route::get('/ajax/patient-appointments', [DataController::class, 'patientAppointmentData'])->name('patientAppointmentData');
 });
