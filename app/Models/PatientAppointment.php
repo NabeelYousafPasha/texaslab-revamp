@@ -12,7 +12,7 @@ class PatientAppointment extends Model
 {
 
     protected $fillable = [
-
+        'patient_id',
     ];
 
     protected $casts = [
