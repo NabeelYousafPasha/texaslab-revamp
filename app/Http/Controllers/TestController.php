@@ -12,7 +12,11 @@ class TestController extends Controller
      */
     public function index()
     {
-        //
+        $tests = Test::all();
+
+        return view('pages.admin.test.index')->with([
+            'tests' => $tests,
+        ]);
     }
 
     /**
