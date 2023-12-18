@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Test extends Model
 {
@@ -33,4 +34,20 @@ class Test extends Model
         'faqs' => 'json',
         'result_kpis' => 'json',
     ];
+
+    /**
+     * |--------------------------------------------------------------------------
+     * | RELATIONSHIPS
+     * |--------------------------------------------------------------------------
+     */
+
+    /**
+     * Get the Status of Test
+     *
+     * @return BelongsTo
+     */
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
+    }
 }

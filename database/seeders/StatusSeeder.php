@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Status;
+use App\Models\Test;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +14,26 @@ class StatusSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $statuses = [
+            Test::class => [
+                'draft' => [
+                    'name' => 'Draft',
+                ],
+                'active' => [
+                    'name' => 'Active',
+                ],
+            ],
+        ];
+
+        foreach ($statuses as $model => $status) {
+            foreach ($status as $statusCode => $statusValue) {
+                Status::firstOrCreate([
+                    'model' => $model,
+                    'code' => $statusCode,
+                ], [
+                    'name' => $statusValue['name'],
+                ]);
+            }
+        }
     }
 }
