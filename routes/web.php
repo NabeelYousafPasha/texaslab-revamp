@@ -8,6 +8,10 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\TestController;
+use App\Http\Middleware\{
+    Authenticate,
+};
 
 Route::view('/analytics', 'analytics');
 Route::view('/finance', 'finance');
@@ -119,7 +123,11 @@ Route::view('/auth/cover-login', 'auth.cover-login');
 Route::view('/auth/cover-register', 'auth.cover-register');
 Route::view('/auth/cover-lockscreen', 'auth.cover-lockscreen');
 Route::view('/auth/cover-password-reset', 'auth.cover-password-reset');
+
+// Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Auth
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
@@ -138,4 +146,12 @@ Route::middleware(['auth'])->group(function () {
 
     // for ajax, it is better to rely on api/v1 routes
     Route::get('/ajax/patient-appointments', [DataController::class, 'patientAppointmentData'])->name('patientAppointmentData');
+});
+
+Route::group([
+    'middleware' => [Authenticate::class,],
+    'prefix' => '/admin/',
+    'as' => 'admin.',
+], function() {
+    Route::resource('/tests', TestController::class);
 });
