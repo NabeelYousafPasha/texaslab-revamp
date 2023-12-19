@@ -96,23 +96,23 @@
                             <ul x-cloak x-show="activeDropdown === 'invoice'" x-collapse
                                 class="sub-menu text-gray-500">
                                 <li>
-                                    <a href="/apps/invoice/list">List</a>
+                                    <a href="/template/apps/invoice/list">List</a>
                                 </li>
                                 <li>
-                                    <a href="/apps/invoice/preview">Preview</a>
+                                    <a href="/template/apps/invoice/preview">Preview</a>
                                 </li>
                                 <li>
-                                    <a href="/apps/invoice/add">Add</a>
+                                    <a href="/template/apps/invoice/add">Add</a>
                                 </li>
                                 <li>
-                                    <a href="/apps/invoice/edit">Edit</a>
+                                    <a href="/template/apps/invoice/edit">Edit</a>
                                 </li>
                             </ul>
                         </li> --}}
                     </ul>
                 </li>
 
-                @if(false)
+                @if(true)
                 <h2
                     class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
 
@@ -155,46 +155,46 @@
                     </button>
                     <ul x-cloak x-show="activeDropdown === 'components'" x-collapse class="sub-menu text-gray-500">
                         <li>
-                            <a href="/components/tabs">Tabs</a>
+                            <a href="/template/components/tabs">Tabs</a>
                         </li>
                         <li>
-                            <a href="/components/accordions">Accordions</a>
+                            <a href="/template/components/accordions">Accordions</a>
                         </li>
                         <li>
-                            <a href="/components/modals">Modals</a>
+                            <a href="/template/components/modals">Modals</a>
                         </li>
                         <li>
-                            <a href="/components/cards">Cards</a>
+                            <a href="/template/components/cards">Cards</a>
                         </li>
                         <li>
-                            <a href="/components/carousel">Carousel</a>
+                            <a href="/template/components/carousel">Carousel</a>
                         </li>
                         <li>
-                            <a href="/components/countdown">Countdown</a>
+                            <a href="/template/components/countdown">Countdown</a>
                         </li>
                         <li>
-                            <a href="/components/counter">Counter</a>
+                            <a href="/template/components/counter">Counter</a>
                         </li>
                         <li>
-                            <a href="/components/sweetalert">Sweet Alerts</a>
+                            <a href="/template/components/sweetalert">Sweet Alerts</a>
                         </li>
                         <li>
-                            <a href="/components/timeline">Timeline</a>
+                            <a href="/template/components/timeline">Timeline</a>
                         </li>
                         <li>
-                            <a href="/components/notifications">Notifications</a>
+                            <a href="/template/components/notifications">Notifications</a>
                         </li>
                         <li>
-                            <a href="/components/media-object">Media Object</a>
+                            <a href="/template/components/media-object">Media Object</a>
                         </li>
                         <li>
-                            <a href="/components/list-group">List Group</a>
+                            <a href="/template/components/list-group">List Group</a>
                         </li>
                         <li>
-                            <a href="/components/pricing-table">Pricing Tables</a>
+                            <a href="/template/components/pricing-table">Pricing Tables</a>
                         </li>
                         <li>
-                            <a href="/components/lightbox">Lightbox</a>
+                            <a href="/template/components/lightbox">Lightbox</a>
                         </li>
                     </ul>
                 </li>
@@ -226,64 +226,64 @@
                     </button>
                     <ul x-cloak x-show="activeDropdown === 'elements'" x-collapse class="sub-menu text-gray-500">
                         <li>
-                            <a href="/elements/alerts">Alerts</a>
+                            <a href="/template/elements/alerts">Alerts</a>
                         </li>
                         <li>
-                            <a href="/elements/avatar">Avatar</a>
+                            <a href="/template/elements/avatar">Avatar</a>
                         </li>
                         <li>
-                            <a href="/elements/badges">Badges</a>
+                            <a href="/template/elements/badges">Badges</a>
                         </li>
                         <li>
-                            <a href="/elements/breadcrumbs">Breadcrumbs</a>
+                            <a href="/template/elements/breadcrumbs">Breadcrumbs</a>
                         </li>
                         <li>
-                            <a href="/elements/buttons">Buttons</a>
+                            <a href="/template/elements/buttons">Buttons</a>
                         </li>
                         <li>
-                            <a href="/elements/buttons-group">Button Groups</a>
+                            <a href="/template/elements/buttons-group">Button Groups</a>
                         </li>
                         <li>
-                            <a href="/elements/color-library">Color Library</a>
+                            <a href="/template/elements/color-library">Color Library</a>
                         </li>
                         <li>
-                            <a href="/elements/dropdown">Dropdown</a>
+                            <a href="/template/elements/dropdown">Dropdown</a>
                         </li>
                         <li>
-                            <a href="/elements/infobox">Infobox</a>
+                            <a href="/template/elements/infobox">Infobox</a>
                         </li>
                         <li>
-                            <a href="/elements/jumbotron">Jumbotron</a>
+                            <a href="/template/elements/jumbotron">Jumbotron</a>
                         </li>
                         <li>
-                            <a href="/elements/loader">Loader</a>
+                            <a href="/template/elements/loader">Loader</a>
                         </li>
                         <li>
-                            <a href="/elements/pagination">Pagination</a>
+                            <a href="/template/elements/pagination">Pagination</a>
                         </li>
                         <li>
-                            <a href="/elements/popovers">Popovers</a>
+                            <a href="/template/elements/popovers">Popovers</a>
                         </li>
                         <li>
-                            <a href="/elements/progress-bar">Progress Bar</a>
+                            <a href="/template/elements/progress-bar">Progress Bar</a>
                         </li>
                         <li>
-                            <a href="/elements/search">Search</a>
+                            <a href="/template/elements/search">Search</a>
                         </li>
                         <li>
-                            <a href="/elements/tooltips">Tooltips</a>
+                            <a href="/template/elements/tooltips">Tooltips</a>
                         </li>
                         <li>
-                            <a href="/elements/treeview">Treeview</a>
+                            <a href="/template/elements/treeview">Treeview</a>
                         </li>
                         <li>
-                            <a href="/elements/typography">Typography</a>
+                            <a href="/template/elements/typography">Typography</a>
                         </li>
                     </ul>
                 </li>
 
                 <li class="menu nav-item">
-                    <a href="/charts" class="nav-link group">
+                    <a href="/template/charts" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24"
@@ -302,7 +302,7 @@
                 </li>
 
                 <li class="menu nav-item">
-                    <a href="/widgets" class="nav-link group">
+                    <a href="/template/widgets" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24"
@@ -327,7 +327,7 @@
                 </li>
 
                 <li class="menu nav-item">
-                    <a href="/font-icons" class="nav-link group">
+                    <a href="/template/font-icons" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24"
@@ -347,7 +347,7 @@
                 </li>
 
                 <li class="menu nav-item">
-                    <a href="/dragndrop" class="nav-link group">
+                    <a href="/template/dragndrop" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24"
@@ -387,7 +387,7 @@
                 </h2>
 
                 <li class="menu nav-item">
-                    <a href="/tables" class="nav-link group">
+                    <a href="/template/tables" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24"
@@ -448,43 +448,43 @@
                     </button>
                     <ul x-cloak x-show="activeDropdown === 'datatables'" x-collapse class="sub-menu text-gray-500">
                         <li>
-                            <a href="/datatables/basic">Basic</a>
+                            <a href="/template/datatables/basic">Basic</a>
                         </li>
                         <li>
-                            <a href="/datatables/advanced">Advanced</a>
+                            <a href="/template/datatables/advanced">Advanced</a>
                         </li>
                         <li>
-                            <a href="/datatables/skin">Skin</a>
+                            <a href="/template/datatables/skin">Skin</a>
                         </li>
                         <li>
-                            <a href="/datatables/order-sorting">Order Sorting</a>
+                            <a href="/template/datatables/order-sorting">Order Sorting</a>
                         </li>
                         <li>
-                            <a href="/datatables/multi-column">Multi Column</a>
+                            <a href="/template/datatables/multi-column">Multi Column</a>
                         </li>
                         <li>
-                            <a href="/datatables/multiple-tables">Multiple Tables</a>
+                            <a href="/template/datatables/multiple-tables">Multiple Tables</a>
                         </li>
                         <li>
-                            <a href="/datatables/alt-pagination">Alt. Pagination</a>
+                            <a href="/template/datatables/alt-pagination">Alt. Pagination</a>
                         </li>
                         <li>
-                            <a href="/datatables/checkbox">Checkbox</a>
+                            <a href="/template/datatables/checkbox">Checkbox</a>
                         </li>
                         <li>
-                            <a href="/datatables/range-search">Range Search</a>
+                            <a href="/template/datatables/range-search">Range Search</a>
                         </li>
                         <li>
-                            <a href="/datatables/export">Export</a>
+                            <a href="/template/datatables/export">Export</a>
                         </li>
                         <li>
-                            <a href="/datatables/sticky-header">Sticky Header</a>
+                            <a href="/template/datatables/sticky-header">Sticky Header</a>
                         </li>
                         <li>
-                            <a href="/datatables/clone-header">Clone Header</a>
+                            <a href="/template/datatables/clone-header">Clone Header</a>
                         </li>
                         <li>
-                            <a href="/datatables/column-chooser">Column Chooser</a>
+                            <a href="/template/datatables/column-chooser">Column Chooser</a>
                         </li>
                     </ul>
                 </li>
@@ -523,49 +523,49 @@
                     </button>
                     <ul x-cloak x-show="activeDropdown === 'forms'" x-collapse class="sub-menu text-gray-500">
                         <li>
-                            <a href="/forms/basic">Basic</a>
+                            <a href="/template/forms/basic">Basic</a>
                         </li>
                         <li>
-                            <a href="/forms/input-group">Input Group</a>
+                            <a href="/template/forms/input-group">Input Group</a>
                         </li>
                         <li>
-                            <a href="/forms/layouts">Layouts</a>
+                            <a href="/template/forms/layouts">Layouts</a>
                         </li>
                         <li>
-                            <a href="/forms/validation">Validation</a>
+                            <a href="/template/forms/validation">Validation</a>
                         </li>
                         <li>
-                            <a href="/forms/input-mask">Input Mask</a>
+                            <a href="/template/forms/input-mask">Input Mask</a>
                         </li>
                         <li>
-                            <a href="/forms/select2">Select2</a>
+                            <a href="/template/forms/select2">Select2</a>
                         </li>
                         <li>
-                            <a href="/forms/touchspin">TouchSpin</a>
+                            <a href="/template/forms/touchspin">TouchSpin</a>
                         </li>
                         <li>
-                            <a href="/forms/checkbox-radio">Checkbox & Radio</a>
+                            <a href="/template/forms/checkbox-radio">Checkbox & Radio</a>
                         </li>
                         <li>
-                            <a href="/forms/switches">Switches</a>
+                            <a href="/template/forms/switches">Switches</a>
                         </li>
                         <li>
-                            <a href="/forms/wizards">Wizards</a>
+                            <a href="/template/forms/wizards">Wizards</a>
                         </li>
                         <li>
-                            <a href="/forms/file-upload">File Upload</a>
+                            <a href="/template/forms/file-upload">File Upload</a>
                         </li>
                         <li>
-                            <a href="/forms/quill-editor">Quill Editor</a>
+                            <a href="/template/forms/quill-editor">Quill Editor</a>
                         </li>
                         <li>
-                            <a href="/forms/markdown-editor">Markdown Editor</a>
+                            <a href="/template/forms/markdown-editor">Markdown Editor</a>
                         </li>
                         <li>
-                            <a href="/forms/date-picker">Date & Range Picker</a>
+                            <a href="/template/forms/date-picker">Date & Range Picker</a>
                         </li>
                         <li>
-                            <a href="/forms/clipboard">Clipboard</a>
+                            <a href="/template/forms/clipboard">Clipboard</a>
                         </li>
                     </ul>
                 </li>
@@ -609,10 +609,10 @@
                     </button>
                     <ul x-cloak x-show="activeDropdown === 'users'" x-collapse class="sub-menu text-gray-500">
                         <li>
-                            <a href="/users/profile">Profile</a>
+                            <a href="/template/users/profile">Profile</a>
                         </li>
                         <li>
-                            <a href="/users/user-account-settings">Account Settings</a>
+                            <a href="/template/users/user-account-settings">Account Settings</a>
                         </li>
                     </ul>
                 </li>
@@ -651,22 +651,22 @@
                     </button>
                     <ul x-cloak x-show="activeDropdown === 'pages'" x-collapse class="sub-menu text-gray-500">
                         <li>
-                            <a href="/pages/knowledge-base">Knowledge Base</a>
+                            <a href="/template/pages/knowledge-base">Knowledge Base</a>
                         </li>
                         <li>
-                            <a href="/pages/contact-us-boxed" target="_blank">Contact Us Boxed</a>
+                            <a href="/template/pages/contact-us-boxed" target="_blank">Contact Us Boxed</a>
                         </li>
                         <li>
-                            <a href="/pages/contact-us-cover" target="_blank">Contact Us Cover</a>
+                            <a href="/template/pages/contact-us-cover" target="_blank">Contact Us Cover</a>
                         </li>
                         <li>
-                            <a href="/pages/faq">Faq</a>
+                            <a href="/template/pages/faq">Faq</a>
                         </li>
                         <li>
-                            <a href="/pages/coming-soon-boxed" target="_blank">Coming Soon Boxed</a>
+                            <a href="/template/pages/coming-soon-boxed" target="_blank">Coming Soon Boxed</a>
                         </li>
                         <li>
-                            <a href="/pages/coming-soon-cover" target="_blank">Coming Soon Cover</a>
+                            <a href="/template/pages/coming-soon-cover" target="_blank">Coming Soon Cover</a>
                         </li>
                         <li x-data="{ subActive: null }">
                             <button type="button"
@@ -689,18 +689,18 @@
                             <ul class="sub-menu text-gray-500 ltr:ml-2 rtl:mr-2" x-show="subActive === 'error'"
                                 x-collapse>
                                 <li>
-                                    <a href="/pages/error404" target="_blank">404</a>
+                                    <a href="/template/pages/error404" target="_blank">404</a>
                                 </li>
                                 <li>
-                                    <a href="/pages/error500" target="_blank">500</a>
+                                    <a href="/template/pages/error500" target="_blank">500</a>
                                 </li>
                                 <li>
-                                    <a href="/pages/error503" target="_blank">503</a>
+                                    <a href="/template/pages/error503" target="_blank">503</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="/pages/maintenence" target="_blank">Maintanence</a>
+                            <a href="/template/pages/maintenence" target="_blank">Maintanence</a>
                         </li>
                     </ul>
                 </li>
@@ -744,28 +744,28 @@
                     <ul x-cloak x-show="activeDropdown === 'authentication'" x-collapse
                         class="sub-menu text-gray-500">
                         <li>
-                            <a href="/auth/boxed-signin" target="_blank">Login Boxed</a>
+                            <a href="/template/auth/boxed-signin" target="_blank">Login Boxed</a>
                         </li>
                         <li>
-                            <a href="/auth/boxed-signup" target="_blank">Register Boxed</a>
+                            <a href="/template/auth/boxed-signup" target="_blank">Register Boxed</a>
                         </li>
                         <li>
-                            <a href="/auth/boxed-lockscreen" target="_blank">Unlock Boxed</a>
+                            <a href="/template/auth/boxed-lockscreen" target="_blank">Unlock Boxed</a>
                         </li>
                         <li>
-                            <a href="/auth/boxed-password-reset" target="_blank">Recover ID Boxed</a>
+                            <a href="/template/auth/boxed-password-reset" target="_blank">Recover ID Boxed</a>
                         </li>
                         <li>
-                            <a href="/auth/cover-login" target="_blank">Login Cover</a>
+                            <a href="/template/auth/cover-login" target="_blank">Login Cover</a>
                         </li>
                         <li>
-                            <a href="/auth/cover-register" target="_blank">Register Cover</a>
+                            <a href="/template/auth/cover-register" target="_blank">Register Cover</a>
                         </li>
                         <li>
-                            <a href="/auth/cover-lockscreen" target="_blank">Unlock Cover</a>
+                            <a href="/template/auth/cover-lockscreen" target="_blank">Unlock Cover</a>
                         </li>
                         <li>
-                            <a href="/auth/cover-password-reset" target="_blank">Recover ID Cover</a>
+                            <a href="/template/auth/cover-password-reset" target="_blank">Recover ID Cover</a>
                         </li>
                     </ul>
                 </li>
@@ -781,7 +781,7 @@
                 </h2>
 
                 <li class="menu nav-item">
-                    <a href="https://vristo.sbthemes.com" target="_blank" class="nav-link group">
+                    <a href="/templatehttps://vristo.sbthemes.com" target="_blank" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24"
@@ -803,14 +803,14 @@
         </div>
     </nav>
 </div>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/css/fontawesome-iconpicker.css">
+<link rel="stylesheet" href="/templatehttps://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+<link rel="stylesheet" href="/templatehttps://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/css/fontawesome-iconpicker.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js"></script>    
 <script>
     document.addEventListener("alpine:init", () => {
         Alpine.data("sidebar", () => ({
             init() {
-                const selector = document.querySelector('.sidebar ul a[href="' + window.location
+                const selector = document.querySelector('.sidebar ul a[href="/template' + window.location
                     .pathname + '"]');
                 if (selector) {
                     selector.classList.add('active');
