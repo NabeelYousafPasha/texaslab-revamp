@@ -24,7 +24,7 @@ class TestController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.test.form');
     }
 
     /**

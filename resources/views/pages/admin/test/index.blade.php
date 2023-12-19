@@ -8,8 +8,46 @@
         </ul>
 
         <div class="panel mt-6">
-            <h5 class="font-semibold text-lg dark:text-white-light">TESTS</h5>
-            <table id="testsTable" class="whitespace-nowrap table-hover"></table>
+
+            <div class="flow-root">  
+                <div class="float-left">
+                    <h5 class="font-semibold text-lg dark:text-white-light">TESTS</h5>
+                </div>
+                <div class="float-right">
+                    <a 
+                        href="{{ route('admin.tests.create') }}"
+                        class="btn btn-outline-primary"
+                    >
+                        + Add New
+                    </a>
+                </div>
+            </div>
+            
+            <div class="table-responsive mt-3">
+                <table 
+                    id="testsTable" 
+                    class="whitespace-nowrap table-hover table-bordered"
+                >
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Test</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -20,27 +58,8 @@
                 datatable: null,
                 init() {
                     this.datatable = new simpleDatatables.DataTable('#testsTable', {
-                        data: {
-                            headings: ["ID", "Name",],
-                            data: [
-                                [1, 'Caroline',],
-                                [2, 'Celeste',],
-                                [3, 'Tillman',],
-                                [4, 'Daisy',],
-                                [5, 'Weber',],
-                                [6, 'Buckley',],
-                                [7, 'Latoya',],
-                                [8, 'Kate',],
-                                [9, 'Marva',],
-                                [10, 'Decker',],
-                                [11, 'Odom',],
-                                [12, 'Sellers',],
-                                [13, 'Wendi',],
-                                [14, 'Sophie',],
-                            ]
-                        },
                         sortable: false,
-                        searchable: false,
+                        searchable: true,
                         perPage: 10,
                         perPageSelect: [10, 20, 30, 50, 100],
                         firstLast: true,
