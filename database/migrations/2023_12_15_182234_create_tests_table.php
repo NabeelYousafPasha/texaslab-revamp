@@ -25,7 +25,6 @@ return new class extends Migration
             $table->longText('description_html')->nullable();
             $table->json('symptoms')->nullable();
             $table->json('faqs')->nullable();
-            $table->json('result_kpis')->nullable();
             $table->timestamps();
         });
     }

@@ -23,16 +23,16 @@ class Test extends Model
         'description_html',
         'symptoms',
         'faqs',
-        'result_kpis',
     ];
 
     protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
         'is_free' => 'boolean',
         'featured_at' => 'datetime',
         'is_renderabble' => 'boolean',
         'symptoms' => 'json',
         'faqs' => 'json',
-        'result_kpis' => 'json',
     ];
 
     /**

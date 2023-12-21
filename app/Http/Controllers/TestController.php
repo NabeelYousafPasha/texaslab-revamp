@@ -2,11 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Test;
+use App\Http\Requests\Test\TestRequest;
+use App\Models\{
+    ResultKpi,
+    Status, 
+    Test
+};
+use App\Services\TestService;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
+
+    protected $testService;
+
+    /**
+     *
+     * @param TestService $testService
+     */
+    public function __construct(
+        TestService $testService
+    )
+    {
+        $this->testService = $testService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -24,15 +44,24 @@ class TestController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.test.form');
+        $statuses = Status::OfTest()
+                    ->pluck('name', 'id');
+
+        $resultKpis = ResultKpi::ofTest()
+                    ->pluck('name', 'id');
+        
+        return view('pages.admin.test.form')->with([
+            'statuses' => $statuses,
+            'resultKpis' => $resultKpis,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TestRequest $request)
     {
-        //
+        $this->testService->store($request->validated());
     }
 
     /**
