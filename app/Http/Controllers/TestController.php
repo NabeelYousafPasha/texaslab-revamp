@@ -10,6 +10,7 @@ use App\Models\{
 };
 use App\Services\TestService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class TestController extends Controller
 {
@@ -32,7 +33,9 @@ class TestController extends Controller
      */
     public function index()
     {
-        $tests = Test::all();
+        $tests = Test::with([
+            'status:id,name',
+        ])->get();
 
         return view('pages.admin.test.index')->with([
             'tests' => $tests,
@@ -62,6 +65,8 @@ class TestController extends Controller
     public function store(TestRequest $request)
     {
         $this->testService->store($request->validated());
+
+        return redirect()->route('admin.tests.index', [], Response::HTTP_CREATED);
     }
 
     /**

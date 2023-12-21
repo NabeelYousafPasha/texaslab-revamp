@@ -38,13 +38,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        @foreach ($tests as $row => $test)
+                            <tr>
+                                <td>{{ ++$row }}</td>
+                                <td>{{ $test->name }}</td>
+                                <td>{{ $test->paid_or_free }}</td>
+                                <td>{{ $test->status->name }}</td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
