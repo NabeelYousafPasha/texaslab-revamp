@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('panels', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->foreignId('status_id')->constrained('statuses');
+            $table->longText('description_text');
+            $table->longText('description_html');
+            $table->decimal('price')->default(0.00);
+            $table->boolean('is_renderabble')->default(false);
             $table->timestamps();
         });
     }

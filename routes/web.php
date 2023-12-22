@@ -8,7 +8,10 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DataController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\{
+    PanelController,
+    TestController,
+};
 use App\Http\Middleware\{
     Authenticate,
 };
@@ -51,7 +54,7 @@ Route::group([
      * Route Prefix: /admin/panels
      * Route Name: admin.panels.
      */
-    Route::resource('/panels', TestController::class);
+    Route::resource('/panels', PanelController::class);
 });
 
 Route::middleware(['auth'])->group(function () {

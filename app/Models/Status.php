@@ -16,6 +16,11 @@ class Status extends Model
         'name',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
     /**
      * |--------------------------------------------------------------------------
      * | SCOPES
@@ -41,5 +46,15 @@ class Status extends Model
     public function scopeOfTest(Builder $builder): Builder
     {
         return $builder->ofModel(Test::class);
+    }
+
+    /**
+     *
+     * @param Builder $builder
+     * @return Builder
+     */
+    public function scopeOfPanel(Builder $builder): Builder
+    {
+        return $builder->ofModel(Panel::class);
     }
 }

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('panel_tests', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('panel_id')->constrained('panels');
+            $table->foreignId('test_id')->constrained('tests');
             $table->timestamps();
         });
     }

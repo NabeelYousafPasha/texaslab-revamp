@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePanelRequest;
-use App\Http\Requests\UpdatePanelRequest;
-use App\Models\Panel;
+use App\Models\{
+    Panel,
+    Status,
+};
+use Illuminate\Http\Request;
 
 class PanelController extends Controller
 {
@@ -13,7 +15,13 @@ class PanelController extends Controller
      */
     public function index()
     {
-        //
+        $panels = Panel::with([
+            'status:id,name',
+        ])->get();
+
+        return view('pages.admin.panel.index')->with([
+            'panels' => $panels,
+        ]);
     }
 
     /**
@@ -21,13 +29,18 @@ class PanelController extends Controller
      */
     public function create()
     {
-        //
+        $statuses = Status::OfPanel()
+                    ->pluck('name', 'id');
+
+        return view('pages.admin.panel.form')->with([
+            'statuses' => $statuses,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePanelRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -51,7 +64,7 @@ class PanelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePanelRequest $request, Panel $panel)
+    public function update(Request $request, Panel $panel)
     {
         //
     }
