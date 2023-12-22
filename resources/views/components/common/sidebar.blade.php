@@ -54,7 +54,7 @@
                         </li>
                         <li class="nav-item">
                             <a 
-                                href="{{ route('home') }}" 
+                                href="{{ route('admin.panels.index') }}" 
                                 class="group"
                             >
                                 <div class="flex items-center">
