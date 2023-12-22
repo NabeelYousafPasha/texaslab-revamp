@@ -17,22 +17,22 @@ use App\Http\Middleware\{
 };
 
 /**
- * 
+ *
  * Home
  */
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /**
- * 
+ *
  * Auth
  */
 Auth::routes();
 
 
 /**
- * 
+ *
  * Admin routes
- * 
+ *
  * Route Prefix: /admin
  * Route Name: admin.
  */
@@ -43,14 +43,14 @@ Route::group([
 ], function () {
 
     /**
-     * 
+     *
      * Route Prefix: /admin/tests
      * Route Name: admin.tests.
      */
     Route::resource('/tests', TestController::class);
 
     /**
-     * 
+     *
      * Route Prefix: /admin/panels
      * Route Name: admin.panels.
      */
@@ -63,21 +63,19 @@ Route::group([
     Route::view('/admin', 'home');
 
     Route::get('/admin/patient-appointments', [DataController::class, 'patientAppointment'])->name('patientAppointment');
-
-    Route::group(['prefix' => 'admin'], function () {
-        Route::view('/', 'index');
-        Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
-        Route::get('/menu/create', [MenuItemController::class, 'create'])->name('menu.create');
-        Route::get('/patient-appointments', [DataController::class, 'patientAppointment'])->name('patientAppointment');
-        Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-        Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
-        Route::post('/register', [RegisterController::class, 'register']);
-        Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
-        Route::post('/menu', [MenuItemController::class, 'store'])->name('menu.store');
-        Route::get('/create-permission', [PermissionController::class, 'create'])->name('permissions.create');
-        Route::post('/store-permission', [PermissionController::class, 'store'])->name('permissions.store');
-        Route::get('/admin/menu/create', [MenuItemController::class, 'create'])->name('menu.create');
-    });
+    
+    Route::view('/', 'index');
+    Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
+    Route::get('/menu/create', [MenuItemController::class, 'create'])->name('menu.create');
+    Route::get('/patient-appointments', [DataController::class, 'patientAppointment'])->name('patientAppointment');
+    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
+    Route::post('/register', [RegisterController::class, 'register']);
+    Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
+    Route::post('/menu', [MenuItemController::class, 'store'])->name('menu.store');
+    Route::get('/create-permission', [PermissionController::class, 'create'])->name('permissions.create');
+    Route::post('/store-permission', [PermissionController::class, 'store'])->name('permissions.store');
+    Route::get('/admin/menu/create', [MenuItemController::class, 'create'])->name('menu.create');
 
     // for ajax, it is better to rely on api/v1 routes
     Route::get('/ajax/patient-appointments', [DataController::class, 'patientAppointmentData'])->name('patientAppointmentData');
