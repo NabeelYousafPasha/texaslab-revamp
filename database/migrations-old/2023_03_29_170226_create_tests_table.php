@@ -20,7 +20,6 @@ class CreateTestsTable extends Migration
             $table->integer('featured')->nullable();
             $table->string('actual_price',200)->nullable();
             $table->string('competitor_price',200)->nullable();
-            $table->string('competitor_price',200)->nullable();
             $table->tinyInteger('test_type')->nullable();
             $table->string('panel_tests',200)->nullable();
             $table->string('slug',200)->nullable();

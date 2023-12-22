@@ -26,7 +26,6 @@ class CreatePatientsTable extends Migration
             $table->string('ethnicity', 200)->nullable();
             $table->string('cell_phone', 200)->nullable();
             $table->string('patientrace', 200)->nullable();
-            $table->string('cell_phone', 200)->nullable();
             $table->string('zipcode', 200)->nullable();
             $table->string('city', 200)->nullable();
             $table->text('address')->nullable();
