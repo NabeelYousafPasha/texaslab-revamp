@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLocationExpenseTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLocationExpenseTable extends Migration
      */
     public function up()
     {
-        Schema::create('location_expense', function (Blueprint $table) {
+        Schema::create('location_expenses', function (Blueprint $table) {
             $table->id();
             $table->integer('location_id')->nullable();
             $table->longText('location_expense',200)->nullable();
@@ -29,6 +29,6 @@ class CreateLocationExpenseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('location_expense');
+        Schema::dropIfExists('location_expenses');
     }
-}
+};
