@@ -12,6 +12,7 @@ class TestResultKpi extends Model
     protected $fillable = [
         'test_id',
         'result_kpi_id',
+        'value',
     ];
 
     protected $casts = [

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Entities\TestEntity;
 use App\Models\Test;
+use App\Models\TestResultKpi;
 
 class TestService 
 {
@@ -23,5 +24,16 @@ class TestService
         // $testEntity->setDescriptionHtml($data['description_html']);
 
         return Test::create($data);
+    }
+
+    public function syncTestResultKpis(Test $test, array $resultKpis)
+    {
+        foreach ($resultKpis as $resultKpiId => $value) {
+            TestResultKpi::create([
+                'test_id' => $test->id,
+                'result_kpi_id' => $resultKpiId,
+                'value' => $value,
+            ]);
+        }
     }
 }

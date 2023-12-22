@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('test_id')->constrained('tests');
             $table->foreignId('result_kpi_id')->constrained('result_kpis');
+            $table->string('value');
 
             $table->unique([
                 'test_id',

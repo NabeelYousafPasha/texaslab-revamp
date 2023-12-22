@@ -64,7 +64,8 @@ class TestController extends Controller
      */
     public function store(TestRequest $request)
     {
-        $this->testService->store($request->validated());
+        $test = $this->testService->store($request->validated());
+        $this->testService->syncTestResultKpis($test, $request->validated('test_result_kpis'));
 
         return redirect()->route('admin.tests.index', [], Response::HTTP_CREATED);
     }
