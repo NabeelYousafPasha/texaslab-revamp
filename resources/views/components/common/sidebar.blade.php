@@ -109,7 +109,7 @@
                                             class="sub-menu text-gray-500">
                                             @foreach ($multiMenu as $item)
                                                 <li>
-                                                    <a href="{{ $item->url }}">{{ $item->label }}</a>
+                                                    <a href="/admin/{{ $item->url }}">{{ $item->label }}</a>
                                                 </li>
                                             @endforeach
                                         </ul>
