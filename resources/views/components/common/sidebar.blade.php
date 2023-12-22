@@ -21,35 +21,36 @@
                     </svg>
                 </a>
             </div>
-            <ul class="perfect-scrollbar relative font-semibold space-y-0.5 h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden  p-4 py-0"
-                x-data="{ activeDropdown: null }">
+            
+            <ul 
+                class="perfect-scrollbar relative font-semibold space-y-0.5 h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden  p-4 py-0"
+                x-data="{ activeDropdown: null }"
+            >
                 <h2
-                    class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
-
+                    class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1"
+                >
                     <svg class="w-4 h-5 flex-none hidden" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
                         fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
-                    <span>Apps</span>
+                    <span>Admin</span>
                 </h2>
-                @php
-                    $menuItmes = \App\Models\MenuItem::all();
-                @endphp
-                <li class="nav-item">
+                
+                <li class="menu nav-item">
                     <ul>
                         <li class="nav-item">
-                            <a href="/apps/chat" class="group">
+                            <a 
+                                href="{{ route('admin.tests.index') }}" 
+                                class="group"
+                            >
                                 <div class="flex items-center">
-                                    <svg class="group-hover:!text-primary shrink-0" width="20" height="20"
-                                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M10.4036 22.4797L10.6787 22.015C11.1195 21.2703 11.3399 20.8979 11.691 20.6902C12.0422 20.4825 12.5001 20.4678 13.4161 20.4385C14.275 20.4111 14.8523 20.3361 15.3458 20.1317C16.385 19.7012 17.2106 18.8756 17.641 17.8365C17.9639 17.0571 17.9639 16.0691 17.9639 14.093V13.2448C17.9639 10.4683 17.9639 9.08006 17.3389 8.06023C16.9892 7.48958 16.5094 7.0098 15.9388 6.66011C14.919 6.03516 13.5307 6.03516 10.7542 6.03516H8.20964C5.43314 6.03516 4.04489 6.03516 3.02507 6.66011C2.45442 7.0098 1.97464 7.48958 1.62495 8.06023C1 9.08006 1 10.4683 1 13.2448V14.093C1 16.0691 1 17.0571 1.32282 17.8365C1.75326 18.8756 2.57886 19.7012 3.61802 20.1317C4.11158 20.3361 4.68882 20.4111 5.5477 20.4385C6.46368 20.4678 6.92167 20.4825 7.27278 20.6902C7.6239 20.8979 7.84431 21.2703 8.28514 22.015L8.5602 22.4797C8.97002 23.1721 9.9938 23.1721 10.4036 22.4797ZM13.1928 14.5171C13.7783 14.5171 14.253 14.0424 14.253 13.4568C14.253 12.8713 13.7783 12.3966 13.1928 12.3966C12.6072 12.3966 12.1325 12.8713 12.1325 13.4568C12.1325 14.0424 12.6072 14.5171 13.1928 14.5171ZM10.5422 13.4568C10.5422 14.0424 10.0675 14.5171 9.48193 14.5171C8.89637 14.5171 8.42169 14.0424 8.42169 13.4568C8.42169 12.8713 8.89637 12.3966 9.48193 12.3966C10.0675 12.3966 10.5422 12.8713 10.5422 13.4568ZM5.77108 14.5171C6.35664 14.5171 6.83133 14.0424 6.83133 13.4568C6.83133 12.8713 6.35664 12.3966 5.77108 12.3966C5.18553 12.3966 4.71084 12.8713 4.71084 13.4568C4.71084 14.0424 5.18553 14.5171 5.77108 14.5171Z"
-                                            fill="currentColor" />
-                                        <path opacity="0.5"
-                                            d="M15.486 1C16.7529 0.999992 17.7603 0.999986 18.5683 1.07681C19.3967 1.15558 20.0972 1.32069 20.7212 1.70307C21.3632 2.09648 21.9029 2.63623 22.2963 3.27821C22.6787 3.90219 22.8438 4.60265 22.9226 5.43112C22.9994 6.23907 22.9994 7.24658 22.9994 8.51343V9.37869C22.9994 10.2803 22.9994 10.9975 22.9597 11.579C22.9191 12.174 22.8344 12.6848 22.6362 13.1632C22.152 14.3323 21.2232 15.2611 20.0541 15.7453C20.0249 15.7574 19.9955 15.7691 19.966 15.7804C19.8249 15.8343 19.7039 15.8806 19.5978 15.915H17.9477C17.9639 15.416 17.9639 14.8217 17.9639 14.093V13.2448C17.9639 10.4683 17.9639 9.08006 17.3389 8.06023C16.9892 7.48958 16.5094 7.0098 15.9388 6.66011C14.919 6.03516 13.5307 6.03516 10.7542 6.03516H8.20964C7.22423 6.03516 6.41369 6.03516 5.73242 6.06309V4.4127C5.76513 4.29934 5.80995 4.16941 5.86255 4.0169C5.95202 3.75751 6.06509 3.51219 6.20848 3.27821C6.60188 2.63623 7.14163 2.09648 7.78361 1.70307C8.40759 1.32069 9.10805 1.15558 9.93651 1.07681C10.7445 0.999986 11.7519 0.999992 13.0188 1H15.486Z"
-                                            fill="currentColor" />
-                                    </svg>
                                     <span
+<<<<<<< HEAD
+                                        class="ltr:pl-1 rtl:pr-1 text-black dark:text-[#506690] dark:group-hover:text-white-dark"
+                                    >
+                                        Tests
+                                    </span>
+=======
                                         class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Chat</span>
                                 </div>
                             </a>
@@ -141,93 +142,25 @@
                                     </svg>
                                     <span
                                         class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Mailbox</span>
+>>>>>>> 9421184e2e3f2bb1ee5e4c68568a4b7324412b7b
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/apps/todolist" class="group">
+                            <a 
+                                href="{{ route('admin.panels.index') }}" 
+                                class="group"
+                            >
                                 <div class="flex items-center">
-
-                                    <svg class="group-hover:!text-primary shrink-0" width="20" height="20"
-                                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.5"
-                                            d="M3 10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H13C16.7712 2 18.6569 2 19.8284 3.17157C21 4.34315 21 6.22876 21 10V14C21 17.7712 21 19.6569 19.8284 20.8284C18.6569 22 16.7712 22 13 22H11C7.22876 22 5.34315 22 4.17157 20.8284C3 19.6569 3 17.7712 3 14V10Z"
-                                            fill="currentColor" />
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M12 5.25C12.4142 5.25 12.75 5.58579 12.75 6V7.25H14C14.4142 7.25 14.75 7.58579 14.75 8C14.75 8.41421 14.4142 8.75 14 8.75L12.75 8.75L12.75 10C12.75 10.4142 12.4142 10.75 12 10.75C11.5858 10.75 11.25 10.4142 11.25 10L11.25 8.75H9.99997C9.58575 8.75 9.24997 8.41421 9.24997 8C9.24997 7.58579 9.58575 7.25 9.99997 7.25H11.25L11.25 6C11.25 5.58579 11.5858 5.25 12 5.25ZM7.25 14C7.25 13.5858 7.58579 13.25 8 13.25H16C16.4142 13.25 16.75 13.5858 16.75 14C16.75 14.4142 16.4142 14.75 16 14.75H8C7.58579 14.75 7.25 14.4142 7.25 14ZM8.25 18C8.25 17.5858 8.58579 17.25 9 17.25H15C15.4142 17.25 15.75 17.5858 15.75 18C15.75 18.4142 15.4142 18.75 15 18.75H9C8.58579 18.75 8.25 18.4142 8.25 18Z"
-                                            fill="currentColor" />
-                                    </svg>
                                     <span
-                                        class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Todo
-                                        List</span>
+                                        class="ltr:pl-1 rtl:pr-1 text-black dark:text-[#506690] dark:group-hover:text-white-dark"
+                                    >
+                                        Panels
+                                    </span>
                                 </div>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/apps/notes" class="group">
-                                <div class="flex items-center">
-
-                                    <svg class="group-hover:!text-primary shrink-0" width="20" height="20"
-                                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.5"
-                                            d="M3 10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H13C16.7712 2 18.6569 2 19.8284 3.17157C21 4.34315 21 6.22876 21 10V14C21 17.7712 21 19.6569 19.8284 20.8284C18.6569 22 16.7712 22 13 22H11C7.22876 22 5.34315 22 4.17157 20.8284C3 19.6569 3 17.7712 3 14V10Z"
-                                            fill="currentColor" />
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M7.25 12C7.25 11.5858 7.58579 11.25 8 11.25H16C16.4142 11.25 16.75 11.5858 16.75 12C16.75 12.4142 16.4142 12.75 16 12.75H8C7.58579 12.75 7.25 12.4142 7.25 12Z"
-                                            fill="currentColor" />
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M7.25 8C7.25 7.58579 7.58579 7.25 8 7.25H16C16.4142 7.25 16.75 7.58579 16.75 8C16.75 8.41421 16.4142 8.75 16 8.75H8C7.58579 8.75 7.25 8.41421 7.25 8Z"
-                                            fill="currentColor" />
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M7.25 16C7.25 15.5858 7.58579 15.25 8 15.25H13C13.4142 15.25 13.75 15.5858 13.75 16C13.75 16.4142 13.4142 16.75 13 16.75H8C7.58579 16.75 7.25 16.4142 7.25 16Z"
-                                            fill="currentColor" />
-                                    </svg>
-                                    <span
-                                        class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Notes</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/apps/scrumboard" class="group">
-                                <div class="flex items-center">
-
-                                    <svg class="group-hover:!text-primary shrink-0" width="20" height="20"
-                                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.5"
-                                            d="M21 15.9983V9.99826C21 7.16983 21 5.75562 20.1213 4.87694C19.3529 4.10856 18.175 4.01211 16 4H8C5.82497 4.01211 4.64706 4.10856 3.87868 4.87694C3 5.75562 3 7.16983 3 9.99826V15.9983C3 18.8267 3 20.2409 3.87868 21.1196C4.75736 21.9983 6.17157 21.9983 9 21.9983H15C17.8284 21.9983 19.2426 21.9983 20.1213 21.1196C21 20.2409 21 18.8267 21 15.9983Z"
-                                            fill="currentColor" />
-                                        <path
-                                            d="M8 3.5C8 2.67157 8.67157 2 9.5 2H14.5C15.3284 2 16 2.67157 16 3.5V4.5C16 5.32843 15.3284 6 14.5 6H9.5C8.67157 6 8 5.32843 8 4.5V3.5Z"
-                                            fill="currentColor" />
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M12 9.25C12.4142 9.25 12.75 9.58579 12.75 10V12.25L15 12.25C15.4142 12.25 15.75 12.5858 15.75 13C15.75 13.4142 15.4142 13.75 15 13.75L12.75 13.75L12.75 16C12.75 16.4142 12.4142 16.75 12 16.75C11.5858 16.75 11.25 16.4142 11.25 16L11.25 13.75H9C8.58579 13.75 8.25 13.4142 8.25 13C8.25 12.5858 8.58579 12.25 9 12.25L11.25 12.25L11.25 10C11.25 9.58579 11.5858 9.25 12 9.25Z"
-                                            fill="currentColor" />
-                                    </svg>
-                                    <span
-                                        class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Scrumboard</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/apps/contacts" class="group">
-                                <div class="flex items-center">
-
-                                    <svg class="group-hover:!text-primary shrink-0" width="20" height="20"
-                                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.5"
-                                            d="M19.7165 20.3624C21.143 19.5846 22 18.5873 22 17.5C22 16.3475 21.0372 15.2961 19.4537 14.5C17.6226 13.5794 14.9617 13 12 13C9.03833 13 6.37738 13.5794 4.54631 14.5C2.96285 15.2961 2 16.3475 2 17.5C2 18.6525 2.96285 19.7039 4.54631 20.5C6.37738 21.4206 9.03833 22 12 22C15.1066 22 17.8823 21.3625 19.7165 20.3624Z"
-                                            fill="currentColor" />
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M5 8.51464C5 4.9167 8.13401 2 12 2C15.866 2 19 4.9167 19 8.51464C19 12.0844 16.7658 16.2499 13.2801 17.7396C12.4675 18.0868 11.5325 18.0868 10.7199 17.7396C7.23416 16.2499 5 12.0844 5 8.51464ZM12 11C13.1046 11 14 10.1046 14 9C14 7.89543 13.1046 7 12 7C10.8954 7 10 7.89543 10 9C10 10.1046 10.8954 11 12 11Z"
-                                            fill="currentColor" />
-                                    </svg>
-
-                                    <span
-                                        class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Contacts</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="menu nav-item">
+                        {{-- <li class="menu nav-item">
                             <button type="button" class="nav-link group"
                                 :class="{ 'active': activeDropdown === 'invoice' }"
                                 @click="activeDropdown === 'invoice' ? activeDropdown = null : activeDropdown = 'invoice'">
@@ -257,40 +190,23 @@
                             <ul x-cloak x-show="activeDropdown === 'invoice'" x-collapse
                                 class="sub-menu text-gray-500">
                                 <li>
-                                    <a href="/apps/invoice/list">List</a>
+                                    <a href="/template/apps/invoice/list">List</a>
                                 </li>
                                 <li>
-                                    <a href="/apps/invoice/preview">Preview</a>
+                                    <a href="/template/apps/invoice/preview">Preview</a>
                                 </li>
                                 <li>
-                                    <a href="/apps/invoice/add">Add</a>
+                                    <a href="/template/apps/invoice/add">Add</a>
                                 </li>
                                 <li>
-                                    <a href="/apps/invoice/edit">Edit</a>
+                                    <a href="/template/apps/invoice/edit">Edit</a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/apps/calendar" class="group">
-                                <div class="flex items-center">
-
-                                    <svg class="group-hover:!text-primary shrink-0" width="20" height="20"
-                                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6.94028 2C7.35614 2 7.69326 2.32421 7.69326 2.72414V4.18487C8.36117 4.17241 9.10983 4.17241 9.95219 4.17241H13.9681C14.8104 4.17241 15.5591 4.17241 16.227 4.18487V2.72414C16.227 2.32421 16.5641 2 16.98 2C17.3958 2 17.733 2.32421 17.733 2.72414V4.24894C19.178 4.36022 20.1267 4.63333 20.8236 5.30359C21.5206 5.97385 21.8046 6.88616 21.9203 8.27586L22 9H2.92456H2V8.27586C2.11571 6.88616 2.3997 5.97385 3.09665 5.30359C3.79361 4.63333 4.74226 4.36022 6.1873 4.24894V2.72414C6.1873 2.32421 6.52442 2 6.94028 2Z"
-                                            fill="currentColor" />
-                                        <path opacity="0.5"
-                                            d="M21.9995 14.0001V12.0001C21.9995 11.161 21.9963 9.66527 21.9834 9H2.00917C1.99626 9.66527 1.99953 11.161 1.99953 12.0001V14.0001C1.99953 17.7713 1.99953 19.6569 3.1711 20.8285C4.34267 22.0001 6.22829 22.0001 9.99953 22.0001H13.9995C17.7708 22.0001 19.6564 22.0001 20.828 20.8285C21.9995 19.6569 21.9995 17.7713 21.9995 14.0001Z"
-                                            fill="currentColor" />
-                                    </svg>
-                                    <span
-                                        class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Calendar</span>
-                                </div>
-                            </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
 
+                @if(true)
                 <h2
                     class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
 
@@ -333,46 +249,46 @@
                     </button>
                     <ul x-cloak x-show="activeDropdown === 'components'" x-collapse class="sub-menu text-gray-500">
                         <li>
-                            <a href="/components/tabs">Tabs</a>
+                            <a href="/template/components/tabs">Tabs</a>
                         </li>
                         <li>
-                            <a href="/components/accordions">Accordions</a>
+                            <a href="/template/components/accordions">Accordions</a>
                         </li>
                         <li>
-                            <a href="/components/modals">Modals</a>
+                            <a href="/template/components/modals">Modals</a>
                         </li>
                         <li>
-                            <a href="/components/cards">Cards</a>
+                            <a href="/template/components/cards">Cards</a>
                         </li>
                         <li>
-                            <a href="/components/carousel">Carousel</a>
+                            <a href="/template/components/carousel">Carousel</a>
                         </li>
                         <li>
-                            <a href="/components/countdown">Countdown</a>
+                            <a href="/template/components/countdown">Countdown</a>
                         </li>
                         <li>
-                            <a href="/components/counter">Counter</a>
+                            <a href="/template/components/counter">Counter</a>
                         </li>
                         <li>
-                            <a href="/components/sweetalert">Sweet Alerts</a>
+                            <a href="/template/components/sweetalert">Sweet Alerts</a>
                         </li>
                         <li>
-                            <a href="/components/timeline">Timeline</a>
+                            <a href="/template/components/timeline">Timeline</a>
                         </li>
                         <li>
-                            <a href="/components/notifications">Notifications</a>
+                            <a href="/template/components/notifications">Notifications</a>
                         </li>
                         <li>
-                            <a href="/components/media-object">Media Object</a>
+                            <a href="/template/components/media-object">Media Object</a>
                         </li>
                         <li>
-                            <a href="/components/list-group">List Group</a>
+                            <a href="/template/components/list-group">List Group</a>
                         </li>
                         <li>
-                            <a href="/components/pricing-table">Pricing Tables</a>
+                            <a href="/template/components/pricing-table">Pricing Tables</a>
                         </li>
                         <li>
-                            <a href="/components/lightbox">Lightbox</a>
+                            <a href="/template/components/lightbox">Lightbox</a>
                         </li>
                     </ul>
                 </li>
@@ -404,64 +320,64 @@
                     </button>
                     <ul x-cloak x-show="activeDropdown === 'elements'" x-collapse class="sub-menu text-gray-500">
                         <li>
-                            <a href="/elements/alerts">Alerts</a>
+                            <a href="/template/elements/alerts">Alerts</a>
                         </li>
                         <li>
-                            <a href="/elements/avatar">Avatar</a>
+                            <a href="/template/elements/avatar">Avatar</a>
                         </li>
                         <li>
-                            <a href="/elements/badges">Badges</a>
+                            <a href="/template/elements/badges">Badges</a>
                         </li>
                         <li>
-                            <a href="/elements/breadcrumbs">Breadcrumbs</a>
+                            <a href="/template/elements/breadcrumbs">Breadcrumbs</a>
                         </li>
                         <li>
-                            <a href="/elements/buttons">Buttons</a>
+                            <a href="/template/elements/buttons">Buttons</a>
                         </li>
                         <li>
-                            <a href="/elements/buttons-group">Button Groups</a>
+                            <a href="/template/elements/buttons-group">Button Groups</a>
                         </li>
                         <li>
-                            <a href="/elements/color-library">Color Library</a>
+                            <a href="/template/elements/color-library">Color Library</a>
                         </li>
                         <li>
-                            <a href="/elements/dropdown">Dropdown</a>
+                            <a href="/template/elements/dropdown">Dropdown</a>
                         </li>
                         <li>
-                            <a href="/elements/infobox">Infobox</a>
+                            <a href="/template/elements/infobox">Infobox</a>
                         </li>
                         <li>
-                            <a href="/elements/jumbotron">Jumbotron</a>
+                            <a href="/template/elements/jumbotron">Jumbotron</a>
                         </li>
                         <li>
-                            <a href="/elements/loader">Loader</a>
+                            <a href="/template/elements/loader">Loader</a>
                         </li>
                         <li>
-                            <a href="/elements/pagination">Pagination</a>
+                            <a href="/template/elements/pagination">Pagination</a>
                         </li>
                         <li>
-                            <a href="/elements/popovers">Popovers</a>
+                            <a href="/template/elements/popovers">Popovers</a>
                         </li>
                         <li>
-                            <a href="/elements/progress-bar">Progress Bar</a>
+                            <a href="/template/elements/progress-bar">Progress Bar</a>
                         </li>
                         <li>
-                            <a href="/elements/search">Search</a>
+                            <a href="/template/elements/search">Search</a>
                         </li>
                         <li>
-                            <a href="/elements/tooltips">Tooltips</a>
+                            <a href="/template/elements/tooltips">Tooltips</a>
                         </li>
                         <li>
-                            <a href="/elements/treeview">Treeview</a>
+                            <a href="/template/elements/treeview">Treeview</a>
                         </li>
                         <li>
-                            <a href="/elements/typography">Typography</a>
+                            <a href="/template/elements/typography">Typography</a>
                         </li>
                     </ul>
                 </li>
 
                 <li class="menu nav-item">
-                    <a href="/charts" class="nav-link group">
+                    <a href="/template/charts" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24"
@@ -480,7 +396,7 @@
                 </li>
 
                 <li class="menu nav-item">
-                    <a href="/widgets" class="nav-link group">
+                    <a href="/template/widgets" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24"
@@ -505,7 +421,7 @@
                 </li>
 
                 <li class="menu nav-item">
-                    <a href="/font-icons" class="nav-link group">
+                    <a href="/template/font-icons" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24"
@@ -525,7 +441,7 @@
                 </li>
 
                 <li class="menu nav-item">
-                    <a href="/dragndrop" class="nav-link group">
+                    <a href="/template/dragndrop" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24"
@@ -565,7 +481,7 @@
                 </h2>
 
                 <li class="menu nav-item">
-                    <a href="/tables" class="nav-link group">
+                    <a href="/template/tables" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24"
@@ -626,43 +542,43 @@
                     </button>
                     <ul x-cloak x-show="activeDropdown === 'datatables'" x-collapse class="sub-menu text-gray-500">
                         <li>
-                            <a href="/datatables/basic">Basic</a>
+                            <a href="/template/datatables/basic">Basic</a>
                         </li>
                         <li>
-                            <a href="/datatables/advanced">Advanced</a>
+                            <a href="/template/datatables/advanced">Advanced</a>
                         </li>
                         <li>
-                            <a href="/datatables/skin">Skin</a>
+                            <a href="/template/datatables/skin">Skin</a>
                         </li>
                         <li>
-                            <a href="/datatables/order-sorting">Order Sorting</a>
+                            <a href="/template/datatables/order-sorting">Order Sorting</a>
                         </li>
                         <li>
-                            <a href="/datatables/multi-column">Multi Column</a>
+                            <a href="/template/datatables/multi-column">Multi Column</a>
                         </li>
                         <li>
-                            <a href="/datatables/multiple-tables">Multiple Tables</a>
+                            <a href="/template/datatables/multiple-tables">Multiple Tables</a>
                         </li>
                         <li>
-                            <a href="/datatables/alt-pagination">Alt. Pagination</a>
+                            <a href="/template/datatables/alt-pagination">Alt. Pagination</a>
                         </li>
                         <li>
-                            <a href="/datatables/checkbox">Checkbox</a>
+                            <a href="/template/datatables/checkbox">Checkbox</a>
                         </li>
                         <li>
-                            <a href="/datatables/range-search">Range Search</a>
+                            <a href="/template/datatables/range-search">Range Search</a>
                         </li>
                         <li>
-                            <a href="/datatables/export">Export</a>
+                            <a href="/template/datatables/export">Export</a>
                         </li>
                         <li>
-                            <a href="/datatables/sticky-header">Sticky Header</a>
+                            <a href="/template/datatables/sticky-header">Sticky Header</a>
                         </li>
                         <li>
-                            <a href="/datatables/clone-header">Clone Header</a>
+                            <a href="/template/datatables/clone-header">Clone Header</a>
                         </li>
                         <li>
-                            <a href="/datatables/column-chooser">Column Chooser</a>
+                            <a href="/template/datatables/column-chooser">Column Chooser</a>
                         </li>
                     </ul>
                 </li>
@@ -701,49 +617,49 @@
                     </button>
                     <ul x-cloak x-show="activeDropdown === 'forms'" x-collapse class="sub-menu text-gray-500">
                         <li>
-                            <a href="/forms/basic">Basic</a>
+                            <a href="/template/forms/basic">Basic</a>
                         </li>
                         <li>
-                            <a href="/forms/input-group">Input Group</a>
+                            <a href="/template/forms/input-group">Input Group</a>
                         </li>
                         <li>
-                            <a href="/forms/layouts">Layouts</a>
+                            <a href="/template/forms/layouts">Layouts</a>
                         </li>
                         <li>
-                            <a href="/forms/validation">Validation</a>
+                            <a href="/template/forms/validation">Validation</a>
                         </li>
                         <li>
-                            <a href="/forms/input-mask">Input Mask</a>
+                            <a href="/template/forms/input-mask">Input Mask</a>
                         </li>
                         <li>
-                            <a href="/forms/select2">Select2</a>
+                            <a href="/template/forms/select2">Select2</a>
                         </li>
                         <li>
-                            <a href="/forms/touchspin">TouchSpin</a>
+                            <a href="/template/forms/touchspin">TouchSpin</a>
                         </li>
                         <li>
-                            <a href="/forms/checkbox-radio">Checkbox & Radio</a>
+                            <a href="/template/forms/checkbox-radio">Checkbox & Radio</a>
                         </li>
                         <li>
-                            <a href="/forms/switches">Switches</a>
+                            <a href="/template/forms/switches">Switches</a>
                         </li>
                         <li>
-                            <a href="/forms/wizards">Wizards</a>
+                            <a href="/template/forms/wizards">Wizards</a>
                         </li>
                         <li>
-                            <a href="/forms/file-upload">File Upload</a>
+                            <a href="/template/forms/file-upload">File Upload</a>
                         </li>
                         <li>
-                            <a href="/forms/quill-editor">Quill Editor</a>
+                            <a href="/template/forms/quill-editor">Quill Editor</a>
                         </li>
                         <li>
-                            <a href="/forms/markdown-editor">Markdown Editor</a>
+                            <a href="/template/forms/markdown-editor">Markdown Editor</a>
                         </li>
                         <li>
-                            <a href="/forms/date-picker">Date & Range Picker</a>
+                            <a href="/template/forms/date-picker">Date & Range Picker</a>
                         </li>
                         <li>
-                            <a href="/forms/clipboard">Clipboard</a>
+                            <a href="/template/forms/clipboard">Clipboard</a>
                         </li>
                     </ul>
                 </li>
@@ -787,13 +703,14 @@
                     </button>
                     <ul x-cloak x-show="activeDropdown === 'users'" x-collapse class="sub-menu text-gray-500">
                         <li>
-                            <a href="/users/profile">Profile</a>
+                            <a href="/template/users/profile">Profile</a>
                         </li>
                         <li>
-                            <a href="/users/user-account-settings">Account Settings</a>
+                            <a href="/template/users/user-account-settings">Account Settings</a>
                         </li>
                     </ul>
                 </li>
+
                 <li class="menu nav-item">
                     <button type="button" class="nav-link group" :class="{ 'active': activeDropdown === 'pages' }"
                         @click="activeDropdown === 'pages' ? activeDropdown = null : activeDropdown = 'pages'">
@@ -828,22 +745,22 @@
                     </button>
                     <ul x-cloak x-show="activeDropdown === 'pages'" x-collapse class="sub-menu text-gray-500">
                         <li>
-                            <a href="/pages/knowledge-base">Knowledge Base</a>
+                            <a href="/template/pages/knowledge-base">Knowledge Base</a>
                         </li>
                         <li>
-                            <a href="/pages/contact-us-boxed" target="_blank">Contact Us Boxed</a>
+                            <a href="/template/pages/contact-us-boxed" target="_blank">Contact Us Boxed</a>
                         </li>
                         <li>
-                            <a href="/pages/contact-us-cover" target="_blank">Contact Us Cover</a>
+                            <a href="/template/pages/contact-us-cover" target="_blank">Contact Us Cover</a>
                         </li>
                         <li>
-                            <a href="/pages/faq">Faq</a>
+                            <a href="/template/pages/faq">Faq</a>
                         </li>
                         <li>
-                            <a href="/pages/coming-soon-boxed" target="_blank">Coming Soon Boxed</a>
+                            <a href="/template/pages/coming-soon-boxed" target="_blank">Coming Soon Boxed</a>
                         </li>
                         <li>
-                            <a href="/pages/coming-soon-cover" target="_blank">Coming Soon Cover</a>
+                            <a href="/template/pages/coming-soon-cover" target="_blank">Coming Soon Cover</a>
                         </li>
                         <li x-data="{ subActive: null }">
                             <button type="button"
@@ -866,21 +783,22 @@
                             <ul class="sub-menu text-gray-500 ltr:ml-2 rtl:mr-2" x-show="subActive === 'error'"
                                 x-collapse>
                                 <li>
-                                    <a href="/pages/error404" target="_blank">404</a>
+                                    <a href="/template/pages/error404" target="_blank">404</a>
                                 </li>
                                 <li>
-                                    <a href="/pages/error500" target="_blank">500</a>
+                                    <a href="/template/pages/error500" target="_blank">500</a>
                                 </li>
                                 <li>
-                                    <a href="/pages/error503" target="_blank">503</a>
+                                    <a href="/template/pages/error503" target="_blank">503</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="/pages/maintenence" target="_blank">Maintanence</a>
+                            <a href="/template/pages/maintenence" target="_blank">Maintanence</a>
                         </li>
                     </ul>
                 </li>
+
                 <li class="menu nav-item">
                     <button type="button" class="nav-link group"
                         :class="{ 'active': activeDropdown === 'authentication' }"
@@ -920,33 +838,31 @@
                     <ul x-cloak x-show="activeDropdown === 'authentication'" x-collapse
                         class="sub-menu text-gray-500">
                         <li>
-                            <a href="/auth/boxed-signin" target="_blank">Login Boxed</a>
+                            <a href="/template/auth/boxed-signin" target="_blank">Login Boxed</a>
                         </li>
                         <li>
-                            <a href="/auth/boxed-signup" target="_blank">Register Boxed</a>
+                            <a href="/template/auth/boxed-signup" target="_blank">Register Boxed</a>
                         </li>
                         <li>
-                            <a href="/auth/boxed-lockscreen" target="_blank">Unlock Boxed</a>
+                            <a href="/template/auth/boxed-lockscreen" target="_blank">Unlock Boxed</a>
                         </li>
                         <li>
-                            <a href="/auth/boxed-password-reset" target="_blank">Recover ID Boxed</a>
+                            <a href="/template/auth/boxed-password-reset" target="_blank">Recover ID Boxed</a>
                         </li>
                         <li>
-                            <a href="/auth/cover-login" target="_blank">Login Cover</a>
+                            <a href="/template/auth/cover-login" target="_blank">Login Cover</a>
                         </li>
                         <li>
-                            <a href="/auth/cover-register" target="_blank">Register Cover</a>
+                            <a href="/template/auth/cover-register" target="_blank">Register Cover</a>
                         </li>
                         <li>
-                            <a href="/auth/cover-lockscreen" target="_blank">Unlock Cover</a>
+                            <a href="/template/auth/cover-lockscreen" target="_blank">Unlock Cover</a>
                         </li>
                         <li>
-                            <a href="/auth/cover-password-reset" target="_blank">Recover ID Cover</a>
+                            <a href="/template/auth/cover-password-reset" target="_blank">Recover ID Cover</a>
                         </li>
                     </ul>
-                </li> --}}
-
-
+                </li>
 
                 <h2
                     class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
@@ -959,7 +875,7 @@
                 </h2>
 
                 <li class="menu nav-item">
-                    <a href="https://vristo.sbthemes.com" target="_blank" class="nav-link group">
+                    <a href="/templatehttps://vristo.sbthemes.com" target="_blank" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24"
@@ -976,18 +892,19 @@
                         </div>
                     </a>
                 </li>
+                @endif
             </ul>
         </div>
     </nav>
 </div>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/css/fontawesome-iconpicker.css">
+<link rel="stylesheet" href="/templatehttps://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+<link rel="stylesheet" href="/templatehttps://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/css/fontawesome-iconpicker.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js"></script>    
 <script>
     document.addEventListener("alpine:init", () => {
         Alpine.data("sidebar", () => ({
             init() {
-                const selector = document.querySelector('.sidebar ul a[href="' + window.location
+                const selector = document.querySelector('.sidebar ul a[href="/template' + window.location
                     .pathname + '"]');
                 if (selector) {
                     selector.classList.add('active');
