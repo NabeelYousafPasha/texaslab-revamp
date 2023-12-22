@@ -1,5 +1,4 @@
 <x-layout.default>
-
     <div x-data="form">
         <div class="pt-5 grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div class="panel">
@@ -9,8 +8,25 @@
                 <div class="mb-5">
                     <form method="POST" action="{{ route('permissions.store') }}">
                         @csrf
-                        <input placeholder="Enter Permission" type="text" class="form-input" name="name" id="name">
-                        <input placeholder="Enter Slug" type="text" class="form-input mt-6" name="slug" id="slug">
+                        <div class="form-group">
+                            <label for="name">Permission Name:</label>
+                            <input 
+                                type="text" 
+                                class="form-input" 
+                                id="name" name="name" 
+                                value="{{ old('name') }}" 
+                                required
+                            >
+                        </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <button type="submit" class="btn btn-primary mt-6">Create Permission</button>
                     </form>
                 </div>
