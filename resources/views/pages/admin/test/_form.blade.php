@@ -6,7 +6,6 @@
             <input 
                 id="name" 
                 name="name"
-                x-model="fields.name"
                 type="text"
                 placeholder="Name of test"
                 class="form-input"
@@ -29,7 +28,6 @@
                 <input 
                     type="radio" 
                     name="is_free" 
-                    x-model.boolean="fields.is_free"
                     class="form-radio" 
                     value="1"
                     
@@ -42,7 +40,6 @@
                 <input 
                     type="radio" 
                     name="is_free" 
-                    x-model.boolean="fields.is_free"
                     class="form-radio" 
                     value="0"
                     
@@ -179,7 +176,6 @@
                         type="radio" 
                         id="status_id_{{ $statusId }}"
                         name="status_id" 
-                        x-model="fields.status_id"
                         class="form-radio" 
                         value="{{ $statusId }}"
                         {{ old('status_id') == $statusId ? 'checked' : '' }}
@@ -205,7 +201,6 @@
                 <input 
                     id="featured_at" 
                     name="featured_at"
-                    x-model.boolean="fields.featured_at"
                     type="checkbox" 
                     value="true"
                     class="form-checkbox" 
@@ -230,7 +225,6 @@
                 <input 
                     id="is_renderabble" 
                     name="is_renderabble"
-                    x-model.boolean="fields.is_renderabble"
                     type="checkbox" 
                     value="true"
                     class="form-checkbox" 
@@ -283,7 +277,6 @@
             renderPriceFields: false,
 
             fields: {
-                name: '',
                 actual_price: 0,
                 offered_price: 0,
                 competitor_price: 0,
