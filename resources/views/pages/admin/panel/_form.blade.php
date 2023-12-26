@@ -8,7 +8,7 @@
                 name="name"
                 x-model="fields.name"
                 type="text"
-                placeholder="Name of test"
+                placeholder="Name of Panel"
                 class="form-input"
                 
                 value="{{ old('name') }}"
@@ -22,22 +22,22 @@
         </div>
     </div>
 
-    <div class="form-field @error('actual_price') has-error @enderror">
-        <label for="actual_price">Price</label>
+    <div class="form-field @error('price') has-error @enderror">
+        <label for="price">Price</label>
     
         <div class="relative">
             <input 
-                id="actual_price" 
-                name="actual_price"
-                x-model="fields.actual_price"
+                id="price" 
+                name="price"
+                x-model="fields.price"
                 type="number"
-                placeholder="Actual Price"
+                placeholder="Price"
                 class="form-input"
                 
-                value="{{ old('actual_price') }}"
+                value="{{ old('price') }}"
             />
             
-            @error('actual_price')
+            @error('price')
                 <span>
                     <p class="text-danger mt-1">{{ $message }}</p>
                 </span>
@@ -125,7 +125,7 @@
                     class="form-checkbox" 
                     {{ old('is_renderabble') == true ? 'checked' : '' }}
                 />
-                <span class="text-white-dark"">Show this Test on Homepage?</span>
+                <span class="text-white-dark"">Show this Panel on Homepage?</span>
             </label>
             
             @error('is_renderabble')
@@ -136,6 +136,39 @@
         </div>
     </div>
 
+    <div class="form-field space-y-3 @error('tests') has-error @enderror" x-data="
+    {
+        tests: {{ $tests }}
+    }">
+        <label for="tests">Tests</label>
+    
+        <div class="relative">
+            <select 
+                id="tests"
+                name="tests[]" 
+                class="selectize seachable-select"
+                placeholder="Choose Test(s)..."
+                multiple="multiple"
+                x-model="fields.tests"
+            >
+                @foreach ($tests as $testId => $testName)
+                    <option
+                        class="form-radio" 
+                        value="{{ $testId }}"
+                        {{ in_array($testId, old('tests') ?? []) ? 'selected' : '' }} 
+                    />
+                        <span class="text-white-dark"">{{ $testId .' - '. $testName }}</span>
+                    </label>
+                @endforeach
+            </select>
+
+            @error('tests')
+                <span>
+                    <p class="text-danger mt-1">{{ $message }}</p>
+                </span>
+            @enderror
+        </div>
+    </div>
 </div>
 
 <script>
@@ -146,6 +179,7 @@
                 name: '',
                 price: 0,
                 quill_description: '',
+                tests: [],
             },
             
             init() {

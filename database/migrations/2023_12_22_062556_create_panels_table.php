@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('status_id')->constrained('statuses');
-            $table->longText('description_text');
-            $table->longText('description_html');
+            $table->longText('description_text')->nullable();
+            $table->longText('description_html')->nullable();
             $table->decimal('price')->default(0.00);
             $table->boolean('is_renderabble')->default(false);
             $table->timestamps();

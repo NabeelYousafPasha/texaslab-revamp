@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Status;
-use App\Models\Test;
+use App\Models\{
+    Panel,
+    Status,
+    Test,
+};
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +19,14 @@ class StatusSeeder extends Seeder
     {
         $statuses = [
             Test::class => [
+                'draft' => [
+                    'name' => 'Draft',
+                ],
+                'active' => [
+                    'name' => 'Active',
+                ],
+            ],
+            Panel::class => [
                 'draft' => [
                     'name' => 'Draft',
                 ],

@@ -2,14 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Panel\PanelRequest;
 use App\Models\{
     Panel,
     Status,
+    Test,
 };
+use App\Services\PanelService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class PanelController extends Controller
 {
+
+    protected $panelService;
+
+    /**
+     *
+     * @param PanelService $panelService
+     */
+    public function __construct(
+        PanelService $panelService
+    )
+    {
+        $this->panelService = $panelService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -31,18 +49,24 @@ class PanelController extends Controller
     {
         $statuses = Status::OfPanel()
                     ->pluck('name', 'id');
+        
+        $tests = Test::pluck('name', 'id');
 
         return view('pages.admin.panel.form')->with([
             'statuses' => $statuses,
+            'tests' => $tests,
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PanelRequest $request)
     {
-        //
+        $panel = $this->panelService->store($request->validated());
+        $this->panelService->syncPanelTests($panel, $request->validated('tests'));
+
+        return redirect()->route('admin.panels.index', [], Response::HTTP_CREATED);
     }
 
     /**

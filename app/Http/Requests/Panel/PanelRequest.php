@@ -4,6 +4,7 @@ namespace App\Http\Requests\Panel;
 
 use App\Models\Panel;
 use App\Models\Status;
+use App\Models\Test;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -38,6 +39,9 @@ class PanelRequest extends FormRequest
             ],
             'is_renderabble' => ['nullable', /** 'accepted', */],
             'description_html' => ['nullable', 'string', 'max:255',],
+
+            'tests' => ['required', 'array',],
+            'tests.*' => ['required', 'numeric', Rule::in(Test::pluck('id')->toArray()),],
         ];
     }
 
@@ -49,6 +53,7 @@ class PanelRequest extends FormRequest
             'status_id' => 'Status',
             'is_renderabble' => 'Show On Homepage',
             'description_html' => 'Description',
+            'tests' => 'Tests',
         ];   
     }
 
