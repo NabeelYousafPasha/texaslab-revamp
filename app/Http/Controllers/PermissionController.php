@@ -3,32 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\permission;
+use App\Models\Permission;
 
 class PermissionController extends Controller
 {
-    public function index()
+    public function create()
     {
-        $permissions = Permission::all();
-        return view('permissions.index', compact('permissions'));
+        return view('permissions.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:permissions',
+            'name' => 'required|unique:permissions|max:255',
         ]);
 
-        $permission = new Permission;
-        $permission->name = $request->name;
-        $permission->slug = $request->slug;
-        $permission->save();
-
+        Permission::create(['name' => $request->input('name')]);
 
         return redirect()->back()->with('success', 'Permission created successfully');
-    }
-
-    public function createPermission(){
-        return view('permissions.create');
     }
 }
