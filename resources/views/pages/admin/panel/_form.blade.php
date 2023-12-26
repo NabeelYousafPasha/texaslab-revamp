@@ -6,7 +6,6 @@
             <input 
                 id="name" 
                 name="name"
-                x-model="fields.name"
                 type="text"
                 placeholder="Name of Panel"
                 class="form-input"
@@ -29,7 +28,6 @@
             <input 
                 id="price" 
                 name="price"
-                x-model="fields.price"
                 type="number"
                 placeholder="Price"
                 class="form-input"
@@ -93,7 +91,6 @@
                         type="radio" 
                         id="status_id_{{ $statusId }}"
                         name="status_id" 
-                        x-model="fields.status_id"
                         class="form-radio" 
                         value="{{ $statusId }}"
                         {{ old('status_id') == $statusId ? 'checked' : '' }}
@@ -119,7 +116,6 @@
                 <input 
                     id="is_renderabble" 
                     name="is_renderabble"
-                    x-model.boolean="fields.is_renderabble"
                     type="checkbox" 
                     value="true"
                     class="form-checkbox" 
@@ -149,7 +145,6 @@
                 class="selectize seachable-select"
                 placeholder="Choose Test(s)..."
                 multiple="multiple"
-                x-model="fields.tests"
             >
                 @foreach ($tests as $testId => $testName)
                     <option
@@ -175,15 +170,9 @@
     document.addEventListener("alpine:init", () => {
         Alpine.data("panelForm", () => ({
 
-            fields: {
-                name: '',
-                price: 0,
-                quill_description: '',
-                tests: [],
-            },
+            fields: {},
             
-            init() {
-            },
+            init() {},
         }));
     });
 </script>
