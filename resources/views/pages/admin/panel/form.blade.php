@@ -1,5 +1,7 @@
 <x-layout.default>
-    
+    <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/quill.snow.css') }}" />
+    <link rel='stylesheet' type='text/css' href='{{ Vite::asset('resources/css/nice-select2.css') }}'>
+
     <div x-data="panels">
         <ul class="flex space-x-2 rtl:space-x-reverse">
             <li>
@@ -34,22 +36,21 @@
         </div>
     </div>
 
-    <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/quill.snow.css') }}" />
     <script src="/assets/js/quill.js"></script>
-    <script>    
-        // let quill = new Quill('#quill', {
-        //     theme: 'snow',
-        // });
+    <script src="/assets/js/nice-select2.js"></script>
+    <script>
+
+        // default
+        let els = document.querySelectorAll(".selectize");
         
-        // let toolbar = quill.container.previousSibling;
-        // toolbar.querySelector('.ql-picker').setAttribute('title', 'Font Size');
-        // toolbar.querySelector('button.ql-bold').setAttribute('title', 'Bold');
-        // toolbar.querySelector('button.ql-italic').setAttribute('title', 'Italic');
-        // toolbar.querySelector('button.ql-link').setAttribute('title', 'Link');
-        // toolbar.querySelector('button.ql-underline').setAttribute('title', 'Underline');
-        // toolbar.querySelector('button.ql-clean').setAttribute('title', 'Clear Formatting');
-        // toolbar.querySelector('[value=ordered]').setAttribute('title', 'Ordered List');
-        // toolbar.querySelector('[value=bullet]').setAttribute('title', 'Bullet List');
+        // seachable
+        let options = {
+            searchable: true
+        };
+        
+        els.forEach(function(select) {
+            NiceSelect.bind(select, options);
+        });
 
         document.addEventListener("alpine:init", () => {
             Alpine.data("panels", () => ({
