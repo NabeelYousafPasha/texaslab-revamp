@@ -44,7 +44,7 @@
                     value="0"
                     
                     x-on:click="showPriceFields"
-                    {{ old('is_free') == 0 ? 'checked' : '' }}
+                    {{ old('is_free') != null && old('is_free') == 0 ? 'checked' : '' }}
                 />
                 <span class="text-white-dark"">Paid</span>
             </label>
@@ -136,7 +136,7 @@
                 {{-- id="quill"  --}}
                 x-ref="quillEditor"
                 x-init="
-                    quill = new Quill($refs.quillEditor, {theme: 'snow'});
+                    quill = new Quill($refs.quillEditor, {theme: 'snow', placeholder: 'Description...',});
                     quill.on('text-change', function () {
                         $dispatch('input', quill.root.innerHTML);
                         $refs.description_html.value = quill.root.innerHTML;
@@ -149,7 +149,6 @@
                 id="description_html"
                 x-ref="description_html"
                 name="description_html"
-                x-model="fields.description_html"
                 class="hidden" 
                 type="hidden"
                 value="{{ old('description_html') }}"
@@ -280,7 +279,6 @@
                 actual_price: 0,
                 offered_price: 0,
                 competitor_price: 0,
-                quill_description: '',
             },
             
             init() {
