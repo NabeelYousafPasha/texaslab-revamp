@@ -17,9 +17,11 @@
             
             <div class="mt-3 mb-3">
                 <x-helpers.form
-                    id="create_form__test"
-                    name="create_form__test"
-                    :action="route('admin.tests.store')"
+                    :id="$form['id']"
+                    :name="$form['name']"
+                    :action="$form['action']"
+
+                    :spoofed-type="$form['_method'] ?? NULL"
                 >
                     @includeIf('pages.admin.test._form')
 

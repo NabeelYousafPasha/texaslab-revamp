@@ -19,9 +19,11 @@
             
             <div class="mt-3 mb-3">
                 <x-helpers.form
-                    id="create_form__panel"
-                    name="create_form__panel"
-                    :action="route('admin.panels.store')"
+                    :id="$form['id']"
+                    :name="$form['name']"
+                    :action="$form['action']"
+
+                    :spoofed-type="$form['_method'] ?? NULL"
                 >
                     @includeIf('pages.admin.panel._form')
 
