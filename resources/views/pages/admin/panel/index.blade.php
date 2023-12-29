@@ -11,7 +11,7 @@
 
             <div class="flow-root">  
                 <div class="float-left">
-                    <h5 class="font-semibold text-lg dark:text-white-light">Panels</h5>
+                    <h5 class="font-semibold text-lg dark:text-white-light">PANELS</h5>
                 </div>
                 <div class="float-right">
                     <a 

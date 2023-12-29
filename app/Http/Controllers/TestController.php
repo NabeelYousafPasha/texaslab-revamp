@@ -52,10 +52,19 @@ class TestController extends Controller
 
         $resultKpis = ResultKpi::ofTest()
                     ->pluck('name', 'id');
+
+        $form = [
+            'id' => 'create_form__test',
+            'name' => 'create_form__test',
+            'action' => route('admin.tests.store'),
+            'method' => 'POST',
+        ];
         
         return view('pages.admin.test.form')->with([
             'statuses' => $statuses,
             'resultKpis' => $resultKpis,
+
+            'form' => $form,
         ]);
     }
 
@@ -83,7 +92,28 @@ class TestController extends Controller
      */
     public function edit(Test $test)
     {
-        //
+        $statuses = Status::OfTest()
+                    ->pluck('name', 'id');
+
+        $resultKpis = ResultKpi::ofTest()
+                    ->pluck('name', 'id');
+
+        $form = [
+            'id' => 'edit_form__test',
+            'name' => 'edit_form__test',
+            'action' => route('admin.tests.store'),
+            'method' => 'POST',
+
+            '_method' => 'PATCH',
+        ];
+        
+        return view('pages.admin.test.form')->with([
+            'statuses' => $statuses,
+            'resultKpis' => $resultKpis,
+
+            'test' => $test,
+            'form' => $form,
+        ]);
     }
 
     /**
@@ -99,6 +129,8 @@ class TestController extends Controller
      */
     public function destroy(Test $test)
     {
-        //
+        $test->delete();
+
+        return redirect()->route('admin.tests.index', [], Response::HTTP_NO_CONTENT);
     }
 }

@@ -10,7 +10,7 @@
                 placeholder="Name of Panel"
                 class="form-input"
                 
-                value="{{ old('name') }}"
+                value="{{ old('name', $panel->name ?? '') }}"
             />
             
             @error('name')
@@ -32,7 +32,7 @@
                 placeholder="Price"
                 class="form-input"
                 
-                value="{{ old('price') }}"
+                value="{{ old('price', $panel->price ?? 0) }}"
             />
             
             @error('price')
@@ -67,7 +67,7 @@
                 x-model="fields.description_html"
                 class="hidden" 
                 type="hidden"
-                value="{{ old('description_html') }}"
+                value="{{ old('description_html', $panel->description_html ?? 0) }}"
             >
             
             @error('description_html')
@@ -94,6 +94,7 @@
                         class="form-radio" 
                         value="{{ $statusId }}"
                         {{ old('status_id') == $statusId ? 'checked' : '' }}
+                        {{ $panel->status_id ?? '' == $statusId ? 'checked' : '' }}
                         
                     />
                     <span class="text-white-dark"">{{ $statusName }}</span>
@@ -120,6 +121,7 @@
                     value="true"
                     class="form-checkbox" 
                     {{ old('is_renderabble') == true ? 'checked' : '' }}
+                    {{ $panel->is_renderabble ?? '' ? 'checked' : '' }}
                 />
                 <span class="text-white-dark"">Show this Panel on Homepage?</span>
             </label>
@@ -151,6 +153,7 @@
                         class="form-radio" 
                         value="{{ $testId }}"
                         {{ in_array($testId, old('tests') ?? []) ? 'selected' : '' }} 
+                        {{ in_array($testId, $panelTests ?? []) ? 'selected' : '' }} 
                     />
                         <span class="text-white-dark"">{{ $testId .' - '. $testName }}</span>
                     </label>

@@ -10,7 +10,7 @@
                 placeholder="Name of test"
                 class="form-input"
                 
-                value="{{ old('name') }}"
+                value="{{ old('name', $test->name ?? '') }}"
             />
             
             @error('name')
@@ -33,6 +33,7 @@
                     
                     x-on:click="hidePriceFields"
                     {{ old('is_free') == 1 ? 'checked' : '' }}
+                    {{ $test->is_free ?? '' == 1 ? 'checked' : '' }}
                 />
                 <span class="text-white-dark"">Free</span>
             </label>
@@ -45,6 +46,7 @@
                     
                     x-on:click="showPriceFields"
                     {{ old('is_free') != null && old('is_free') == 0 ? 'checked' : '' }}
+                    {{ $test->is_free ?? '' == 0 ? 'checked' : '' }}
                 />
                 <span class="text-white-dark"">Paid</span>
             </label>
@@ -70,7 +72,7 @@
                     placeholder="Actual Price"
                     class="form-input"
                     
-                    value="{{ old('actual_price') }}"
+                    value="{{ old('actual_price', $test->actual_price ?? 0) }}"
                 />
                 
                 @error('actual_price')
@@ -93,7 +95,7 @@
                     placeholder="Offered Price"
                     class="form-input"
                     
-                    value="{{ old('offered_price') }}"
+                    value="{{ old('offered_price', $test->offered_price ?? 0) }}"
                 />
                 
                 @error('offered_price')
@@ -116,7 +118,7 @@
                     placeholder="Competitor Price"
                     class="form-input"
                     
-                    value="{{ old('competitor_price') }}"
+                    value="{{ old('competitor_price', $test->competitor_price ?? 0) }}"
                 />
                 
                 @error('competitor_price')
@@ -151,7 +153,7 @@
                 name="description_html"
                 class="hidden" 
                 type="hidden"
-                value="{{ old('description_html') }}"
+                value="{{ old('description_html', $test->description_html ?? '') }}"
             >
             
             @error('description_html')
@@ -178,6 +180,7 @@
                         class="form-radio" 
                         value="{{ $statusId }}"
                         {{ old('status_id') == $statusId ? 'checked' : '' }}
+                        {{ $test->status_id ?? '' == $statusId ? 'checked' : '' }}
                         
                     />
                     <span class="text-white-dark"">{{ $statusName }}</span>
@@ -204,6 +207,7 @@
                     value="true"
                     class="form-checkbox" 
                     {{ old('featured_at') == true ? 'checked' : '' }}
+                    {{ $test->featured_at ?? '' ? 'checked' : '' }}
                 />
                 <span class="text-white-dark"">Feature this Test?</span>
             </label>
@@ -228,6 +232,7 @@
                     value="true"
                     class="form-checkbox" 
                     {{ old('is_renderabble') == true ? 'checked' : '' }}
+                    {{ $test->is_renderabble ?? '' ? 'checked' : '' }}
                 />
                 <span class="text-white-dark"">Show this Test on Homepage?</span>
             </label>

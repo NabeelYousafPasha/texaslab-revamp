@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Panel\PanelRequest;
 use App\Models\{
     Panel,
+    PanelTest,
     Status,
     Test,
 };
@@ -52,9 +53,18 @@ class PanelController extends Controller
         
         $tests = Test::pluck('name', 'id');
 
+        $form = [
+            'id' => 'create_form__panel',
+            'name' => 'create_form__panel',
+            'action' => route('admin.panels.store'),
+            'method' => 'POST',
+        ];
+
         return view('pages.admin.panel.form')->with([
             'statuses' => $statuses,
             'tests' => $tests,
+
+            'form' => $form,
         ]);
     }
 
@@ -82,7 +92,31 @@ class PanelController extends Controller
      */
     public function edit(Panel $panel)
     {
-        //
+        $statuses = Status::OfPanel()
+                    ->pluck('name', 'id');
+        
+        $tests = Test::pluck('name', 'id');
+
+        $panelTests = PanelTest::where('panel_id', '=', $panel->id)
+                ->pluck('test_id');
+
+        $form = [
+            'id' => 'edit_form__panel',
+            'name' => 'edit_form__panel',
+            'action' => route('admin.panels.update', ['panel' => $panel]),
+            'method' => 'POST',
+            
+            '_method' => 'PATCH',
+        ];
+
+        return view('pages.admin.panel.form')->with([
+            'statuses' => $statuses,
+            'tests' => $tests,
+
+            'panel' => $panel,
+            'panelTests' => $panelTests->toArray(),
+            'form' => $form,
+        ]);
     }
 
     /**
@@ -98,6 +132,8 @@ class PanelController extends Controller
      */
     public function destroy(Panel $panel)
     {
-        //
+        $panel->delete();
+
+        return redirect()->route('admin.panels.index', [], Response::HTTP_NO_CONTENT);
     }
 }
