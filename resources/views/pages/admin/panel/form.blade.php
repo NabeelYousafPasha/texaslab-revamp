@@ -1,6 +1,10 @@
 <x-layout.default>
-    <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/quill.snow.css') }}" />
-    <link rel='stylesheet' type='text/css' href='{{ Vite::asset('resources/css/nice-select2.css') }}'>
+
+    @push('stylesheets')
+        {{-- <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"> --}}
+        <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/quill.snow.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/nice-select2.css') }}" />
+    @endpush
 
     <div x-data="panels">
         <ul class="flex space-x-2 rtl:space-x-reverse">
@@ -38,35 +42,33 @@
         </div>
     </div>
 
-    <script src="/assets/js/quill.js"></script>
-    <script src="/assets/js/nice-select2.js"></script>
-    <script>
+    @push('scripts')
+        {{-- <script src="https://cdn.quilljs.com/1.3.6/quill.js" defer></script> --}}
+        <script src="/assets/js/quill.js"></script>
+        <script src="/assets/js/nice-select2.js"></script>
+        <script src="https://unpkg.com/quill-paste-smart@latest/dist/quill-paste-smart.js" defer></script>
+    
+        <script>
+            // default
+            let els = document.querySelectorAll(".selectize");
+            
+            // seachable
+            let options = {
+                searchable: true
+            };
+            
+            els.forEach(function(select) {
+                NiceSelect.bind(select, options);
+            });
 
-        let quill = new Quill('#quill', {
-            theme: 'snow',
-        });
-        const oldContent = document.querySelector('#quill').getAttribute('data-old-value');
-        quill.clipboard.dangerouslyPasteHTML(oldContent);
-
-        // default
-        let els = document.querySelectorAll(".selectize");
-        
-        // seachable
-        let options = {
-            searchable: true
-        };
-        
-        els.forEach(function(select) {
-            NiceSelect.bind(select, options);
-        });
-
-        document.addEventListener("alpine:init", () => {
-            Alpine.data("panels", () => ({
-                form: null,
-                init() {
-                    this.form = {};
-                }
-            }));
-        });
-    </script>
+            document.addEventListener("alpine:init", () => {
+                Alpine.data("panels", () => ({
+                    form: null,
+                    init() {
+                        this.form = {};
+                    }
+                }));
+            });
+        </script>
+    @endpush
 </x-layout.default>

@@ -1,4 +1,5 @@
 <div x-data="panelForm" class="space-y-3">
+
     <div class="form-field @error('name') has-error @enderror">
         <label for="name">Name</label>
 
@@ -43,31 +44,12 @@
         </div>
     </div>
 
-    <div class="form-field @error('description_html') has-error @enderror">
-        <label for="description_html">Description</label>
-
-        <div class="relative">
-            <div 
-                id="quill" 
-                data-old-value="{{ old('description_html', $panel->description_html ?? '') }}"
-            >
-            </div>            
-
-            <input 
-                id="description_html"
-                name="description_html"
-                class="hidden" 
-                type="hidden"
-                value="{{ old('description_html', $panel->description_html ?? '') }}"
-            >
-            
-            @error('description_html')
-                <span>
-                    <p class="text-danger mt-1">{{ $message }}</p>
-                </span>
-            @enderror
-        </div>
-    </div>
+    <x-helpers.quill-editor 
+        label="Description" 
+        name="description_html" 
+        value="{{ old('description_html', $panel->description_html ?? '') }}" 
+        placeholder="Panel Description here..." 
+    />
 
     <div class="form-field space-y-3 @error('status_id') has-error @enderror" x-data="
     {
