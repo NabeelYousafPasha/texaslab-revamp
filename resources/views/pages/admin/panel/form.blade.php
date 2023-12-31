@@ -42,6 +42,12 @@
     <script src="/assets/js/nice-select2.js"></script>
     <script>
 
+        let quill = new Quill('#quill', {
+            theme: 'snow',
+        });
+        const oldContent = document.querySelector('#quill').getAttribute('data-old-value');
+        quill.clipboard.dangerouslyPasteHTML(oldContent);
+
         // default
         let els = document.querySelectorAll(".selectize");
         

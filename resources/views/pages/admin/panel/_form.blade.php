@@ -48,26 +48,17 @@
 
         <div class="relative">
             <div 
-                {{-- id="quill"  --}}
-                x-ref="quillEditor"
-                x-init="
-                    quill = new Quill($refs.quillEditor, {theme: 'snow'});
-                    quill.on('text-change', function () {
-                        $dispatch('input', quill.root.innerHTML);
-                        $refs.description_html.value = quill.root.innerHTML;
-                    });
-                "
-                x-model.debounce.500ms="fields.quill_description"
-            ></div>
+                id="quill" 
+                data-old-value="{{ old('description_html', $panel->description_html ?? '') }}"
+            >
+            </div>            
 
             <input 
                 id="description_html"
-                x-ref="description_html"
                 name="description_html"
-                x-model="fields.description_html"
                 class="hidden" 
                 type="hidden"
-                value="{{ old('description_html', $panel->description_html ?? 0) }}"
+                value="{{ old('description_html', $panel->description_html ?? '') }}"
             >
             
             @error('description_html')
