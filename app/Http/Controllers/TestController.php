@@ -7,7 +7,8 @@ use App\Models\{
     PanelTest,
     ResultKpi,
     Status, 
-    Test
+    Test,
+    TestResultKpi
 };
 use App\Services\TestService;
 use Symfony\Component\HttpFoundation\Response;
@@ -130,6 +131,7 @@ class TestController extends Controller
     public function destroy(Test $test)
     {
         PanelTest::where('test_id', '=', $test->id)->delete();
+        TestResultKpi::where('test_id', '=', $test->id)->delete();
         $test->delete();
 
         return redirect()->route('admin.tests.index');
