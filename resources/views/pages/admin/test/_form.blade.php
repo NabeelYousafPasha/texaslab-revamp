@@ -67,7 +67,6 @@
                 <input 
                     id="actual_price" 
                     name="actual_price"
-                    x-model="fields.actual_price"
                     type="number"
                     placeholder="Actual Price"
                     class="form-input"
@@ -90,7 +89,6 @@
                 <input 
                     id="offered_price" 
                     name="offered_price"
-                    x-model="fields.offered_price"
                     type="number"
                     placeholder="Offered Price"
                     class="form-input"
@@ -113,7 +111,6 @@
                 <input 
                     id="competitor_price" 
                     name="competitor_price"
-                    x-model="fields.competitor_price"
                     type="number"
                     placeholder="Competitor Price"
                     class="form-input"
