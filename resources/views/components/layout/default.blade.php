@@ -13,15 +13,9 @@
     <meta name='viewport' content='width=device-width, initial-scale=1' />
     <link rel="icon" type="image/svg" href="/assets/images/favicon.svg" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" />
+    @include('components.includes.styles')
+    @stack('stylesheets')
 
-    <script src="/assets/js/perfect-scrollbar.min.js"></script>
-    <script defer src="/assets/js/popper.min.js"></script>
-    <script defer src="/assets/js/tippy-bundle.umd.min.js"></script>
-    <script defer src="/assets/js/sweetalert.min.js"></script>
-    
     @vite(['resources/css/app.css'])
     @vite(['resources/css/styles.css'])
 </head>
@@ -103,12 +97,8 @@
         });
     </script>
 
-    <script src="/assets/js/alpine-collaspe.min.js"></script>
-    <script src="/assets/js/alpine-persist.min.js"></script>
-    <script src="/assets/js/alpine-ui.min.js" defer></script>
-    <script src="/assets/js/alpine-focus.min.js" defer></script>
-    <script src="/assets/js/alpine.min.js" defer></script>
-    <script src="/assets/js/custom.js"></script>
+    @include('components.includes.scripts')
+    @stack('scripts')
 </body>
 
 </html>

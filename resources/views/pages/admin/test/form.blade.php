@@ -1,5 +1,10 @@
 <x-layout.default>
-    
+
+    @push('stylesheets')
+        {{-- <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"> --}}
+        <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/quill.snow.css') }}" />
+    @endpush
+
     <div x-data="tests">
         <ul class="flex space-x-2 rtl:space-x-reverse">
             <li>
@@ -36,30 +41,21 @@
         </div>
     </div>
 
-    <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/quill.snow.css') }}" />
-    <script src="/assets/js/quill.js"></script>
-    <script>    
-        // let quill = new Quill('#quill', {
-        //     theme: 'snow',
-        // });
+    @push('scripts')
+        {{-- <script src="https://cdn.quilljs.com/1.3.6/quill.js" defer></script> --}}
+        <script src="/assets/js/quill.js"></script>
+        <script src="https://unpkg.com/quill-paste-smart@latest/dist/quill-paste-smart.js" defer></script>
         
-        // let toolbar = quill.container.previousSibling;
-        // toolbar.querySelector('.ql-picker').setAttribute('title', 'Font Size');
-        // toolbar.querySelector('button.ql-bold').setAttribute('title', 'Bold');
-        // toolbar.querySelector('button.ql-italic').setAttribute('title', 'Italic');
-        // toolbar.querySelector('button.ql-link').setAttribute('title', 'Link');
-        // toolbar.querySelector('button.ql-underline').setAttribute('title', 'Underline');
-        // toolbar.querySelector('button.ql-clean').setAttribute('title', 'Clear Formatting');
-        // toolbar.querySelector('[value=ordered]').setAttribute('title', 'Ordered List');
-        // toolbar.querySelector('[value=bullet]').setAttribute('title', 'Bullet List');
+        <script>    
 
-        document.addEventListener("alpine:init", () => {
-            Alpine.data("tests", () => ({
-                form: null,
-                init() {
-                    this.form = {};
-                }
-            }));
-        });
-    </script>
+            document.addEventListener("alpine:init", () => {
+                Alpine.data("tests", () => ({
+                    form: null,
+                    init() {
+                        this.form = {};
+                    }
+                }));
+            });
+        </script>
+    @endpush
 </x-layout.default>

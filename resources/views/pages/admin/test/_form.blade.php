@@ -67,7 +67,6 @@
                 <input 
                     id="actual_price" 
                     name="actual_price"
-                    x-model="fields.actual_price"
                     type="number"
                     placeholder="Actual Price"
                     class="form-input"
@@ -90,7 +89,6 @@
                 <input 
                     id="offered_price" 
                     name="offered_price"
-                    x-model="fields.offered_price"
                     type="number"
                     placeholder="Offered Price"
                     class="form-input"
@@ -113,7 +111,6 @@
                 <input 
                     id="competitor_price" 
                     name="competitor_price"
-                    x-model="fields.competitor_price"
                     type="number"
                     placeholder="Competitor Price"
                     class="form-input"
@@ -130,39 +127,12 @@
         </div>
     </div>
 
-    <div class="form-field @error('description_html') has-error @enderror">
-        <label for="description_html">Description</label>
-
-        <div class="relative">
-            <div 
-                {{-- id="quill"  --}}
-                x-ref="quillEditor"
-                x-init="
-                    quill = new Quill($refs.quillEditor, {theme: 'snow', placeholder: 'Description...',});
-                    quill.on('text-change', function () {
-                        $dispatch('input', quill.root.innerHTML);
-                        $refs.description_html.value = quill.root.innerHTML;
-                    });
-                "
-                x-model.debounce.500ms="fields.quill_description"
-            ></div>
-
-            <input 
-                id="description_html"
-                x-ref="description_html"
-                name="description_html"
-                class="hidden" 
-                type="hidden"
-                value="{{ old('description_html', $test->description_html ?? '') }}"
-            >
-            
-            @error('description_html')
-                <span>
-                    <p class="text-danger mt-1">{{ $message }}</p>
-                </span>
-            @enderror
-        </div>
-    </div>
+    <x-helpers.quill-editor 
+        label="Description" 
+        name="description_html" 
+        value="{{ old('description_html', $test->description_html ?? '') }}" 
+        placeholder="Test Description here..." 
+    />
 
     <div class="form-field space-y-3 @error('status_id') has-error @enderror" x-data="
     {

@@ -131,6 +131,6 @@ class TestController extends Controller
     {
         $test->delete();
 
-        return redirect()->route('admin.tests.index', [], Response::HTTP_NO_CONTENT);
+        return redirect()->route('admin.tests.index');
     }
 }

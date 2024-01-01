@@ -1,4 +1,5 @@
 <div x-data="panelForm" class="space-y-3">
+
     <div class="form-field @error('name') has-error @enderror">
         <label for="name">Name</label>
 
@@ -43,40 +44,12 @@
         </div>
     </div>
 
-    <div class="form-field @error('description_html') has-error @enderror">
-        <label for="description_html">Description</label>
-
-        <div class="relative">
-            <div 
-                {{-- id="quill"  --}}
-                x-ref="quillEditor"
-                x-init="
-                    quill = new Quill($refs.quillEditor, {theme: 'snow'});
-                    quill.on('text-change', function () {
-                        $dispatch('input', quill.root.innerHTML);
-                        $refs.description_html.value = quill.root.innerHTML;
-                    });
-                "
-                x-model.debounce.500ms="fields.quill_description"
-            ></div>
-
-            <input 
-                id="description_html"
-                x-ref="description_html"
-                name="description_html"
-                x-model="fields.description_html"
-                class="hidden" 
-                type="hidden"
-                value="{{ old('description_html', $panel->description_html ?? 0) }}"
-            >
-            
-            @error('description_html')
-                <span>
-                    <p class="text-danger mt-1">{{ $message }}</p>
-                </span>
-            @enderror
-        </div>
-    </div>
+    <x-helpers.quill-editor 
+        label="Description" 
+        name="description_html" 
+        value="{{ old('description_html', $panel->description_html ?? '') }}" 
+        placeholder="Panel Description here..." 
+    />
 
     <div class="form-field space-y-3 @error('status_id') has-error @enderror" x-data="
     {
