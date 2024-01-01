@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('user_locations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('location_id');
+            $table->dateTime('started_at');
+            $table->dateTime('ended_at')->nullable();
             $table->timestamps();
         });
     }
