@@ -132,8 +132,9 @@ class PanelController extends Controller
      */
     public function destroy(Panel $panel)
     {
+        PanelTest::where('panel_id', '=', $panel->id)->delete();
         $panel->delete();
 
-        return redirect()->route('admin.panels.index', [], Response::HTTP_NO_CONTENT);
+        return redirect()->route('admin.panels.index');
     }
 }

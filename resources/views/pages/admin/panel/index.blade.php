@@ -44,8 +44,41 @@
                                 <td>{{ $panel->name }}</td>
                                 <td>{{ $panel->price }}</td>
                                 <td>{{ $panel->status->name }}</td>
-                                <td>
-                                    
+                                <td class="text-center">
+                                    <ul class="flex items-center gap-2">
+                                        <li>
+                                            <a 
+                                                href="{{ route('admin.panels.edit', ['panel' => $panel,]) }}" 
+                                                x-tooltip="Edit"
+                                            >
+                                                EDIT
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <x-helpers.confirm 
+                                                title="Delete?" 
+                                                subtitle="Cannot undo after delete."
+                                            >
+                                                <x-slot name="trigger">
+                                                    <span>DELETE</span>
+                                                </x-slot>
+                                            
+                                                <form 
+                                                    action="{{ route('admin.panels.destroy', ['panel' => $panel,]) }}"
+                                                    method="POST"
+                                                >
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button
+                                                        type="submit"
+                                                        class="font-medium focus:outline-none px-4 py-4 text-gray-500" 
+                                                    >
+                                                        DELETE
+                                                    </button>
+                                                </form>
+                                            </x-confirm>
+                                        </li>
+                                    </ul>
                                 </td>
                             </tr>
                         @endforeach
