@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,4 +47,28 @@ class User extends Authenticatable implements Auditable
         'email_verified_at' => 'datetime',
         'role' => 'json',
     ];
+
+    /**
+     * |--------------------------------------------------------------------------
+     * | SCOPES
+     * |--------------------------------------------------------------------------
+     */
+    
+    /**
+     *
+     * @param Builder $builder
+     * @param integer|null $patientId
+     * 
+     * @return Builder
+     */
+    public function scopeOfTypePatient(Builder $builder, int $patientId = null): Builder
+    {
+        $builder = $builder->where('model_type', '=', Patient::class);
+
+        if (! is_null($patientId)) {
+            $builder->where('model_id', '=', $patientId);
+        }
+
+        return $builder;
+    }
 }
