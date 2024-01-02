@@ -165,13 +165,13 @@
         </div>
     </div>
 
-    <div class="form-field space-y-3 @error('icdCodes') has-error @enderror">
-        <label for="icdCodes">ICD Codes</label>
+    <div class="form-field space-y-3 @error('icd_codes') has-error @enderror">
+        <label for="icd_codes">ICD Codes</label>
     
         <div class="relative">
             <select 
-                id="icdCodes"
-                name="icdCodes[]" 
+                id="icd_codes"
+                name="icd_codes[]" 
                 class="selectize seachable-select"
                 placeholder="Choose ICD Code(s)..."
                 multiple="multiple"
@@ -188,7 +188,7 @@
                 @endforeach
             </select>
 
-            @error('icdCodes')
+            @error('icd_codes')
                 <span>
                     <p class="text-danger mt-1">{{ $message }}</p>
                 </span>

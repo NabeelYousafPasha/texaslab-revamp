@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Test;
 
 use App\Models\{
+    IcdCode,
     ResultKpi, 
     Status, 
     Test,
@@ -50,6 +51,8 @@ class TestRequest extends FormRequest
 
             'test_result_kpis' => ['required', 'array', /** Rule::in(ResultKpi::ofTest()->pluck('id')->toArray()), */],
             'test_result_kpis.*' => ['required', 'string',],
+
+            'icd_codes' => ['required', 'array', Rule::in(IcdCode::pluck('id')->toArray())],
         ];
     }
 
@@ -71,6 +74,8 @@ class TestRequest extends FormRequest
 
             'test_result_kpis' => 'Result Kpis',
             ...$resultKpisFields,
+
+            'icd_codes' => 'ICD Codes',
         ];   
     }
 
