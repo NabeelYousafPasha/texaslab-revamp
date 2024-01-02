@@ -44,8 +44,8 @@
         </div>
     </div>
 
-    <div class="form-field @error('username') has-error @enderror">
-        <label for="username">
+    <div class="form-field @error('avatar') has-error @enderror">
+        <label for="avatar">
             <div class="flex flex-col md:flex-row md:items-center">
             <svg class="text-gray-500 w-6 h-6 mr-1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
             Attach Avatar
@@ -61,7 +61,7 @@
                 class="form-input text-sm inline-flex items-center border bg-gray-100 rounded-full focus:rounded-full pl-2 pr-3 py-1 text-gray-600"
             />
             
-            @error('username')
+            @error('avatar')
                 <span>
                     <p class="text-danger mt-1">{{ $message }}</p>
                 </span>
@@ -69,6 +69,27 @@
         </div>
     </div>
 
+    <div class="form-field @error('password') has-error @enderror">
+        <label for="password">Password</label>
+    
+        <div class="relative">
+            <input 
+                id="password" 
+                name="password"
+                type="text"
+                placeholder="Password"
+                class="form-input"
+                
+                value="{{ old('password', $user->password ?? '') }}"
+            />
+            
+            @error('password')
+                <span>
+                    <p class="text-danger mt-1">{{ $message }}</p>
+                </span>
+            @enderror
+        </div>
+    </div>
 </div>
 
 <script>
