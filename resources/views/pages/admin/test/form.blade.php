@@ -3,6 +3,7 @@
     @push('stylesheets')
         {{-- <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"> --}}
         <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/quill.snow.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/nice-select2.css') }}" />
     @endpush
 
     <div x-data="tests">
@@ -27,7 +28,7 @@
                     :action="$form['action']"
 
                     :spoofed-type="$form['_method'] ?? NULL"
-                >
+                >   
                     @includeIf('pages.admin.test._form')
 
                     <button 
@@ -45,9 +46,22 @@
         {{-- <script src="https://cdn.quilljs.com/1.3.6/quill.js" defer></script> --}}
         <script src="/assets/js/quill.js"></script>
         <script src="https://unpkg.com/quill-paste-smart@latest/dist/quill-paste-smart.js" defer></script>
+        <script src="/assets/js/nice-select2.js"></script>
         
         <script>    
 
+            // default
+            let els = document.querySelectorAll(".selectize");
+            
+            // seachable
+            let options = {
+                searchable: true
+            };
+            
+            els.forEach(function(select) {
+                NiceSelect.bind(select, options);
+            });
+            
             document.addEventListener("alpine:init", () => {
                 Alpine.data("tests", () => ({
                     form: null,
