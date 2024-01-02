@@ -28,9 +28,7 @@
                     :action="$form['action']"
 
                     :spoofed-type="$form['_method'] ?? NULL"
-                >
-                    @dump($errors)
-                    
+                >   
                     @includeIf('pages.admin.test._form')
 
                     <button 
