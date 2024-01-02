@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Test\TestRequest;
 use App\Models\{
+    PanelTest,
     ResultKpi,
     Status, 
-    Test
+    Test,
+    TestResultKpi
 };
 use App\Services\TestService;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class TestController extends Controller
@@ -119,7 +120,7 @@ class TestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Test $test)
+    public function update(TestRequest $request, Test $test)
     {
         //
     }
@@ -129,6 +130,8 @@ class TestController extends Controller
      */
     public function destroy(Test $test)
     {
+        PanelTest::where('test_id', '=', $test->id)->delete();
+        TestResultKpi::where('test_id', '=', $test->id)->delete();
         $test->delete();
 
         return redirect()->route('admin.tests.index');

@@ -10,7 +10,6 @@ use App\Models\{
     Test,
 };
 use App\Services\PanelService;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class PanelController extends Controller
@@ -122,7 +121,7 @@ class PanelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Panel $panel)
+    public function update(PanelRequest $request, Panel $panel)
     {
         //
     }
