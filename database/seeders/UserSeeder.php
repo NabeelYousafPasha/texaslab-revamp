@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        foreach ($roleUsers as $role => $users) {    
+        foreach ($roleUsers as $role => $users) {
             foreach ($users as $userIndex => $user) {
                 $seederUser = User::firstOrCreate([
                     'email' => $userIndex,
