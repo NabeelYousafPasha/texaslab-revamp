@@ -10,11 +10,22 @@ use Spatie\Permission\Models\Role as SpatieRole;
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $guard_name
+ * @property ?\Illuminate\Support\Carbon $created_at
+ * @property ?\Illuminate\Support\Carbon $updated_at
+ */
 class Role extends SpatieRole implements Auditable
 {
     use HasFactory, AuditableTrait;
 
     const SUPER_ADMIN = 'super_admin';
+
+    const CLINIC_ADMIN = 'clinic_admin';
+
+    const PATIENT = 'patient';
 
     /**
      *
@@ -24,6 +35,8 @@ class Role extends SpatieRole implements Auditable
     {
         return [
             self::SUPER_ADMIN,
+            self::CLINIC_ADMIN,
+            self::PATIENT,
         ];
     }
 

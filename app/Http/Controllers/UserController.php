@@ -12,7 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.admin.user.index')->with([
+            'users' => [],
+        ]);
     }
 
     /**
@@ -20,7 +22,18 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $form = [
+            'id' => 'create_form__user',
+            'name' => 'create_form__user',
+            'action' => route('admin.users.store'),
+            'method' => 'POST',
+            
+            'enctype' => 'multipart/form-data',
+        ];
+        
+        return view('pages.admin.user.form')->with([
+            'form' => $form,
+        ]);
     }
 
     /**
@@ -28,7 +41,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

@@ -40,6 +40,20 @@
                     <ul>
                         <li class="nav-item">
                             <a 
+                                href="{{ route('admin.users.index') }}" 
+                                class="group"
+                            >
+                                <div class="flex items-center">
+                                    <span
+                                        class="ltr:pl-1 rtl:pr-1 text-black dark:text-[#506690] dark:group-hover:text-white-dark"
+                                    >
+                                        Users
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a 
                                 href="{{ route('admin.tests.index') }}" 
                                 class="group"
                             >
