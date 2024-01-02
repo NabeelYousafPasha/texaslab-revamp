@@ -16,6 +16,10 @@ class Role extends SpatieRole implements Auditable
 
     const SUPER_ADMIN = 'super_admin';
 
+    const CLINIC_ADMIN = 'clinic_admin';
+
+    const PATIENT = 'patient';
+
     /**
      *
      * @return array
@@ -24,6 +28,8 @@ class Role extends SpatieRole implements Auditable
     {
         return [
             self::SUPER_ADMIN,
+            self::CLINIC_ADMIN,
+            self::PATIENT,
         ];
     }
 
