@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Test\TestRequest;
 use App\Models\{
+    IcdCode,
     PanelTest,
     ResultKpi,
     Status, 
@@ -64,6 +65,7 @@ class TestController extends Controller
         return view('pages.admin.test.form')->with([
             'statuses' => $statuses,
             'resultKpis' => $resultKpis,
+            'icdCodes' => IcdCode::pluck('code', 'id')->toArray(),
 
             'form' => $form,
         ]);

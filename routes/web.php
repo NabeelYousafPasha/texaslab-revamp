@@ -9,6 +9,7 @@ use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\{
+    IcdCodeController,
     PanelController,
     TestController,
     UserController,
@@ -50,6 +51,13 @@ Route::group([
      * Route Name: admin.users.
      */
     Route::resource('/users', UserController::class);
+
+    /**
+     *
+     * Route Prefix: /admin/users
+     * Route Name: admin.users.
+     */
+    Route::resource('/icd-codes', IcdCodeController::class);
 
     /**
      *

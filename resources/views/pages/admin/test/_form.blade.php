@@ -165,6 +165,37 @@
         </div>
     </div>
 
+    <div class="form-field space-y-3 @error('icdCodes') has-error @enderror">
+        <label for="icdCodes">ICD Codes</label>
+    
+        <div class="relative">
+            <select 
+                id="icdCodes"
+                name="icdCodes[]" 
+                class="selectize seachable-select"
+                placeholder="Choose ICD Code(s)..."
+                multiple="multiple"
+            >
+                @foreach ($icdCodes as $icdCodeId => $icdCode)
+                    <option
+                        class="form-radio" 
+                        value="{{ $icdCodeId }}"
+                        {{ in_array($icdCodeId, old('icdCodes') ?? []) ? 'selected' : '' }} 
+                        {{ in_array($icdCodeId, $testIcdCodes ?? []) ? 'selected' : '' }} 
+                    />
+                        <span class="text-white-dark"">{{ $icdCode }}</span>
+                    </label>
+                @endforeach
+            </select>
+
+            @error('icdCodes')
+                <span>
+                    <p class="text-danger mt-1">{{ $message }}</p>
+                </span>
+            @enderror
+        </div>
+    </div>
+
     <div class="form-field @error('featured_at') has-error @enderror">
         <label for="featured_at">Feature</label>
 
