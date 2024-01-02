@@ -114,7 +114,7 @@
         </label>
     @endif
 
-    <div class="relative {{ $errors->has($name) ? 'ql-editor-haserror' : '' }}">
+    <div class="relative {{ $errors->has($name) ? 'ql-editor-haserror has-error text-danger mt-1' : '' }}">
 
         <div class="w-full pl-px pr-px bg-transparent z-20 absolute left-0 right-0" style="top: 38px;">
           <div id="quillProgressBar" class="bg-green-600 text-xs leading-none h-1" style="width: 0%"></div>
