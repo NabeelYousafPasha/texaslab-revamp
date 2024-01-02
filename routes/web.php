@@ -11,10 +11,12 @@ use App\Http\Controllers\DataController;
 use App\Http\Controllers\{
     PanelController,
     TestController,
+    UserController,
 };
 use App\Http\Middleware\{
     Authenticate,
 };
+use Illuminate\Http\Request;
 
 /**
  *
@@ -31,7 +33,7 @@ Auth::routes();
 
 /**
  *
- * Admin routes
+ * Auth & Admin routes
  *
  * Route Prefix: /admin
  * Route Name: admin.
@@ -41,6 +43,13 @@ Route::group([
     'prefix' => '/admin/',
     'as' => 'admin.',
 ], function () {
+
+    /**
+     *
+     * Route Prefix: /admin/users
+     * Route Name: admin.users.
+     */
+    Route::resource('/users', UserController::class);
 
     /**
      *
@@ -79,4 +88,37 @@ Route::group([
 
     // for ajax, it is better to rely on api/v1 routes
     Route::get('/ajax/patient-appointments', [DataController::class, 'patientAppointmentData'])->name('patientAppointmentData');
+});
+
+/**
+ *
+ * Auth Routes
+ *
+ * Route Prefix: ''
+ * Route Name: ''
+ */
+Route::group([
+    'middleware' => [Authenticate::class],
+], function() {
+    
+    Route::post('/uploads', function(Request $request) {
+        try {
+            if ($request->file('image')) {
+
+                if (is_array($request->image)) {
+                    $path = collect($request->image)->map->store('tmp-editor-uploads');
+                } else {
+                    $path = $request->image->store('tmp-editor-uploads');                
+                }
+    
+                return response()->json([
+                    'url' => $path
+                ], 200);
+            }
+    
+            return;
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    })->name('upload');
 });
