@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class TestIdcCode extends Pivot
+class TestIcdCode extends Pivot
 {
     /**
      *

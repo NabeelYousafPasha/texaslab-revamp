@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Test extends Model
 {
@@ -74,5 +75,14 @@ class Test extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
+    }
+    
+    /**
+     *
+     * @return BelongsToMany
+     */
+    public function icd_codes(): BelongsToMany
+    {
+        return $this->belongsToMany(IcdCode::class, 'test_icd_code', 'test_id', 'icd_code_id');
     }
 }

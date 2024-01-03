@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class IcdCode extends Model
 {
@@ -28,4 +29,20 @@ class IcdCode extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+
+    /**
+     * |--------------------------------------------------------------------------
+     * | RELATIONSHIPS
+     * |--------------------------------------------------------------------------
+     */
+
+    /**
+     *
+     * @return BelongsToMany
+     */
+    public function tests(): BelongsToMany
+    {
+        return $this->belongsToMany(Test::class, 'test_icd_code', 'icd_code_id', 'test_id');
+    }
 }

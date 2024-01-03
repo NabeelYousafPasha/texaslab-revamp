@@ -7,13 +7,79 @@
                 id="name" 
                 name="name"
                 type="text"
-                placeholder="Name of test"
+                placeholder="Name of Test"
                 class="form-input"
                 
                 value="{{ old('name', $test->name ?? '') }}"
             />
             
             @error('name')
+                <span>
+                    <p class="text-danger mt-1">{{ $message }}</p>
+                </span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="form-field @error('specimen') has-error @enderror">
+        <label for="specimen">Specimen</label>
+
+        <div class="relative">
+            <input 
+                id="specimen" 
+                name="specimen"
+                type="text"
+                placeholder="Specimen"
+                class="form-input"
+                
+                value="{{ old('specimen', $test->specimen ?? '') }}"
+            />
+            
+            @error('specimen')
+                <span>
+                    <p class="text-danger mt-1">{{ $message }}</p>
+                </span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="form-field @error('labdaq_compendium') has-error @enderror">
+        <label for="labdaq_compendium">Labdaq Compendium</label>
+
+        <div class="relative">
+            <input 
+                id="labdaq_compendium" 
+                name="labdaq_compendium"
+                type="text"
+                placeholder="Labdaq Compendium"
+                class="form-input"
+                
+                value="{{ old('labdaq_compendium', $test->labdaq_compendium ?? '') }}"
+            />
+            
+            @error('labdaq_compendium')
+                <span>
+                    <p class="text-danger mt-1">{{ $message }}</p>
+                </span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="form-field @error('labdaq_panel_name') has-error @enderror">
+        <label for="labdaq_panel_name">Labdaq Panel Name</label>
+
+        <div class="relative">
+            <input 
+                id="labdaq_panel_name" 
+                name="labdaq_panel_name"
+                type="text"
+                placeholder="Labdaq Panel Name"
+                class="form-input"
+                
+                value="{{ old('labdaq_panel_name', $test->labdaq_panel_name ?? '') }}"
+            />
+            
+            @error('labdaq_panel_name')
                 <span>
                     <p class="text-danger mt-1">{{ $message }}</p>
                 </span>
@@ -30,10 +96,12 @@
                     name="is_free" 
                     class="form-radio" 
                     value="1"
+                    x-ref="priceIsFree"
                     
                     x-on:click="hidePriceFields"
                     {{ old('is_free') == 1 ? 'checked' : '' }}
-                    {{ $test->is_free ?? '' == 1 ? 'checked' : '' }}
+
+                    {{ isset($test) && (bool) $test->is_free == 1 ? 'checked' : '' }}
                 />
                 <span class="text-white-dark"">Free</span>
             </label>
@@ -43,10 +111,12 @@
                     name="is_free" 
                     class="form-radio" 
                     value="0"
+                    x-ref="priceIsPaid"
                     
                     x-on:click="showPriceFields"
                     {{ old('is_free') != null && old('is_free') == 0 ? 'checked' : '' }}
-                    {{ $test->is_free ?? '' == 0 ? 'checked' : '' }}
+                    
+                    {{ isset($test) && (bool) $test->is_free == 0 ? 'checked' : '' }}
                 />
                 <span class="text-white-dark"">Paid</span>
             </label>
@@ -59,7 +129,7 @@
         </div>
     </div>
 
-    <div x-show="renderPriceFields" x-transition class="space-y-3">
+    <div x-show="renderPriceFields" x-transition x-cloak class="space-y-3">
         <div class="form-field @error('actual_price') has-error @enderror">
             <label for="actual_price">Actual Price</label>
         
@@ -149,9 +219,9 @@
                         name="status_id" 
                         class="form-radio" 
                         value="{{ $statusId }}"
+
                         {{ old('status_id') == $statusId ? 'checked' : '' }}
                         {{ $test->status_id ?? '' == $statusId ? 'checked' : '' }}
-                        
                     />
                     <span class="text-white-dark"">{{ $statusName }}</span>
                 </label>
@@ -246,33 +316,48 @@
         </div>
     </div>
 
-    <div x-data="
-        {
-            test_result_kpis: {{ $resultKpis }}
-        }
-    " class="space-y-3">
-        @foreach ($resultKpis as $resultKpiId => $resultKpiName)
-            <div class="form-field {{ $errors->has('test_result_kpis.'.$resultKpiId) ? 'has-error' : '' }}">
-                <label for="test_result_kpis_{{ $resultKpiId }}">{{ $resultKpiName }}</label>
+    <div class="form-field @error('meta_title') has-error @enderror">
+        <label for="meta_title">Meta Title</label>
 
-                <div class="relative">
-                    <input 
-                        id="test_result_kpis_{{ $resultKpiId }}" 
-                        name="test_result_kpis[{{ $resultKpiId }}]"
-                        type="text"
-                        placeholder="{{ $resultKpiName }}"
-                        class="form-input"
-                        value="{{ old('test_result_kpis')[$resultKpiId] ?? "" }}"
-                    />
-                    
-                    @if($errors->has('test_result_kpis.'.$resultKpiId))
-                        <span>
-                            <p class="text-danger mt-1">{{ $errors->first('test_result_kpis.'.$resultKpiId) }}</p>
-                        </span>
-                    @endif
-                </div>
-            </div>
-        @endforeach
+        <div class="relative">
+            <input 
+                id="meta_title" 
+                name="meta_title"
+                type="text"
+                placeholder="Meta Title"
+                class="form-input"
+                
+                value="{{ old('meta_title', $test->meta_title ?? '') }}"
+            />
+            
+            @error('meta_title')
+                <span>
+                    <p class="text-danger mt-1">{{ $message }}</p>
+                </span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="form-field @error('meta_description') has-error @enderror">
+        <label for="meta_description">Meta Description</label>
+
+        <div class="relative">
+            <input 
+                id="meta_description" 
+                name="meta_description"
+                type="text"
+                placeholder="Meta Description"
+                class="form-input"
+                
+                value="{{ old('meta_description', $test->meta_description ?? '') }}"
+            />
+            
+            @error('meta_description')
+                <span>
+                    <p class="text-danger mt-1">{{ $message }}</p>
+                </span>
+            @enderror
+        </div>
     </div>
 </div>
 
@@ -289,6 +374,11 @@
             
             init() {
                 this.renderPriceFields = false;
+
+                if (this.$refs.priceIsPaid.checked) {
+                    this.renderPriceFields = true;
+                }
+                
             },
             showPriceFields() {
                 this.renderPriceFields = true;

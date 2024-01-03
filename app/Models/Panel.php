@@ -22,6 +22,8 @@ class Panel extends Model
         'description_html',
         'price',
         'is_renderabble',
+        'meta_title',
+        'meta_description',
     ];
 
     /**

@@ -22,6 +22,7 @@
             </div>
             
             <div class="mt-3 mb-3">
+
                 <x-helpers.form
                     :id="$form['id']"
                     :name="$form['name']"

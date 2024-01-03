@@ -64,6 +64,9 @@
             <x-common.header />
 
             <div class="p-6 animate__animated" :class="[$store.app.animation]">
+
+                <x-helpers.validation-errors />
+                
                 {{ $slot }}
             </div>
 

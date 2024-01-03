@@ -6,7 +6,6 @@ use App\Http\Requests\Test\TestRequest;
 use App\Models\{
     IcdCode,
     PanelTest,
-    ResultKpi,
     Status, 
     Test,
     TestResultKpi
@@ -52,9 +51,6 @@ class TestController extends Controller
         $statuses = Status::OfTest()
                     ->pluck('name', 'id');
 
-        $resultKpis = ResultKpi::ofTest()
-                    ->pluck('name', 'id');
-
         $form = [
             'id' => 'create_form__test',
             'name' => 'create_form__test',
@@ -64,7 +60,6 @@ class TestController extends Controller
         
         return view('pages.admin.test.form')->with([
             'statuses' => $statuses,
-            'resultKpis' => $resultKpis,
             'icdCodes' => IcdCode::pluck('code', 'id')->toArray(),
 
             'form' => $form,
@@ -76,8 +71,7 @@ class TestController extends Controller
      */
     public function store(TestRequest $request)
     {
-        $test = $this->testService->store($request->validated());
-        $this->testService->syncTestResultKpis($test, $request->validated('test_result_kpis'));
+        $this->testService->store($request->validated());
 
         return redirect()->route('admin.tests.index', [], Response::HTTP_CREATED);
     }
@@ -98,9 +92,6 @@ class TestController extends Controller
         $statuses = Status::OfTest()
                     ->pluck('name', 'id');
 
-        $resultKpis = ResultKpi::ofTest()
-                    ->pluck('name', 'id');
-
         $form = [
             'id' => 'edit_form__test',
             'name' => 'edit_form__test',
@@ -112,10 +103,11 @@ class TestController extends Controller
         
         return view('pages.admin.test.form')->with([
             'statuses' => $statuses,
-            'resultKpis' => $resultKpis,
+            'icdCodes' => IcdCode::pluck('code', 'id')->toArray(),
 
-            'test' => $test,
             'form' => $form,
+            'test' => $test,
+            'testIcdCodes' => $test->icd_codes()->pluck('icd_codes.id')->toArray(),
         ]);
     }
 
