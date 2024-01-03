@@ -10,6 +10,11 @@ class Panel extends Model
 {
     use HasFactory;
 
+    /**
+     *
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'status_id',
@@ -19,6 +24,11 @@ class Panel extends Model
         'is_renderabble',
     ];
 
+    /**
+     *
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

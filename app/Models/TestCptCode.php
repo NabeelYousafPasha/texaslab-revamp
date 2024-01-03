@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TestResultKpi extends Model
+class TestCptCode extends Model
 {
     use HasFactory;
 
@@ -16,8 +16,8 @@ class TestResultKpi extends Model
      */
     protected $fillable = [
         'test_id',
-        'result_kpi_id',
-        'value',
+        'cpt_code',
+        'cpt_description',
     ];
 
     /**
