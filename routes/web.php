@@ -13,6 +13,7 @@ use App\Http\Controllers\{
     PanelController,
     TestController,
     UserController,
+    LocationController,
 };
 use App\Http\Middleware\{
     Authenticate,
@@ -77,10 +78,15 @@ Route::group([
     /***********
      * ZOHAIB Routes
      **********/
-    Route::view('/admin', 'home');
+    /**
+     *
+     * Route Prefix: /admin/panels
+     * Route Name: admin.panels.
+     */
+    Route::resource('/locations', LocationController::class);
 
+    Route::view('/admin', 'home');
     Route::get('/admin/patient-appointments', [DataController::class, 'patientAppointment'])->name('patientAppointment');
-    
     Route::view('/', 'index');
     Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
     Route::get('/menu/create', [MenuItemController::class, 'create'])->name('menu.create');
@@ -92,7 +98,8 @@ Route::group([
     Route::post('/menu', [MenuItemController::class, 'store'])->name('menu.store');
     Route::get('/create-permission', [PermissionController::class, 'create'])->name('permissions.create');
     Route::post('/store-permission', [PermissionController::class, 'store'])->name('permissions.store');
-    Route::get('/admin/menu/create', [MenuItemController::class, 'create'])->name('menu.create');
+    Route::get('/menu/create', [MenuItemController::class, 'create'])->name('menu.create');
+
 
     // for ajax, it is better to rely on api/v1 routes
     Route::get('/ajax/patient-appointments', [DataController::class, 'patientAppointmentData'])->name('patientAppointmentData');
@@ -107,23 +114,23 @@ Route::group([
  */
 Route::group([
     'middleware' => [Authenticate::class],
-], function() {
-    
-    Route::post('/uploads', function(Request $request) {
+], function () {
+
+    Route::post('/uploads', function (Request $request) {
         try {
             if ($request->file('image')) {
 
                 if (is_array($request->image)) {
                     $path = collect($request->image)->map->store('tmp-editor-uploads');
                 } else {
-                    $path = $request->image->store('tmp-editor-uploads');                
+                    $path = $request->image->store('tmp-editor-uploads');
                 }
-    
+
                 return response()->json([
                     'url' => $path
                 ], 200);
             }
-    
+
             return;
         } catch (\Throwable $th) {
             dd($th);

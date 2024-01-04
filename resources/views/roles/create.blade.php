@@ -8,7 +8,7 @@
                     <h5 class="font-semibold text-lg dark:text-white-light">Enter Role</h5>
                 </div>
                 <div class="mb-5">
-                    <form method="POST" action="{{ route('roles.store') }}">
+                    <form method="POST" action="{{ route('admin.roles.store') }}">
                         @csrf
                         <div class="form-group">
                             <label for="name">Role Name:</label>

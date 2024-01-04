@@ -1,3 +1,17 @@
 .height-vh{
     height: 100vh;    
 }
+.flex-column{
+    width: 50%;
+    flex-direction: column;
+}
+.flex-wd-10{
+    width: 10% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.wd-49{
+    width: 49%;
+}
