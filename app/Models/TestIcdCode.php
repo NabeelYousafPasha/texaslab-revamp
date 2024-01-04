@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class TestResultKpi extends Model
+class TestIcdCode extends Pivot
 {
-    use HasFactory;
-
     /**
      *
      *
@@ -16,12 +13,11 @@ class TestResultKpi extends Model
      */
     protected $fillable = [
         'test_id',
-        'result_kpi_id',
-        'value',
+        'icd_code_id',
     ];
 
     /**
-     *
+     * The attributes that should be cast.
      *
      * @var array<string, string>
      */

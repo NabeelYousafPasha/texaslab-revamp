@@ -18,12 +18,22 @@ class ResultKpi extends Model
 {
     use HasFactory;
 
+    /**
+     *
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'code',
         'name',
         'model',
     ];
 
+    /**
+     *
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

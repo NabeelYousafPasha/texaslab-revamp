@@ -18,12 +18,22 @@ class Status extends Model
 {
     use HasFactory;
 
+    /**
+     *
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'model',
         'code',
         'name',
     ];
 
+    /**
+     *
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

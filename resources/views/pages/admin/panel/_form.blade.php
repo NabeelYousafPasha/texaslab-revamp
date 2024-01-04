@@ -140,6 +140,50 @@
             @enderror
         </div>
     </div>
+
+    <div class="form-field @error('meta_title') has-error @enderror">
+        <label for="meta_title">Meta Title</label>
+
+        <div class="relative">
+            <input 
+                id="meta_title" 
+                name="meta_title"
+                type="text"
+                placeholder="Meta Title"
+                class="form-input"
+                
+                value="{{ old('meta_title', $test->meta_title ?? '') }}"
+            />
+            
+            @error('meta_title')
+                <span>
+                    <p class="text-danger mt-1">{{ $message }}</p>
+                </span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="form-field @error('meta_description') has-error @enderror">
+        <label for="meta_description">Meta Description</label>
+
+        <div class="relative">
+            <input 
+                id="meta_description" 
+                name="meta_description"
+                type="text"
+                placeholder="Meta Description"
+                class="form-input"
+                
+                value="{{ old('meta_description', $test->meta_description ?? '') }}"
+            />
+            
+            @error('meta_description')
+                <span>
+                    <p class="text-danger mt-1">{{ $message }}</p>
+                </span>
+            @enderror
+        </div>
+    </div>
 </div>
 
 <script>

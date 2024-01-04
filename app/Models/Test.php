@@ -6,11 +6,17 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Test extends Model
 {
     use HasFactory;
 
+    /**
+     *
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'status_id',
@@ -22,18 +28,24 @@ class Test extends Model
         'is_renderabble',
         'description_text',
         'description_html',
-        'symptoms',
-        'faqs',
+        'specimen',
+        'labdaq_compendium',
+        'labdaq_panel_name',
+        'meta_title',
+        'meta_description',
     ];
 
+    /**
+     *
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'is_free' => 'boolean',
         'featured_at' => 'datetime',
         'is_renderabble' => 'boolean',
-        'symptoms' => 'json',
-        'faqs' => 'json',
     ];
 
     /**
@@ -63,5 +75,14 @@ class Test extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
+    }
+    
+    /**
+     *
+     * @return BelongsToMany
+     */
+    public function icd_codes(): BelongsToMany
+    {
+        return $this->belongsToMany(IcdCode::class, 'test_icd_code', 'test_id', 'icd_code_id');
     }
 }

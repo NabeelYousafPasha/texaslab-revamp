@@ -49,17 +49,24 @@ class TestRequest extends FormRequest
             'is_renderabble' => ['nullable', /** 'accepted', */],
             'description_html' => ['nullable', 'string', 'max:255',],
 
-            'test_result_kpis' => ['required', 'array', /** Rule::in(ResultKpi::ofTest()->pluck('id')->toArray()), */],
-            'test_result_kpis.*' => ['required', 'string',],
+            // 'test_result_kpis' => ['required', 'array', /** Rule::in(ResultKpi::ofTest()->pluck('id')->toArray()), */],
+            // 'test_result_kpis.*' => ['required', 'string',],
 
             'icd_codes' => ['required', 'array', Rule::in(IcdCode::pluck('id')->toArray())],
+
+            'specimen' => ['required', 'string', 'max:255',],
+            'labdaq_compendium' => ['required', 'string', 'max:255',],
+            'labdaq_panel_name' => ['required', 'string', 'max:255',],
+            
+            'meta_title' => ['nullable', 'string', 'max:255',],
+            'meta_description' => ['nullable', 'string', 'max:255',],
         ];
     }
 
     public function attributes()
     {
-        $resultKpis = ResultKpi::ofTest()->pluck('name', 'id')->toArray();
-        $resultKpisFields = Arr::prependKeysWith($resultKpis, 'test_result_kpis.');
+        // $resultKpis = ResultKpi::ofTest()->pluck('name', 'id')->toArray();
+        // $resultKpisFields = Arr::prependKeysWith($resultKpis, 'test_result_kpis.');
 
         return [
             'name' => 'Name',
@@ -72,10 +79,17 @@ class TestRequest extends FormRequest
             'is_renderabble' => 'Show On Homepage',
             'description_html' => 'Description',
 
-            'test_result_kpis' => 'Result Kpis',
-            ...$resultKpisFields,
+            // 'test_result_kpis' => 'Result Kpis',
+            // ...$resultKpisFields,
 
             'icd_codes' => 'ICD Codes',
+
+            'specimen' => 'specimen',
+            'labdaq_compendium' => 'Labdaq Compendium',
+            'labdaq_panel_name' => 'Labdaq Panel Name',
+            
+            'meta_title' => 'Meta Title',
+            'meta_description' => 'Meta Description',
         ];   
     }
 

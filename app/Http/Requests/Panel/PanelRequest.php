@@ -42,6 +42,9 @@ class PanelRequest extends FormRequest
 
             'tests' => ['required', 'array',],
             'tests.*' => ['required', 'numeric', Rule::in(Test::pluck('id')->toArray()),],
+
+            'meta_title' => ['nullable', 'string', 'max:255',],
+            'meta_description' => ['nullable', 'string', 'max:255',],
         ];
     }
 
@@ -54,6 +57,9 @@ class PanelRequest extends FormRequest
             'is_renderabble' => 'Show On Homepage',
             'description_html' => 'Description',
             'tests' => 'Tests',
+
+            'meta_title' => 'Meta Title',
+            'meta_description' => 'Meta Description',
         ];   
     }
 
