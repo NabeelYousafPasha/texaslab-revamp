@@ -26,7 +26,7 @@
                 class="perfect-scrollbar relative font-semibold space-y-0.5 h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden  p-4 py-0"
                 x-data="{ activeDropdown: null }"
             >
-                <h2
+                <p
                     class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1"
                 >
                     <svg class="w-4 h-5 flex-none hidden" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
@@ -34,7 +34,7 @@
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
                     <span>Admin</span>
-                </h2>
+                </p>
                 
                 <li class="menu nav-item">
                     <ul>
@@ -141,7 +141,7 @@
                 </li>
 
                 @if(true)
-                <h2
+                <p
                     class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
 
                     <svg class="w-4 h-5 flex-none hidden" viewBox="0 0 24 24" stroke="currentColor"
@@ -149,7 +149,7 @@
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
                     <span>USER INTERFACE</span>
-                </h2>
+                </p>
 
                 <li class="menu nav-item">
                     <button type="button" class="nav-link group"
@@ -404,7 +404,7 @@
                 </li>
 
 
-                <h2
+                <p
                     class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
 
                     <svg class="w-4 h-5 flex-none hidden" viewBox="0 0 24 24" stroke="currentColor"
@@ -412,7 +412,7 @@
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
                     <span>TABLES AND FORMS</span>
-                </h2>
+                </p>
 
                 <li class="menu nav-item">
                     <a href="/template/tables" class="nav-link group">
@@ -598,7 +598,7 @@
                     </ul>
                 </li>
 
-                <h2
+                <p
                     class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
 
                     <svg class="w-4 h-5 flex-none hidden" viewBox="0 0 24 24" stroke="currentColor"
@@ -606,7 +606,7 @@
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
                     <span>USER AND PAGES</span>
-                </h2>
+                </p>
 
                 <li class="menu nav-item">
                     <button type="button" class="nav-link group" :class="{ 'active': activeDropdown === 'users' }"
@@ -798,7 +798,7 @@
                     </ul>
                 </li>
 
-                <h2
+                <p
                     class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
 
                     <svg class="w-4 h-5 flex-none hidden" viewBox="0 0 24 24" stroke="currentColor"
@@ -806,7 +806,7 @@
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
                     <span>SUPPORTS</span>
-                </h2>
+                </p>
 
                 <li class="menu nav-item">
                     <a href="/templatehttps://vristo.sbthemes.com" target="_blank" class="nav-link group">

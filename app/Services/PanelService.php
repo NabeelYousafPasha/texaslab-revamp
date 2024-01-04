@@ -7,7 +7,7 @@ use App\Models\{
     PanelTest,
 };
 
-class PanelService 
+class PanelService
 {
     public function store(array $data)
     {

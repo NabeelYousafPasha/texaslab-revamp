@@ -9,7 +9,7 @@
                     <h5 class="font-semibold text-lg dark:text-white-light">Add Menu</h5>
                 </div>
                 <div class="mb-5">
-                    <form method="POST" action="{{ route('menu.store') }}">
+                    <form method="POST" action="{{ route('admin.menu.store') }}">
                         @csrf
                         <div class="form-group mt-4">
                             <label for="parent">Parent:</label>

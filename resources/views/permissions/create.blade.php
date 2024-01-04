@@ -6,7 +6,7 @@
                     <h5 class="font-semibold text-lg dark:text-white-light">Enter Permission Name</h5>
                 </div>
                 <div class="mb-5">
-                    <form method="POST" action="{{ route('permissions.store') }}">
+                    <form method="POST" action="{{ route('admin.permissions.store') }}">
                         @csrf
                         <div class="form-group">
                             <label for="name">Permission Name:</label>
