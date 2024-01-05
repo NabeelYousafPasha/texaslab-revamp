@@ -34,7 +34,7 @@
                             <th>Name</th>
                             <th>Address</th>
                             <th>Status</th>
-                            <th>Actions</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,7 +61,18 @@
                                         </label>
                                     </div>                                    
                                 </td>
-                                    
+                                <td class="text-center">
+                                    <span class="flex-align" style="white-space: nowrap;">
+                                        <a  class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{ $location->id }}">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </span>
+                                    <div class="modal fade" id="deleteModal{{ $location->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $location->id }}" aria-hidden="true">
+                                        <!-- ... (rest of the modal structure) ... -->
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -73,11 +84,26 @@
 
     <script src="/assets/js/simple-datatables.js"></script>
     <script>
+        function confirmDelete(locationId) {
+            // Show a confirmation dialog
+            if (confirm("Are you sure you want to delete this location?")) {
+                // If the user confirms, initiate the deletion
+                deleteLocation(locationId);
+            }
+        }
+    
+        function deleteLocation(locationId) {
+            // Perform the deletion, you can use AJAX or redirect to a delete route
+            // Here, I'm redirecting to a hypothetical route 'delete.location'
+            window.location.href = "{{ url('delete/location') }}/" + locationId;
+        }
+    </script>
+    <script>
         document.addEventListener("alpine:init", () => {
-            Alpine.data("panels", () => ({
+            Alpine.data("locations", () => ({
                 datatable: null,
                 init() {
-                    this.datatable = new simpleDatatables.DataTable('#panelsTable', {
+                    this.datatable = new simpleDatatables.DataTable('#locationsTable', {
                         sortable: false,
                         searchable: true,
                         perPage: 10,
@@ -99,4 +125,5 @@
             }));
         });
     </script>
+    
 </x-layout.default>

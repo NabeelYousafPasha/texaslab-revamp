@@ -105,6 +105,20 @@ class LocationController extends Controller
             'sunday_status',
             'start_time',
             'end_time',
+            'monday-start-time',
+            'monday-end-time',
+            'tuesday-start-time',
+            'tuesday-end-time',
+            'wednesday-start-time',
+            'wednesday-end-time',
+            'thursday-start-time',
+            'thursday-end-time',
+            'friday-start-time',
+            'friday-end-time',
+            'saturday-start-time',
+            'saturday-end-time',
+            'sunday-start-time',
+            'sunday-end-time',
         ]);
 
         $this->locationService->storeLocationDayTiming($dayTimingData, $location->id);

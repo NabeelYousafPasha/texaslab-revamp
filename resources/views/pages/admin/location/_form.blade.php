@@ -468,36 +468,36 @@
                     </div> 
 
                     <div class="grid grid-cols-1 sm:flex justify-between gap-5 mt-3">
-                        <div x-data="{ wedStatus: false }" class="flex flex-wd-10">
+                        <div x-data="{ wednesdayStatus: false }" class="flex flex-wd-10">
                             <p class="mb-2"><b>Wednesday</b></p>
                             <label class="w-12 h-6 relative">
                                 <input
                                     type="checkbox"
-                                    x-model="fields.wedStatus"
+                                    x-model="fields.wednesdayStatus"
                                     class="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer"
-                                    id="wed-status"
-                                    name="wed-status"
+                                    id="wednesday-status"
+                                    name="wednesday-status"
                                 />
                                 <span
-                                    for="wed-status"
-                                    x-bind:class="{ 'bg-[#ebedf2] dark:bg-dark': !fields.wedStatus, 'bg-primary': fields.wedStatus }"
+                                    for="wednesday-status"
+                                    x-bind:class="{ 'bg-[#ebedf2] dark:bg-dark': !fields.wednesdayStatus, 'bg-primary': fields.wednesdayStatus }"
                                     class="block h-full rounded-full before:absolute before:left-1 before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 before:transition-all before:duration-300"
                                 ></span>
                             </label>
                             
-                            <input type="hidden" x-bind:value="wedStatus ? '1' : '0'" name="wednesday_status" />
+                            <input type="hidden" x-bind:value="wednesdayStatus ? '1' : '0'" name="wednesday_status" />
                         </div>
                         
                         
                         <div class="flex flex-column">
                             <label><b>Start time</b></label>
                             <input 
-                                id="wed-start-time" 
-                                x-model="fields.wedstart"
-                                name="wed-start-time"
+                                id="wednesday-start-time" 
+                                x-model="fields.wednesdaystart"
+                                name="wednesday-start-time"
                                 class="form-input" 
                             />
-                            @error('wed-start-time')
+                            @error('wednesday-start-time')
                                 <span>
                                     <p class="text-danger mt-1">{{ $message }}</p>
                                 </span>
@@ -507,12 +507,12 @@
                         <div class="flex flex-column">
                             <label><b>End time</b></label>
                             <input 
-                                id="wed-end-time" 
-                                x-model="fields.wedend"
-                                name="wed-end-time"
+                                id="wednesday-end-time" 
+                                x-model="fields.wednesdayend"
+                                name="wednesday-end-time"
                                 class="form-input" 
                             />
-                            @error('wed-end-time')
+                            @error('wednesday-end-time')
                                 <span>
                                     <p class="text-danger mt-1">{{ $message }}</p>
                                 </span>
@@ -521,34 +521,34 @@
                     </div> 
 
                     <div class="grid grid-cols-1 sm:flex justify-between gap-5 mt-3">
-                        <div x-data="{ thuStatus: false }" class="flex flex-wd-10">
+                        <div x-data="{ thursdayStatus: false }" class="flex flex-wd-10">
                             <p class="mb-2"><b>Thursday</b></p>
                             <label class="w-12 h-6 relative">
                                 <input
                                     type="checkbox"
-                                    x-model="thuStatus"
+                                    x-model="thursdayStatus"
                                     class="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer"
-                                    id="thu-status"
-                                    name="thu-status"
+                                    id="thursday-status"
+                                    name="thursday-status"
                                 />
                                 <span
-                                    for="thu-status"
-                                    x-bind:class="{ 'bg-[#ebedf2] dark:bg-dark': !thuStatus, 'bg-primary': thuStatus }"
+                                    for="thursday-status"
+                                    x-bind:class="{ 'bg-[#ebedf2] dark:bg-dark': !thursdayStatus, 'bg-primary': thursdayStatus }"
                                     class="block h-full rounded-full before:absolute before:left-1 before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 before:transition-all before:duration-300"
                                 ></span>
                             </label>
-                            <input type="hidden" x-bind:value="thuStatus ? '1' : '0'" name="thursday_status" />
+                            <input type="hidden" x-bind:value="thursdayStatus ? '1' : '0'" name="thursday_status" />
                         </div>
                                                                        
                         <div class="flex flex-column">
                             <label><b>Start time</b></label>
                             <input 
-                                id="thu-start-time" 
-                                x-model="fields.thustart"
-                                name="thu-start-time"
+                                id="thursday-start-time" 
+                                x-model="fields.thursdaystart"
+                                name="thursday-start-time"
                                 class="form-input" 
                             />
-                            @error('thu-start-time')
+                            @error('thursday-start-time')
                                 <span>
                                     <p class="text-danger mt-1">{{ $message }}</p>
                                 </span>
@@ -558,12 +558,12 @@
                         <div class="flex flex-column">
                             <label><b>End time</b></label>
                             <input 
-                                id="thu-end-time" 
-                                x-model="fields.thuend"
-                                name="thu-end-time"
+                                id="thursday-end-time" 
+                                x-model="fields.thursdayend"
+                                name="thursday-end-time"
                                 class="form-input" 
                             />
-                            @error('thu-end-time')
+                            @error('thursday-end-time')
                                 <span>
                                     <p class="text-danger mt-1">{{ $message }}</p>
                                 </span>
@@ -572,35 +572,35 @@
                     </div> 
 
                     <div class="grid grid-cols-1 sm:flex justify-between gap-5 mt-3">
-                        <div x-data="{ fields: { friStatus: false } }" class="flex flex-wd-10">
+                        <div x-data="{ fields: { fridayStatus: false } }" class="flex flex-wd-10">
                             <p class="mb-2"><b>Friday</b></p>
                             <label class="w-12 h-6 relative">
                                 <input
                                     type="checkbox"
-                                    x-model="fields.friStatus"
+                                    x-model="fields.fridayStatus"
                                     class="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer"
-                                    id="fri-status"
-                                    name="fri-status"
+                                    id="friday-status"
+                                    name="friday-status"
                                 />
                                 <span
-                                    for="fri-status"
-                                    x-bind:class="{ 'bg-[#ebedf2] dark:bg-dark': !fields.friStatus, 'bg-primary': fields.friStatus }"
+                                    for="friday-status"
+                                    x-bind:class="{ 'bg-[#ebedf2] dark:bg-dark': !fields.fridayStatus, 'bg-primary': fields.fridayStatus }"
                                     class="block h-full rounded-full before:absolute before:left-1 before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 before:transition-all before:duration-300"
                                 ></span>
                             </label>
-                            <input type="hidden" x-bind:value="fields.friStatus ? '1' : '0'" name="friday_status" />
+                            <input type="hidden" x-bind:value="fields.fridayStatus ? '1' : '0'" name="fridayday_status" />
                         </div>                            
                         
                         
                         <div class="flex flex-column">
                             <label><b>Start time</b></label>
                             <input 
-                                id="fri-start-time" 
-                                x-model="fields.fristart"
-                                name="fri-start-time"
+                                id="friday-start-time" 
+                                x-model="fields.fridaystart"
+                                name="friday-start-time"
                                 class="form-input" 
                             />
-                            @error('fri-start-time')
+                            @error('friday-start-time')
                                 <span>
                                     <p class="text-danger mt-1">{{ $message }}</p>
                                 </span>
@@ -610,12 +610,12 @@
                         <div class="flex flex-column">
                             <label><b>End time</b></label>
                             <input 
-                                id="fri-end-time" 
-                                x-model="fields.friend"
-                                name="fri-end-time"
+                                id="friday-end-time" 
+                                x-model="fields.fridayend"
+                                name="friday-end-time"
                                 class="form-input" 
                             />
-                            @error('fri-end-time')
+                            @error('friday-end-time')
                                 <span>
                                     <p class="text-danger mt-1">{{ $message }}</p>
                                 </span>
@@ -624,34 +624,34 @@
                     </div> 
 
                     <div class="grid grid-cols-1 sm:flex justify-between gap-5 mt-3">
-                        <div x-data="{ fields: { satStatus: false } }" class="flex flex-wd-10">
+                        <div x-data="{ fields: { saturdayStatus: false } }" class="flex flex-wd-10">
                             <p class="mb-2"><b>Saturday</b></p>
                             <label class="w-12 h-6 relative">
                                 <input
                                     type="checkbox"
-                                    x-model="fields.satStatus"
+                                    x-model="fields.saturdayStatus"
                                     class="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer"
-                                    id="sat-status"
-                                    name="sat-status"
+                                    id="saturday-status"
+                                    name="saturday-status"
                                 />
                                 <span
-                                    for="sat-status"
-                                    x-bind:class="{ 'bg-[#ebedf2] dark:bg-dark': !fields.satStatus, 'bg-primary': fields.satStatus }"
+                                    for="saturday-status"
+                                    x-bind:class="{ 'bg-[#ebedf2] dark:bg-dark': !fields.saturdayStatus, 'bg-primary': fields.saturdayStatus }"
                                     class="block h-full rounded-full before:absolute before:left-1 before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 before:transition-all before:duration-300"
                                 ></span>
                             </label>
-                            <input type="hidden" x-bind:value="fields.satStatus ? '1' : '0'" name="saturday_status" />
+                            <input type="hidden" x-bind:value="fields.saturdayStatus ? '1' : '0'" name="saturdayurday_status" />
                         </div>
                         
                         <div class="flex flex-column">
                             <label><b>Start time</b></label>
                             <input 
-                                id="sat-start-time" 
-                                x-model="fields.satstart"
-                                name="sat-start-time"
+                                id="saturday-start-time" 
+                                x-model="fields.saturdaystart"
+                                name="saturday-start-time"
                                 class="form-input" 
                             />
-                            @error('sat-start-time')
+                            @error('saturday-start-time')
                                 <span>
                                     <p class="text-danger mt-1">{{ $message }}</p>
                                 </span>
@@ -661,12 +661,12 @@
                         <div class="flex flex-column">
                             <label><b>End time</b></label>
                             <input 
-                                id="sat-end-time" 
-                                x-model="fields.satend"
-                                name="sat-end-time"
+                                id="saturday-end-time" 
+                                x-model="fields.saturdayend"
+                                name="saturday-end-time"
                                 class="form-input" 
                             />
-                            @error('sat-end-time')
+                            @error('saturday-end-time')
                                 <span>
                                     <p class="text-danger mt-1">{{ $message }}</p>
                                 </span>
@@ -675,34 +675,34 @@
                     </div>
                     
                     <div class="grid grid-cols-1 sm:flex justify-between gap-5 mt-3">
-                        <div x-data="{ sunStatus: false }" class="flex flex-wd-10">
+                        <div x-data="{ sundayStatus: false }" class="flex flex-wd-10">
                             <p class="mb-2"><b>Sunday</b></p>
                             <label class="w-12 h-6 relative">
                                 <input
                                     type="checkbox"
-                                    x-model="fields.sunStatus"
+                                    x-model="fields.sundayStatus"
                                     class="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer"
-                                    id="sun-status"
-                                    name="sun-status"
+                                    id="sunday-status"
+                                    name="sunday-status"
                                 />
                                 <span
-                                    for="sun-status"
-                                    x-bind:class="{ 'bg-[#ebedf2] dark:bg-dark': !sunStatus, 'bg-primary': sunStatus }"
+                                    for="sunday-status"
+                                    x-bind:class="{ 'bg-[#ebedf2] dark:bg-dark': !sundayStatus, 'bg-primary': sundayStatus }"
                                     class="block h-full rounded-full before:absolute before:left-1 before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 before:transition-all before:duration-300"
                                 ></span>
                             </label>
-                            <input type="hidden" x-bind:value="sunStatus ? '1' : '0'" name="sunday_status" />
+                            <input type="hidden" x-bind:value="sundayStatus ? '1' : '0'" name="sundayday_status" />
                         </div>                                                                  
                         
                         <div class="flex flex-column">
                             <label><b>Start time</b></label>
                             <input 
-                                id="sun-start-time" 
-                                x-model="fields.sunstart"
-                                name="sun-start-time"
+                                id="sunday-start-time" 
+                                x-model="fields.sundaystart"
+                                name="sunday-start-time"
                                 class="form-input" 
                             />
-                            @error('sun-start-time')
+                            @error('sunday-start-time')
                                 <span>
                                     <p class="text-danger mt-1">{{ $message }}</p>
                                 </span>
@@ -712,12 +712,12 @@
                         <div class="flex flex-column">
                             <label><b>End time</b></label>
                             <input 
-                                id="sun-end-time" 
-                                x-model="fields.sunend"
-                                name="sun-end-time"
+                                id="sunday-end-time" 
+                                x-model="fields.sundayend"
+                                name="sunday-end-time"
                                 class="form-input" 
                             />
-                            @error('sun-end-time')
+                            @error('sunday-end-time')
                                 <span>
                                     <p class="text-danger mt-1">{{ $message }}</p>
                                 </span>
@@ -828,62 +828,62 @@
                     enableTime: true,
                     dateFormat: 'H:i'
                 })
-                flatpickr(document.getElementById('wed-start-time'), {
-                    defaultDate: this.wedstart,
+                flatpickr(document.getElementById('wednesday-start-time'), {
+                    defaultDate: this.wednesdaystart,
                     noCalendar: true,
                     enableTime: true,
                     dateFormat: 'H:i'
                 })
-                flatpickr(document.getElementById('wed-end-time'), {
-                    defaultDate: this.wedend,
+                flatpickr(document.getElementById('wednesday-end-time'), {
+                    defaultDate: this.wednesdayend,
                     noCalendar: true,
                     enableTime: true,
                     dateFormat: 'H:i'
                 })
-                flatpickr(document.getElementById('thu-start-time'), {
-                    defaultDate: this.thustart,
+                flatpickr(document.getElementById('thursday-start-time'), {
+                    defaultDate: this.thursdaystart,
                     noCalendar: true,
                     enableTime: true,
                     dateFormat: 'H:i'
                 })
-                flatpickr(document.getElementById('thu-end-time'), {
-                    defaultDate: this.thuend,
+                flatpickr(document.getElementById('thursday-end-time'), {
+                    defaultDate: this.thursdayend,
                     noCalendar: true,
                     enableTime: true,
                     dateFormat: 'H:i'
                 })
-                flatpickr(document.getElementById('fri-start-time'), {
-                    defaultDate: this.fristart,
+                flatpickr(document.getElementById('friday-start-time'), {
+                    defaultDate: this.fridaystart,
                     noCalendar: true,
                     enableTime: true,
                     dateFormat: 'H:i'
                 })
-                flatpickr(document.getElementById('fri-end-time'), {
-                    defaultDate: this.friend,
+                flatpickr(document.getElementById('friday-end-time'), {
+                    defaultDate: this.fridayend,
                     noCalendar: true,
                     enableTime: true,
                     dateFormat: 'H:i'
                 })
-                flatpickr(document.getElementById('sat-start-time'), {
-                    defaultDate: this.satstart,
+                flatpickr(document.getElementById('saturday-start-time'), {
+                    defaultDate: this.saturdaystart,
                     noCalendar: true,
                     enableTime: true,
                     dateFormat: 'H:i'
                 })
-                flatpickr(document.getElementById('sat-end-time'), {
-                    defaultDate: this.satend,
+                flatpickr(document.getElementById('saturday-end-time'), {
+                    defaultDate: this.saturdayend,
                     noCalendar: true,
                     enableTime: true,
                     dateFormat: 'H:i'
                 })
-                flatpickr(document.getElementById('sun-start-time'), {
-                    defaultDate: this.sunstart,
+                flatpickr(document.getElementById('sunday-start-time'), {
+                    defaultDate: this.sundaystart,
                     noCalendar: true,
                     enableTime: true,
                     dateFormat: 'H:i'
                 })
-                flatpickr(document.getElementById('sun-end-time'), {
-                    defaultDate: this.sunend,
+                flatpickr(document.getElementById('sunday-end-time'), {
+                    defaultDate: this.sundayend,
                     noCalendar: true,
                     enableTime: true,
                     dateFormat: 'H:i'

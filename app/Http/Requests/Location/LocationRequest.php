@@ -28,7 +28,6 @@ class LocationRequest extends FormRequest
             'sales_rep_code' => ['required', 'string', 'max:255'],
             'tests' => ['required', 'array',],
             'panels' => ['required', 'array',],
-
         ];
     }
 }

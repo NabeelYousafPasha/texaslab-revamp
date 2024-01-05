@@ -15,3 +15,11 @@
 .wd-49{
     width: 49%;
 }
+.flex-align{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.text-center{
+    text-align: center !important;
+}
