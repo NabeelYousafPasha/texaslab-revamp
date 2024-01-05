@@ -71,6 +71,7 @@ class TestController extends Controller
      */
     public function store(TestRequest $request)
     {
+        dd($request->all());
         $this->testService->store($request->validated());
 
         return redirect()->route('admin.tests.index', [], Response::HTTP_CREATED);
