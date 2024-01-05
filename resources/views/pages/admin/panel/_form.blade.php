@@ -117,7 +117,7 @@
             <select 
                 id="tests"
                 name="tests[]" 
-                class="selectize seachable-select"
+                class="select2"
                 placeholder="Choose Test(s)..."
                 multiple="multiple"
             >

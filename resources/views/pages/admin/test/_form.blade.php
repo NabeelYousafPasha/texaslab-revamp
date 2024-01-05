@@ -242,7 +242,7 @@
             <select 
                 id="icd_codes"
                 name="icd_codes[]" 
-                class="selectize seachable-select"
+                class="select2"
                 placeholder="Choose ICD Code(s)..."
                 multiple="multiple"
             >
@@ -250,7 +250,7 @@
                     <option
                         class="form-radio" 
                         value="{{ $icdCodeId }}"
-                        {{ in_array($icdCodeId, old('icdCodes') ?? []) ? 'selected' : '' }} 
+                        {{ in_array($icdCodeId, old('icd_codes') ?? []) ? 'selected' : '' }} 
                         {{ in_array($icdCodeId, $testIcdCodes ?? []) ? 'selected' : '' }} 
                     />
                         <span class="text-white-dark"">{{ $icdCode }}</span>
