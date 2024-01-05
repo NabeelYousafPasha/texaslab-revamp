@@ -242,7 +242,7 @@
             <select 
                 id="icd_codes"
                 name="icd_codes[]" 
-                class="selectize seachable-select"
+                class="select2"
                 placeholder="Choose ICD Code(s)..."
                 multiple="multiple"
             >
@@ -250,7 +250,7 @@
                     <option
                         class="form-radio" 
                         value="{{ $icdCodeId }}"
-                        {{ in_array($icdCodeId, old('icdCodes') ?? []) ? 'selected' : '' }} 
+                        {{ in_array($icdCodeId, old('icd_codes') ?? []) ? 'selected' : '' }} 
                         {{ in_array($icdCodeId, $testIcdCodes ?? []) ? 'selected' : '' }} 
                     />
                         <span class="text-white-dark"">{{ $icdCode }}</span>
@@ -263,6 +263,71 @@
                     <p class="text-danger mt-1">{{ $message }}</p>
                 </span>
             @enderror
+        </div>
+    </div>
+
+    <div class="form-field space-y-3 @error('cpt_codes') has-error @enderror">
+        <label for="cpt_codes">CPT Codes</label>
+
+        <div class="relative">
+            <div class="row">
+                <div class="col">
+                    <div class="table-responsive mt-3">
+                        <table class="table whitespace-nowrap table-hover table-bordered">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>CPT Code</th>
+                            <th>Description</th>
+                            <th>
+                                <button 
+                                        type="button"  
+                                        class="btn btn-info" 
+                                        @click="addNewCptCodeField()"
+                                    >
+                                        + CPT Code
+                                </button>
+                            </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="(field, index) in cptCodeFields" :key="index">
+                                <tr>
+                                    <td x-text="index + 1"></td>
+                                    <td>
+                                        <input 
+                                            x-model="field.cpt_code" 
+                                            type="text" 
+                                            name="cpt_codes['cpt_code'][]"
+                                            class="form-input"
+                                            required
+                                        >
+                                    </td>
+                                    <td>
+                                        <input 
+                                            x-model="field.description" 
+                                            type="text" 
+                                            name="cpt_codes['description'][]"
+                                            class="form-input"
+                                            required
+                                        >
+                                    </td>
+                                    <td>
+                                        <button 
+                                            type="button" 
+                                            class="btn btn-outline-danger btn-sm" 
+                                            @click="removeCptCodeField(index)"
+                                        >
+                                            &times;
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -371,6 +436,8 @@
                 offered_price: 0,
                 competitor_price: 0,
             },
+
+            cptCodeFields: [],
             
             init() {
                 this.renderPriceFields = false;
@@ -392,6 +459,15 @@
                 this.fields.offered_price = 0;
                 this.fields.competitor_price = 0;
             },
+            addNewCptCodeField() {
+                this.cptCodeFields.push({
+                    code: '',
+                    description: ''
+                });
+            },
+            removeCptCodeField(index) {
+                this.cptCodeFields.splice(index, 1);
+            }
         }));
     });
 </script>
