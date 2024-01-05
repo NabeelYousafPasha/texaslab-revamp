@@ -31,19 +31,17 @@ class LocationService
     public function storeLocationDayTiming($data, $locationId)
     {
         $daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-
         foreach ($daysOfWeek as $day) {
             if (isset($data[$day . '_status'])) {
                 $locationDayTiming = new LocationDayTiming;
                 $locationDayTiming->location_id = $locationId;
                 $locationDayTiming->day_of_week = $day;
-                $locationDayTiming->start_time = $data['start_time'];
-                $locationDayTiming->end_time = $data['end_time'];
+                $locationDayTiming->start_time = $data[$day . '-start-time']; // Use specific key for start time
+                $locationDayTiming->end_time = $data[$day . '-end-time'];     // Use specific key for end time
                 $locationDayTiming->status = $data[$day . '_status'];
                 $locationDayTiming->save();
             }
         }
-
 
     }
 
