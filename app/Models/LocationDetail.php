@@ -9,6 +9,11 @@ class LocationDetail extends Model
 {
     use HasFactory;
 
+    /**
+     *
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'phone',
@@ -21,6 +26,11 @@ class LocationDetail extends Model
         'status',
     ];
 
+    /**
+     *
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

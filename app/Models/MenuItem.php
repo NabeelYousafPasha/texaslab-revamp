@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class MenuItem extends Model
 {
     use HasFactory;
+
+    /**
+     *
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
         'roles' => 'json',
     ];

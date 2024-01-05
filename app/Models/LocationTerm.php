@@ -10,10 +10,23 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class LocationTerm extends Model
 {
     use HasFactory;
+
+    /**
+     *
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
-        'location_id', 'terms_and_conditions',
+        'location_id', 
+        'terms_and_conditions',
     ];
 
+    /**
+     * |--------------------------------------------------------------------------
+     * | RELATIONSHIPS
+     * |--------------------------------------------------------------------------
+     */
+    
     /**
      * @return BelongsTo
      */

@@ -9,9 +9,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class LocationProvider extends Model
 {
     use HasFactory;
+
+    /**
+     *
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
-        'location_id', 'first_name', 'last_name', 'npi',
+        'location_id', 
+        'first_name', 
+        'last_name', 
+        'npi',
     ];
+
+    /**
+     * |--------------------------------------------------------------------------
+     * | RELATIONSHIPS
+     * |--------------------------------------------------------------------------
+     */
 
     /**
      * @return BelongsTo

@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class LocationTiming extends Model
 {
     use HasFactory;
+
+    /**
+     *
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'day_of_week',
         'start_time',
@@ -18,6 +24,12 @@ class LocationTiming extends Model
         'time_interval',
         'block_limit',
     ];
+
+    /**
+     * |--------------------------------------------------------------------------
+     * | RELATIONSHIPS
+     * |--------------------------------------------------------------------------
+     */
 
     /**
      * @return BelongsTo
