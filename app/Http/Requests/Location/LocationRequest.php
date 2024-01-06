@@ -3,6 +3,9 @@
 namespace App\Http\Requests\Location;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Models\Test;
+
 
 class LocationRequest extends FormRequest
 {
@@ -27,7 +30,7 @@ class LocationRequest extends FormRequest
             'clia' => ['required', 'string', 'max:255'],
             'sales_rep_code' => ['required', 'string', 'max:255'],
             'tests' => ['required', 'array',],
-            'panels' => ['required', 'array',],
+            'tests.*' => ['required', 'numeric', Rule::in(Test::pluck('id')->toArray()),],
         ];
     }
 }

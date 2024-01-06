@@ -16,8 +16,6 @@ return new class extends Migration {
             $table->string('phone');
             $table->string('clia');
             $table->string('sales_rep_code');
-            $table->foreignId('test_ids');
-            $table->foreignId('panel_ids');
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();

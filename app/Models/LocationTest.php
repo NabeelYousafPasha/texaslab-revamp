@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LocationDetail extends Model
+class LocationTest extends Model
 {
     use HasFactory;
 
@@ -14,17 +14,7 @@ class LocationDetail extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'phone',
-        'clia',
-        'sales_rep_code',
-        'address',
-        'city',
-        'state',
-        'zipcode',
-        'status',
-    ];
+    protected $fillable = ['location_id', 'tests'];
 
     /**
      *
@@ -34,10 +24,6 @@ class LocationDetail extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'tests' => 'json',
     ];
-
-    public function dayTimings()
-    {
-        return $this->hasMany(LocationTiming::class, 'location_id');
-    }
 }

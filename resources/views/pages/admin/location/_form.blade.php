@@ -104,8 +104,8 @@
                         <label for="tests"><b>Tests</b></label>  
                         <div x-data="{ showError: @error('tests') true @else false @enderror }" class="relative">
                             <select 
-                                id="test_ids"
-                                name="test_ids[]" 
+                                id="tests"
+                                name="tests[]" 
                                 class="selectize searchable-select"
                                 placeholder="Choose Test(s)..."
                                 multiple="multiple"
@@ -136,8 +136,8 @@
                         <label for="panels"><b>Panels</b></label>
                         <div x-data="{ showError: @error('panels') true @else false @enderror }" class="relative">
                             <select 
-                                id="panel_ids"
-                                name="panel_ids[]" 
+                                id="panels"
+                                name="panels[]" 
                                 class="selectize searchable-select"
                                 placeholder="Choose Panel(s)..."
                                 multiple="multiple"
@@ -896,14 +896,11 @@
 
 <script>
     document.addEventListener("alpine:init", () => {
-
-
         Alpine.data("locationForm", () => ({
             fields: {},
             init() {
-                    this.form = {};
+                this.form = {};
             }
         }));
-       
     });
 </script>

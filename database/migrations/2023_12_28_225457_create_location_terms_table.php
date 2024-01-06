@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('location_terms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('location_id')->constrained('location_details');
+            $table->foreignId('location_id')->constrained('location_details')->onDelete('cascade');
             $table->text('terms_and_conditions')->nullable();
             $table->timestamps(); // Adds created_at and updated_at columns
         });
