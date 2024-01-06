@@ -63,12 +63,39 @@
                                 </td>
                                 <td class="text-center">
                                     <span class="flex-align" style="white-space: nowrap;">
-                                        <a  class="btn btn-sm btn-primary">
-                                            <i class="fas fa-edit"></i> Edit
-                                        </a>
-                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{ $location->id }}">
-                                            <i class="fas fa-trash"></i> Delete
-                                        </button>
+                                        <div x-data="modal" class="mb-5 flex">
+                                            <a  class="btn btn-sm btn-primary mr-2">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+
+                                            <div class="flex items-center justify-center">
+                                                <button type="button" class="btn btn-danger btn-sm " @click="toggle">Delete</button>
+                                            </div>
+                                        
+                                            <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="{ 'block': open, 'hidden': !open }">
+                                                <div class="flex items-center justify-center min-h-screen px-4" @click.self="open = false">
+                                                    <div x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4" class="fixed inset-0">
+                                                        <div class="flex items-center justify-center min-h-screen px-4">
+                                                            <div style="bottom: 200px;" class="panel border-0 p-0 rounded-lg overflow-hidden my-8 w-full max-w-lg bg-white dark:bg-[#121c2c] text-[#1f2937] dark:text-white">
+                                                                <div class="p-5">
+                                                                    <div class="text-left font-medium">
+                                                                        <p>Are you sure you want to delete</p>
+                                                                    </div>
+                                                                    <div class="flex justify-end items-center mt-8">
+                                                                        <button type="button" class="btn btn-outline-danger" @click="toggle">Discard</button>
+                                                                        <form method="post" action="{{route('admin.locations.destroy',$location->id)}}">
+                                                                            @method('delete')
+                                                                            @csrf
+                                                                            <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4" @click="toggle">Confirm</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
                                     </span>
                                     <div class="modal fade" id="deleteModal{{ $location->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $location->id }}" aria-hidden="true">
                                         <!-- ... (rest of the modal structure) ... -->
@@ -83,21 +110,6 @@
     </div>
 
     <script src="/assets/js/simple-datatables.js"></script>
-    <script>
-        function confirmDelete(locationId) {
-            // Show a confirmation dialog
-            if (confirm("Are you sure you want to delete this location?")) {
-                // If the user confirms, initiate the deletion
-                deleteLocation(locationId);
-            }
-        }
-    
-        function deleteLocation(locationId) {
-            // Perform the deletion, you can use AJAX or redirect to a delete route
-            // Here, I'm redirecting to a hypothetical route 'delete.location'
-            window.location.href = "{{ url('delete/location') }}/" + locationId;
-        }
-    </script>
     <script>
         document.addEventListener("alpine:init", () => {
             Alpine.data("locations", () => ({

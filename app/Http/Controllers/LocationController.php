@@ -66,22 +66,10 @@ class LocationController extends Controller
      */
     public function store(LocationRequest $request)
     {
-        $locationDetail = $request->only([
-            'name',
-            'phone',
-            'clia',
-            'sales_rep_code',
-            'test_ids',
-            'panel_ids',
-            'address',
-            'city',
-            'state',
-            'zipcode',
-            'status',
-        ]);
-
+        // Validate the request
         $data = $request->validated();
-        $data = array_merge($locationDetail, $data);
+
+        // Store basic location details
         $location = $this->locationService->storeLocation($data);
 
         $timingData = $request->only([
@@ -92,9 +80,9 @@ class LocationController extends Controller
             'time_interval',
             'block_limit',
         ]);
-
         $this->locationService->storeLocationTiming($timingData, $location->id);
 
+        // Store location day timing
         $dayTimingData = $request->only([
             'monday_status',
             'tuesday_status',
@@ -120,17 +108,29 @@ class LocationController extends Controller
             'sunday-start-time',
             'sunday-end-time',
         ]);
-
         $this->locationService->storeLocationDayTiming($dayTimingData, $location->id);
 
+        // Store location terms
         $termsData = $request->only([
             'terms_and_conditions',
         ]);
-
         $this->locationService->storeLocationTerms($termsData, $location->id);
 
-        return redirect()->route('admin.locations.index', [], Response::HTTP_CREATED);
+        // Store location tests
+        $locationTests = $request->only([
+            'tests',
+        ]);
+        $this->locationService->storeLocationTests($locationTests, $location->id);
+
+        // Store location panels
+        $locationPanels = $request->only([
+            'panels',
+        ]);
+        $this->locationService->storeLocationPanels($locationPanels, $location->id);
+
+        return redirect()->route('admin.locations.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -161,6 +161,9 @@ class LocationController extends Controller
      */
     public function destroy(LocationDetail $location)
     {
-        //
+        $location->delete();
+        $location->dayTimings()->delete();
+        return redirect()->route('admin.locations.index')
+            ->withSuccess(__('Location delete successfully.'));
     }
 }

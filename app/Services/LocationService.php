@@ -6,7 +6,9 @@ use App\Models\{
     LocationDetail,
     LocationTiming,
     LocationDayTiming,
-    LocationTerm
+    LocationTerm,
+    LocationTest,
+    LocationPanel
 };
 
 class LocationService
@@ -53,5 +55,29 @@ class LocationService
         $locationTerm->save();
 
         return $locationTerm;
+    }
+
+    public function storeLocationTests(array $data, $locationId)
+    {
+        if (isset($data['tests'])) {
+            $testIdsString = implode(',', $data['tests']);
+            $locationTests = new LocationTest([
+                'location_id' => $locationId,
+                'tests' => $testIdsString,
+            ]);
+            $locationTests->save();
+        }
+    }
+
+    public function storeLocationPanels(array $data, $locationId)
+    {
+        if (isset($data['panels'])) {
+            $panelIdsString = implode(',', $data['panels']);
+            $locationPanels = new LocationPanel([
+                'location_id' => $locationId,
+                'panels' => $panelIdsString,
+            ]);
+            $locationPanels->save();
+        }
     }
 }
