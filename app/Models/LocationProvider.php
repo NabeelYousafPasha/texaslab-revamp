@@ -31,7 +31,7 @@ class LocationProvider extends Model
     /**
      * @return BelongsTo
      */
-    public function locationProvider(): BelongsTo
+    public function location(): BelongsTo
     {
         return $this->belongsTo(LocationDetail::class, 'location_id');
     }

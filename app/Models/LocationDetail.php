@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class LocationDetail extends Model
 {
@@ -36,7 +37,17 @@ class LocationDetail extends Model
         'updated_at' => 'datetime',
     ];
 
-    public function dayTimings()
+    /**
+     * |--------------------------------------------------------------------------
+     * | RELATIONSHIPS
+     * |--------------------------------------------------------------------------
+     */
+
+    /**
+     *
+     * @return HasMany
+     */
+    public function dayTimings(): HasMany
     {
         return $this->hasMany(LocationTiming::class, 'location_id');
     }
