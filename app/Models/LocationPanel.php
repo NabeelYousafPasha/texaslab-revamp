@@ -16,7 +16,7 @@ class LocationPanel extends Model
      */
     protected $fillable = [
         'location_id',
-        'panels',
+        'panel_id',
     ];
 
     /**
@@ -27,6 +27,5 @@ class LocationPanel extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-        'panels' => 'json',
     ];
 }

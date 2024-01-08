@@ -14,7 +14,10 @@ class LocationTest extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['location_id', 'tests'];
+    protected $fillable = [
+        'location_id', 
+        'test_id',
+    ];
 
     /**
      *
@@ -24,6 +27,5 @@ class LocationTest extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-        'tests' => 'json',
     ];
 }
