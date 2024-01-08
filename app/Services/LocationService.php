@@ -60,24 +60,24 @@ class LocationService
     public function storeLocationTests(array $data, $locationId)
     {
         if (isset($data['tests'])) {
-            $testIdsString = implode(',', $data['tests']);
-            $locationTests = new LocationTest([
-                'location_id' => $locationId,
-                'tests' => $testIdsString,
-            ]);
-            $locationTests->save();
+            foreach ($$data['tests'] as $testId) {
+                LocationTest::create([
+                    'location_id' => $locationId,
+                    'test_id' => $testId,
+                ]);
+            };
         }
     }
 
     public function storeLocationPanels(array $data, $locationId)
     {
         if (isset($data['panels'])) {
-            $panelIdsString = implode(',', $data['panels']);
-            $locationPanels = new LocationPanel([
-                'location_id' => $locationId,
-                'panels' => $panelIdsString,
-            ]);
-            $locationPanels->save();
+            foreach ($$data['panels'] as $panelId) {
+                LocationPanel::create([
+                    'location_id' => $locationId,
+                    'panel_id' => $panelId,
+                ]);
+            };
         }
     }
 }
