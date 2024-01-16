@@ -117,14 +117,18 @@ class LocationController extends Controller
         ]);
         $this->locationService->storeLocationDayTiming($dayTimingData, $location->id);
 
-        // Store location terms
-        $this->locationService->storeLocationTerms($request->only('terms_and_conditions'), $location->id);
+        if ($request->filled('terms_and_conditions')) {
+            // Store location terms
+            $this->locationService->storeLocationTerms($request->only('terms_and_conditions'), $location->id);
+        }
 
         // Store location tests
         $this->locationService->storeLocationTests($request->input('tests'), $location->id);
 
-        // Store location panels
-        $this->locationService->storeLocationPanels($request->input('panels'), $location->id);
+        if ($request->filled('panels') && is_array($request->input('panels'))) {
+            // Store location panels
+            $this->locationService->storeLocationPanels($request->input('panels'), $location->id);
+        }
 
         return redirect()->route('admin.locations.index');
     }
