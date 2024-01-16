@@ -15,6 +15,11 @@ return new class extends Migration {
             $table->time('end_time')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
+
+            $table->unique([
+                'location_id',
+                'day_of_week',
+            ]);
         });
     }
 

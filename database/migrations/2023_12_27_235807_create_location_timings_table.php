@@ -19,11 +19,9 @@ return new class extends Migration {
             $table->time('block_end_time')->nullable();
             $table->integer('time_interval')->nullable();
             $table->integer('block_limit')->nullable();
-
-            $table->unique([
-                'location_id',
-            ]);
             $table->timestamps();
+
+            $table->unique('location_id');
         });
     }
 

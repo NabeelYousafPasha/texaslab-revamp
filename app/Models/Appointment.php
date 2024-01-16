@@ -4,9 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\{
+    BelongsTo,
+    BelongsToMany
+};
 
+/**
+ * @property int $id
+ * @property int $location_id
+ * @property int $user_id
+ * @property ?\Illuminate\Support\Carbon $created_at
+ * @property ?\Illuminate\Support\Carbon $updated_at
+ */
 class Appointment extends Model
 {
     use HasFactory;
@@ -32,7 +41,7 @@ class Appointment extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'appointment_date' => 'date',
-        // 'appointment_time' => 'datetime'
+        'appointment_time' => 'datetime:H:i:s',
     ];
 
 
@@ -76,5 +85,14 @@ class Appointment extends Model
     public function panels(): BelongsToMany
     {
         return $this->belongsToMany(Panel::class, 'appointment_panels', 'appointment_id', 'panel_id');
+    }
+
+    /**
+     *
+     * @return BelongsToMany
+     */
+    public function location_providers(): BelongsToMany
+    {
+        return $this->belongsToMany(LocationProvider::class, 'appointment_location_providers', 'appointment_id', 'location_provider_id');
     }
 }

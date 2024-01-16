@@ -76,7 +76,7 @@ class LocationController extends Controller
             'city' => $request->validated('city'),
             'state' => $request->validated('state'),
             'zipcode' => $request->validated('zipcode'),
-            'status' => $request->validated('status'),
+            'status' => $request->boolean('status'),
         ]);
 
         $timingData = $request->only([
