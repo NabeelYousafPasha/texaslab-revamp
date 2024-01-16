@@ -85,4 +85,13 @@ class Test extends Model
     {
         return $this->belongsToMany(IcdCode::class, 'test_icd_code', 'test_id', 'icd_code_id');
     }
+
+    /**
+     *
+     * @return BelongsToMany
+     */
+    public function appointments(): BelongsToMany
+    {
+        return $this->belongsToMany(Appointment::class, 'appointment_tests', 'test_id', 'appointment_id');
+    }
 }

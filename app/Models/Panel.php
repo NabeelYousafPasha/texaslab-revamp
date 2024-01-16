@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Panel extends Model
 {
@@ -51,5 +52,14 @@ class Panel extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
+    }
+
+    /**
+     *
+     * @return BelongsToMany
+     */
+    public function appointments(): BelongsToMany
+    {
+        return $this->belongsToMany(Appointment::class, 'appointment_panels', 'panel_id', 'appointment_id');
     }
 }

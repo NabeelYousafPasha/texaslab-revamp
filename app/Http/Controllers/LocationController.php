@@ -44,6 +44,7 @@ class LocationController extends Controller
     {
         $tests = Test::pluck('name', 'id');
         $panels = Panel::pluck('name', 'id');
+        
         $form = [
             'id' => 'create_location',
             'name' => 'create_location',
@@ -66,11 +67,18 @@ class LocationController extends Controller
      */
     public function store(LocationRequest $request)
     {
-        // Validate the request
-        $data = $request->validated();
-
         // Store basic location details
-        $location = $this->locationService->storeLocation($data);
+        $location = $this->locationService->storeLocation([
+            'name' => $request->validated('name'),
+            'phone' => $request->validated('phone'),
+            'clia' => $request->validated('clia'),
+            'sales_rep_code' => $request->validated('sales_rep_code'),
+            'address' => $request->validated('address'),
+            'city' => $request->validated('city'),
+            'state' => $request->validated('state'),
+            'zipcode' => $request->validated('zipcode'),
+            'status' => $request->validated('status'),
+        ]);
 
         $timingData = $request->only([
             'start_time',
@@ -111,22 +119,13 @@ class LocationController extends Controller
         $this->locationService->storeLocationDayTiming($dayTimingData, $location->id);
 
         // Store location terms
-        $termsData = $request->only([
-            'terms_and_conditions',
-        ]);
-        $this->locationService->storeLocationTerms($termsData, $location->id);
+        $this->locationService->storeLocationTerms($request->only('terms_and_conditions'), $location->id);
 
         // Store location tests
-        $locationTests = $request->only([
-            'tests',
-        ]);
-        $this->locationService->storeLocationTests($locationTests, $location->id);
+        $this->locationService->storeLocationTests($request->input('tests'), $location->id);
 
         // Store location panels
-        $locationPanels = $request->only([
-            'panels',
-        ]);
-        $this->locationService->storeLocationPanels($locationPanels, $location->id);
+        $this->locationService->storeLocationPanels($request->input('panels'), $location->id);
 
         return redirect()->route('admin.locations.index');
     }
@@ -163,7 +162,8 @@ class LocationController extends Controller
     {
         $location->delete();
         $location->dayTimings()->delete();
+
         return redirect()->route('admin.locations.index')
-            ->withSuccess(__('Location delete successfully.'));
+                ->withSuccess(__('Location delete successfully.'));
     }
 }

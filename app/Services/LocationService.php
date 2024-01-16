@@ -57,27 +57,23 @@ class LocationService
         return $locationTerm;
     }
 
-    public function storeLocationTests(array $data, $locationId)
+    public function storeLocationTests(array $tests, $locationId)
     {
-        if (isset($data['tests'])) {
-            foreach ($$data['tests'] as $testId) {
-                LocationTest::create([
-                    'location_id' => $locationId,
-                    'test_id' => $testId,
-                ]);
-            };
-        }
+        foreach ($tests ?? [] as $testId) {
+            LocationTest::create([
+                'location_id' => $locationId,
+                'test_id' => $testId,
+            ]);
+        };
     }
 
-    public function storeLocationPanels(array $data, $locationId)
+    public function storeLocationPanels(array $panels, $locationId)
     {
-        if (isset($data['panels'])) {
-            foreach ($$data['panels'] as $panelId) {
-                LocationPanel::create([
-                    'location_id' => $locationId,
-                    'panel_id' => $panelId,
-                ]);
-            };
-        }
+        foreach ($panels ?? [] as $panelId) {
+            LocationPanel::create([
+                'location_id' => $locationId,
+                'panel_id' => $panelId,
+            ]);
+        };
     }
 }
