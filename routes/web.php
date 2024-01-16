@@ -9,6 +9,7 @@ use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\{
+    AppointmentController,
     IcdCodeController,
     PanelController,
     TestController,
@@ -74,6 +75,13 @@ Route::group([
      */
     Route::resource('/panels', PanelController::class);
 
+    /**
+     *
+     * Route Prefix: /admin/appointments
+     * Route Name: admin.appointments.
+     */
+    Route::resource('/appointments', AppointmentController::class);
+
 
     /***********
      * ZOHAIB Routes
@@ -103,37 +111,4 @@ Route::group([
 
     // for ajax, it is better to rely on api/v1 routes
     Route::get('/ajax/patient-appointments', [DataController::class, 'patientAppointmentData'])->name('patientAppointmentData');
-});
-
-/**
- *
- * Auth Routes
- *
- * Route Prefix: ''
- * Route Name: ''
- */
-Route::group([
-    'middleware' => [Authenticate::class],
-], function () {
-
-    Route::post('/uploads', function (Request $request) {
-        try {
-            if ($request->file('image')) {
-
-                if (is_array($request->image)) {
-                    $path = collect($request->image)->map->store('tmp-editor-uploads');
-                } else {
-                    $path = $request->image->store('tmp-editor-uploads');
-                }
-
-                return response()->json([
-                    'url' => $path
-                ], 200);
-            }
-
-            return;
-        } catch (\Throwable $th) {
-            dd($th);
-        }
-    })->name('upload');
 });

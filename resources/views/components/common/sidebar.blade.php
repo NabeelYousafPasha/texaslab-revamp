@@ -94,6 +94,20 @@
                                 </div>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a 
+                                href="{{ route('admin.appointments.index') }}" 
+                                class="group"
+                            >
+                                <div class="flex items-center">
+                                    <span
+                                        class="ltr:pl-1 rtl:pr-1 text-black dark:text-[#506690] dark:group-hover:text-white-dark"
+                                    >
+                                        Appointments
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
                         {{-- <li class="menu nav-item">
                             <button type="button" class="nav-link group"
                                 :class="{ 'active': activeDropdown === 'invoice' }"

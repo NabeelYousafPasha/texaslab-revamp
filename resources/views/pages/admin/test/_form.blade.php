@@ -103,7 +103,7 @@
 
                     {{ isset($test) && (bool) $test->is_free == 1 ? 'checked' : '' }}
                 />
-                <span class="text-white-dark"">Free</span>
+                <span class="text-white-dark">Free</span>
             </label>
             <label class="inline-flex mt-1 cursor-pointer">
                 <input 
@@ -118,7 +118,7 @@
                     
                     {{ isset($test) && (bool) $test->is_free == 0 ? 'checked' : '' }}
                 />
-                <span class="text-white-dark"">Paid</span>
+                <span class="text-white-dark">Paid</span>
             </label>
 
             @error('is_free')
@@ -223,7 +223,7 @@
                         {{ old('status_id') == $statusId ? 'checked' : '' }}
                         {{ $test->status_id ?? '' == $statusId ? 'checked' : '' }}
                     />
-                    <span class="text-white-dark"">{{ $statusName }}</span>
+                    <span class="text-white-dark">{{ $statusName }}</span>
                 </label>
             @endforeach
 
@@ -253,7 +253,7 @@
                         {{ in_array($icdCodeId, old('icd_codes') ?? []) ? 'selected' : '' }} 
                         {{ in_array($icdCodeId, $testIcdCodes ?? []) ? 'selected' : '' }} 
                     />
-                        <span class="text-white-dark"">{{ $icdCode }}</span>
+                        <span class="text-white-dark">{{ $icdCode }}</span>
                     </label>
                 @endforeach
             </select>
@@ -345,7 +345,7 @@
                     {{ old('featured_at') == true ? 'checked' : '' }}
                     {{ $test->featured_at ?? '' ? 'checked' : '' }}
                 />
-                <span class="text-white-dark"">Feature this Test?</span>
+                <span class="text-white-dark">Feature this Test?</span>
             </label>
             
             @error('featured_at')
@@ -370,7 +370,7 @@
                     {{ old('is_renderabble') == true ? 'checked' : '' }}
                     {{ $test->is_renderabble ?? '' ? 'checked' : '' }}
                 />
-                <span class="text-white-dark"">Show this Test on Homepage?</span>
+                <span class="text-white-dark">Show this Test on Homepage?</span>
             </label>
             
             @error('is_renderabble')

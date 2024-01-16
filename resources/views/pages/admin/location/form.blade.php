@@ -30,7 +30,6 @@
 
                     :spoofed-type="$form['_method'] ?? NULL"
                 >
-                    @csrf
                     @includeIf('pages.admin.location._form')
 
                     <button 

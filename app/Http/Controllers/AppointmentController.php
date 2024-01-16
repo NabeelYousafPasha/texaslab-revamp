@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
+use App\Enums\GenderEnum;
+use App\Models\{
+    Appointment,
+    Location,
+};
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -12,7 +16,11 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        $appointments = Appointment::with('patient')->get();
+
+        return view('pages.admin.appointment.index')->with([
+            'appointments' => $appointments,
+        ]);
     }
 
     /**
@@ -20,7 +28,20 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        //
+        $form = [
+            'id' => 'create_appointment',
+            'name' => 'create_appointment',
+            'action' => route('admin.appointments.store'),
+            'method' => 'POST',
+        ];
+
+        return view('pages.admin.appointment.form')->with([
+            'form' => $form,
+            'locations' => Location::pluck('name', 'id'),
+            'locationTests' => collect(),
+            'locationProviders' => collect(),
+            'locationPanels' => collect(),
+        ]);
     }
 
     /**

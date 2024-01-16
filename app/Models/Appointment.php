@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{
@@ -44,6 +46,44 @@ class Appointment extends Model
         'appointment_time' => 'datetime:H:i:s',
     ];
 
+    /**
+     * |--------------------------------------------------------------------------
+     * | BOOT
+     * |--------------------------------------------------------------------------
+     */
+
+    /**
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        // @todo - use observer
+        // static::created(function ($obj) {
+        //     $obj->sample_id = 'TL' . $obj->id;
+        //     $obj->save();
+        // });
+    }
+
+    /**
+     * |--------------------------------------------------------------------------
+     * | ACCESSORS & MUTATORS
+     * |--------------------------------------------------------------------------
+     */
+
+    /**
+     *
+     * @return Attribute
+     */
+    protected function appointment(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::parse($value)->format('m/d/Y'),
+            set: fn ($value) => Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d'),
+        );
+    }
 
     /**
      * |--------------------------------------------------------------------------
@@ -66,7 +106,7 @@ class Appointment extends Model
      */
     public function patient(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Patient::class, 'patient_id');
     }
 
     /**

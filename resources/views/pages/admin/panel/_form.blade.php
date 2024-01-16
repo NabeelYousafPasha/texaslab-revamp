@@ -70,7 +70,7 @@
                         {{ $panel->status_id ?? '' == $statusId ? 'checked' : '' }}
                         
                     />
-                    <span class="text-white-dark"">{{ $statusName }}</span>
+                    <span class="text-white-dark">{{ $statusName }}</span>
                 </label>
             @endforeach
 
@@ -96,7 +96,7 @@
                     {{ old('is_renderabble') == true ? 'checked' : '' }}
                     {{ $panel->is_renderabble ?? '' ? 'checked' : '' }}
                 />
-                <span class="text-white-dark"">Show this Panel on Homepage?</span>
+                <span class="text-white-dark">Show this Panel on Homepage?</span>
             </label>
             
             @error('is_renderabble')
@@ -128,7 +128,7 @@
                         {{ in_array($testId, old('tests') ?? []) ? 'selected' : '' }} 
                         {{ in_array($testId, $panelTests ?? []) ? 'selected' : '' }} 
                     />
-                        <span class="text-white-dark"">{{ $testId .' - '. $testName }}</span>
+                        <span class="text-white-dark">{{ $testId .' - '. $testName }}</span>
                     </label>
                 @endforeach
             </select>
