@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('location_day_timings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('location_id')->constrained('location_details')->onDelete('cascade');
+            $table->foreignId('location_id')->constrained('locations')->onDelete('cascade');
             $table->string('day_of_week')->nullable();
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();

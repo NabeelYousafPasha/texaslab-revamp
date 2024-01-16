@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\LocationService;
 use App\Http\Requests\Location\LocationRequest;
-use Symfony\Component\HttpFoundation\Response;
 use App\Models\{
-    LocationDetail,
+    Location,
     Test,
     Panel,
 };
@@ -30,7 +29,7 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $locations = LocationDetail::where('status', '1')->get();
+        $locations = Location::where('status', '1')->get();
 
         return view('pages.admin.location.index')->with([
             'locations' => $locations,
@@ -134,7 +133,7 @@ class LocationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(LocationDetail $location)
+    public function show(Location $location)
     {
         //
     }
@@ -142,7 +141,7 @@ class LocationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LocationDetail $location)
+    public function edit(Location $location)
     {
         //
     }
@@ -150,7 +149,7 @@ class LocationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, LocationDetail $location)
+    public function update(Request $request, Location $location)
     {
         //
     }
@@ -158,7 +157,7 @@ class LocationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(LocationDetail $location)
+    public function destroy(Location $location)
     {
         $location->delete();
         $location->dayTimings()->delete();

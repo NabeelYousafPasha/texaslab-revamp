@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\{
-    LocationDetail,
+    Location,
     LocationTiming,
     LocationDayTiming,
     LocationTerm,
@@ -15,7 +15,7 @@ class LocationService
 {
     public function storeLocation(array $data)
     {
-        $location = new LocationDetail($data);
+        $location = new Location($data);
         $location->save();
 
         return $location;

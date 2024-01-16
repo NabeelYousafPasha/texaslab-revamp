@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('location_tests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('location_id')->constrained('location_details');
+            $table->foreignId('location_id')->constrained('locations');
             $table->json('tests')->nullable();
             $table->timestamps();
         });

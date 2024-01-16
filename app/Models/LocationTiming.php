@@ -36,6 +36,6 @@ class LocationTiming extends Model
      */
     public function location(): BelongsTo
     {
-        return $this->belongsTo(LocationDetail::class, 'location_id');
+        return $this->belongsTo(Location::class, 'location_id');
     }
 }

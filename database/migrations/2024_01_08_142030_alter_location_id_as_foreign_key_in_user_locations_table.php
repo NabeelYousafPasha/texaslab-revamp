@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('user_locations', function (Blueprint $table) {
             $table->foreignId('location_id')
                 ->change()
-                ->constrained('location_details');
+                ->constrained('locations');
         });
     }
 
