@@ -12,7 +12,12 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //
+        $patients = Patient::query()
+            ->get();
+
+        return view('pages.admin.patient.index')->with([
+            'patients' => $patients,
+        ]);
     }
 
     /**
@@ -20,7 +25,16 @@ class PatientController extends Controller
      */
     public function create()
     {
-        //
+        $form = [
+            'id' => 'create_patient',
+            'name' => 'create_patient',
+            'action' => route('admin.patients.store'),
+            'method' => 'POST',
+        ];
+
+        return view('pages.admin.patient.form')->with([
+            'form' => $form,
+        ]);
     }
 
     /**

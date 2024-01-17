@@ -13,7 +13,6 @@
             height: 3px;
         }
         </style>
-        
     @endpush
 
     <div x-data="users">
@@ -86,6 +85,5 @@
                 }));
             });
         </script>
-
     @endpush
 </x-layout.default>

@@ -186,13 +186,15 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener("alpine:init", () => {
-        Alpine.data("panelForm", () => ({
+@push('scripts')
+    <script>
+        document.addEventListener("alpine:init", () => {
+            Alpine.data("panelForm", () => ({
 
-            fields: {},
-            
-            init() {},
-        }));
-    });
-</script>
+                fields: {},
+                
+                init() {},
+            }));
+        });
+    </script>
+@endpush

@@ -426,48 +426,50 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener("alpine:init", () => {
-        Alpine.data("testForm", () => ({
-            renderPriceFields: false,
+@push('scripts')
+    <script>
+        document.addEventListener("alpine:init", () => {
+            Alpine.data("testForm", () => ({
+                renderPriceFields: false,
 
-            fields: {
-                actual_price: 0,
-                offered_price: 0,
-                competitor_price: 0,
-            },
+                fields: {
+                    actual_price: 0,
+                    offered_price: 0,
+                    competitor_price: 0,
+                },
 
-            cptCodeFields: [],
-            
-            init() {
-                this.renderPriceFields = false;
-
-                if (this.$refs.priceIsPaid.checked) {
-                    this.renderPriceFields = true;
-                }
+                cptCodeFields: [],
                 
-            },
-            showPriceFields() {
-                this.renderPriceFields = true;
-            },
-            hidePriceFields() {
-                this.renderPriceFields = false;
-                this.resetPriceFields();
-            },
-            resetPriceFields() {
-                this.fields.actual_price = 0;
-                this.fields.offered_price = 0;
-                this.fields.competitor_price = 0;
-            },
-            addNewCptCodeField() {
-                this.cptCodeFields.push({
-                    code: '',
-                    description: ''
-                });
-            },
-            removeCptCodeField(index) {
-                this.cptCodeFields.splice(index, 1);
-            }
-        }));
-    });
-</script>
+                init() {
+                    this.renderPriceFields = false;
+
+                    if (this.$refs.priceIsPaid.checked) {
+                        this.renderPriceFields = true;
+                    }
+                    
+                },
+                showPriceFields() {
+                    this.renderPriceFields = true;
+                },
+                hidePriceFields() {
+                    this.renderPriceFields = false;
+                    this.resetPriceFields();
+                },
+                resetPriceFields() {
+                    this.fields.actual_price = 0;
+                    this.fields.offered_price = 0;
+                    this.fields.competitor_price = 0;
+                },
+                addNewCptCodeField() {
+                    this.cptCodeFields.push({
+                        code: '',
+                        description: ''
+                    });
+                },
+                removeCptCodeField(index) {
+                    this.cptCodeFields.splice(index, 1);
+                }
+            }));
+        });
+    </script>
+@endpush

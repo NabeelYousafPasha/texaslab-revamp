@@ -1,9 +1,9 @@
 <x-layout.default>
     
-    <div x-data="panels">
+    <div x-data="patients">
         <ul class="flex space-x-2 rtl:space-x-reverse">
             <li>
-                <a href="javascript:;" class="text-primary hover:underline">Panels</a>
+                <a href="javascript:;" class="text-primary hover:underline">Patient</a>
             </li>
         </ul>
 
@@ -11,11 +11,11 @@
 
             <div class="flow-root">  
                 <div class="float-left">
-                    <h5 class="font-semibold text-lg dark:text-white-light">PANELS</h5>
+                    <h5 class="font-semibold text-lg dark:text-white-light">PATIENT</h5>
                 </div>
                 <div class="float-right">
                     <a 
-                        href="{{ route('admin.panels.create') }}"
+                        href="{{ route('admin.patients.create') }}"
                         class="btn btn-outline-primary"
                     >
                         + Add New
@@ -25,30 +25,30 @@
             
             <div class="table-responsive mt-3">
                 <table 
-                    id="panelsTable" 
+                    id="patientsTable" 
                     class="whitespace-nowrap table-hover table-bordered"
                 >
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Panel</th>
-                            <th>Price</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($panels ?? [] as $row => $panel)
+                        @foreach ($patients ?? [] as $row => $patient)
                             <tr>
                                 <td>{{ ++$row }}</td>
-                                <td>{{ $panel->name }}</td>
-                                <td>{{ $panel->price }}</td>
-                                <td>{{ $panel->status->name }}</td>
+                                <td>{{ $patient->first_name }}</td>
+                                <td>{{ $patient->last_name }}</td>
+                                <td>{{ $patient->name }}</td>
                                 <td class="text-center">
                                     <ul class="flex items-center gap-2">
                                         <li>
                                             <a 
-                                                href="{{ route('admin.panels.edit', ['panel' => $panel,]) }}" 
+                                                href="{{ route('admin.patients.edit', ['patient' => $patient,]) }}" 
                                                 x-tooltip="Edit"
                                             >
                                                 <svg width="24" height="24" viewBox="0 0 24 24"
@@ -93,7 +93,7 @@
                                                 </x-slot>
                                             
                                                 <form 
-                                                    action="{{ route('admin.panels.destroy', ['panel' => $panel,]) }}"
+                                                    action="{{ route('admin.patients.destroy', ['patient' => $patient,]) }}"
                                                     method="POST"
                                                 >
                                                     @csrf
@@ -116,15 +116,15 @@
             </div>
         </div>
     </div>
-    
+
     @push('scripts')
         <script src="/assets/js/simple-datatables.js"></script>
         <script>
             document.addEventListener("alpine:init", () => {
-                Alpine.data("panels", () => ({
+                Alpine.data("patients", () => ({
                     datatable: null,
                     init() {
-                        this.datatable = new simpleDatatables.DataTable('#panelsTable', {
+                        this.datatable = new simpleDatatables.DataTable('#patientsTable', {
                             sortable: false,
                             searchable: true,
                             perPage: 10,
