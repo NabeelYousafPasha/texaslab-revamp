@@ -2,15 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\GenderEnum;
+use App\Http\Requests\Appointment\AppointmentRequest;
 use App\Models\{
     Appointment,
     Location,
+    Patient,
 };
+use App\Services\AppointmentService;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
+
+    /**
+     *
+     * @param AppointmentService $appointmentService
+     */
+    public function __construct(
+        protected AppointmentService $appointmentService
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -47,9 +58,17 @@ class AppointmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AppointmentRequest $request)
     {
-        //
+        $patient = new Patient();
+        $patient->fill($request->only([
+            ''
+        ]))->save();
+
+        $this->appointmentService
+            ->savePatientAppointment($patient->id, $request->all());
+
+        return redirect()->route('admin.appointments.index');
     }
 
     /**
