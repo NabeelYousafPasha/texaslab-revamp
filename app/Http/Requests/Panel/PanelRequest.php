@@ -48,7 +48,11 @@ class PanelRequest extends FormRequest
         ];
     }
 
-    public function attributes()
+    /**
+     *
+     * @return array
+     */
+    public function attributes(): array
     {
         return [
             'name' => 'Name',

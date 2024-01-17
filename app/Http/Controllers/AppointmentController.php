@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\GenderEnum;
 use App\Http\Requests\Appointment\AppointmentRequest;
+use App\Http\Requests\Patient\PatientRequest;
 use App\Models\{
     Appointment,
     Location,
+    LocationProvider,
+    Panel,
     Patient,
+    Test,
 };
 use App\Services\AppointmentService;
 use Illuminate\Http\Request;
@@ -49,9 +54,10 @@ class AppointmentController extends Controller
         return view('pages.admin.appointment.form')->with([
             'form' => $form,
             'locations' => Location::pluck('name', 'id'),
-            'locationTests' => collect(),
-            'locationProviders' => collect(),
-            'locationPanels' => collect(),
+            'locationTests' => Test::pluck('name', 'id'),
+            'locationProviders' => LocationProvider::pluck('first_name', 'id'),
+            'locationPanels' => Panel::pluck('name', 'id'),
+            'genders' => GenderEnum::array(),
         ]);
     }
 
@@ -60,13 +66,19 @@ class AppointmentController extends Controller
      */
     public function store(AppointmentRequest $request)
     {
-        $patient = new Patient();
-        $patient->fill($request->only([
-            ''
-        ]))->save();
+        $patientFields = array_keys((new PatientRequest())->rules());
 
+        // create a new patient
+        $patient = new Patient();
+        $patient->fill($request->only($patientFields))
+            ->save();
+
+        // create an appointment and associate it with recently created patient
         $this->appointmentService
-            ->savePatientAppointment($patient->id, $request->all());
+            ->savePatientAppointment(
+                $patient->id, 
+                $request->except($patientFields)
+            );
 
         return redirect()->route('admin.appointments.index');
     }

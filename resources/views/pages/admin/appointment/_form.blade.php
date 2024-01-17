@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="form-field space-y-3 @error('appointment_tests') has-error @enderror" 
+    <div class="form-field space-y-3 @error('tests') has-error @enderror" 
     x-data="{
         locationTests: {{ $locationTests }}
     }">
@@ -42,8 +42,8 @@
     
         <div class="relative">
             <select 
-                id="appointment_tests"
-                name="appointment_tests[]" 
+                id="tests"
+                name="tests[]" 
                 class="select2"
                 placeholder="Choose Test(s)..."
                 multiple="multiple"
@@ -69,16 +69,16 @@
         </div>
     </div>
 
-    <div class="form-field space-y-3 @error('appointment_location_providers') has-error @enderror" 
+    <div class="form-field space-y-3 @error('providers') has-error @enderror" 
     x-data="{
         locationProviders: {{ $locationProviders }}
     }">
-        <label for="appointment_location_providers">Provider</label>
+        <label for="providers">Provider</label>
     
         <div class="relative">
             <select 
-                id="appointment_location_providers"
-                name="appointment_location_providers[]" 
+                id="providers"
+                name="providers[]" 
                 class="select2"
                 placeholder="Choose Provider(s)..."
                 multiple="multiple"
@@ -88,14 +88,14 @@
                     <option
                         class="form-radio" 
                         value="{{ $providerId }}"
-                        {{ in_array($providerId, old('appointment_location_providers') ?? []) ? 'selected' : '' }} 
+                        {{ in_array($providerId, old('providers') ?? []) ? 'selected' : '' }} 
                     />
                         <span class="text-white-dark">{{ $providerId .' - '. $providerName }}</span>
                     </label>
                 @endforeach
             </select>
 
-            @error('appointment_location_providers')
+            @error('providers')
                 <span>
                     <p class="text-danger mt-1">{{ $message }}</p>
                 </span>
@@ -103,16 +103,16 @@
         </div>
     </div>
 
-    <div class="form-field space-y-3 @error('appointment_panels') has-error @enderror" 
+    <div class="form-field space-y-3 @error('panels') has-error @enderror" 
     x-data="{
         locationTests: {{ $locationTests }}
     }">
-        <label for="appointment_panels">Panels</label>
+        <label for="panels">Panels</label>
     
         <div class="relative">
             <select 
-                id="appointment_panels"
-                name="appointment_panels[]" 
+                id="panels"
+                name="panels[]" 
                 class="select2"
                 placeholder="Choose Panel(s)..."
                 multiple="multiple"
@@ -122,14 +122,14 @@
                     <option
                         class="form-radio" 
                         value="{{ $panelId }}"
-                        {{ in_array($panelId, old('appointment_panels') ?? []) ? 'selected' : '' }} 
+                        {{ in_array($panelId, old('panels') ?? []) ? 'selected' : '' }} 
                     />
                         <span class="text-white-dark">{{ $panelId .' - '. $panelName }}</span>
                     </label>
                 @endforeach
             </select>
 
-            @error('appointment_panels')
+            @error('panels')
                 <span>
                     <p class="text-danger mt-1">{{ $message }}</p>
                 </span>
@@ -137,48 +137,52 @@
         </div>
     </div>
 
-    <div class="form-field @error('meta_title') has-error @enderror">
-        <label for="meta_title">Meta Title</label>
+    <div class="grid grid-cols-1 sm:flex justify-between gap-5">
 
-        <div class="relative">
-            <input 
-                id="meta_title" 
-                name="meta_title"
-                type="text"
-                placeholder="Meta Title"
-                class="form-input"
+        <div class="form-field @error('appointment_date') has-error @enderror">
+            <label for="appointment_date">Appointment Date</label>
+
+            <div class="relative">
+                <input 
+                    id="appointment_date" 
+                    name="appointment_date"
+                    type="date"
+                    placeholder="Appointment Date"
+                    class="form-input"
+                    
+                    value="{{ old('appointment_date', $appointment->appointment_date ?? '') }}"
+                />
                 
-                value="{{ old('meta_title', $test->meta_title ?? '') }}"
-            />
-            
-            @error('meta_title')
-                <span>
-                    <p class="text-danger mt-1">{{ $message }}</p>
-                </span>
-            @enderror
+                @error('appointment_date')
+                    <span>
+                        <p class="text-danger mt-1">{{ $message }}</p>
+                    </span>
+                @enderror
+            </div>
         </div>
-    </div>
 
-    <div class="form-field @error('meta_description') has-error @enderror">
-        <label for="meta_description">Meta Description</label>
+        <div class="form-field @error('appointment_time') has-error @enderror">
+            <label for="appointment_time">Appointment Time</label>
 
-        <div class="relative">
-            <input 
-                id="meta_description" 
-                name="meta_description"
-                type="text"
-                placeholder="Meta Description"
-                class="form-input"
+            <div class="relative">
+                <input 
+                    id="appointment_time" 
+                    name="appointment_time"
+                    type="time"
+                    placeholder="Appointment Time"
+                    class="form-input"
+                    
+                    value="{{ old('appointment_time', $appointment->appointment_time ?? '') }}"
+                />
                 
-                value="{{ old('meta_description', $test->meta_description ?? '') }}"
-            />
-            
-            @error('meta_description')
-                <span>
-                    <p class="text-danger mt-1">{{ $message }}</p>
-                </span>
-            @enderror
+                @error('appointment_time')
+                    <span>
+                        <p class="text-danger mt-1">{{ $message }}</p>
+                    </span>
+                @enderror
+            </div>
         </div>
+
     </div>
 </div>
 

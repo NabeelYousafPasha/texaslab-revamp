@@ -49,7 +49,7 @@
                                 <td>{{ $appointment->patient->email }}</td>
                                 <td>{{ $appointment->patient->dob }}</td>
                                 <td>{{ $appointment->patient->gender }}</td>
-                                <td>{{ $appointment->appointment_date .' - '. $appointment->appointment_time }}</td>
+                                <td>{{ $appointment->appointment }}</td>
                                 <td class="text-center">
                                     <ul class="flex items-center gap-2">
                                         <li>

@@ -33,7 +33,7 @@
                             <th>#</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>Status</th>
+                            <th>Gender</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -43,7 +43,7 @@
                                 <td>{{ ++$row }}</td>
                                 <td>{{ $patient->first_name }}</td>
                                 <td>{{ $patient->last_name }}</td>
-                                <td>{{ $patient->name }}</td>
+                                <td>{{ $patient->gender }}</td>
                                 <td class="text-center">
                                     <ul class="flex items-center gap-2">
                                         <li>

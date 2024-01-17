@@ -29,12 +29,32 @@ class PatientRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:255',],
             'email' => ['required', 'string', 'max:255', 'email', Rule::unique(Patient::class, 'email'),],
             'gender' => ['required', 'string', Rule::in(GenderEnum::values()),],
-            'dob' => ['required', 'string', 'date:Y-m-d',],
+            'dob' => ['required', 'string', 'date_format:Y-m-d',],
             'cell_phone' => ['required', 'string', 'max:255',],
             'address' => ['required', 'string', 'max:255',],
             'city' => ['required', 'string', 'max:255',],
             'state' => ['required', 'string', 'max:255',],
             'zipcode' => ['required', 'string', 'max:255',],
         ];
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function attributes(): array
+    {
+        return [
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
+            'email' => 'Email Address',
+            'gender' => 'Gender',
+            'dob' => 'DOB',
+            'cell_phone' => 'Cell Phone',
+            'address' => 'Address',
+            'city' => 'City',
+            'state' => 'State',
+            'zipcode' => 'Zipcode',
+        ];   
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\GenderEnum;
 use App\Http\Requests\Patient\PatientRequest;
 use App\Models\Patient;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ class PatientController extends Controller
 
         return view('pages.admin.patient.form')->with([
             'form' => $form,
+            'genders' => GenderEnum::array(),
         ]);
     }
 
@@ -43,7 +45,11 @@ class PatientController extends Controller
      */
     public function store(PatientRequest $request)
     {
-        //
+        $patient = new Patient();
+        $patient->fill($request->validated())
+            ->save();
+
+        return redirect()->route('admin.patients.index');
     }
 
     /**

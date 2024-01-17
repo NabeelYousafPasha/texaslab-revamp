@@ -29,6 +29,8 @@
                 >
                     @includeIf('pages.admin.appointment._form')
 
+                    @includeIf('pages.admin.patient._form')
+
                     <button 
                         type="submit" 
                         class="btn btn-primary mt-6"

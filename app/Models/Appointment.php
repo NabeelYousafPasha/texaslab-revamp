@@ -29,7 +29,7 @@ class Appointment extends Model
      */
     protected $fillable = [
         'location_id',
-        'user_id',
+        'patient_id',
         'appointment_date',
         'appointment_time',
     ];
@@ -43,7 +43,7 @@ class Appointment extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'appointment_date' => 'date',
-        'appointment_time' => 'datetime:H:i:s',
+        'appointment_time' => 'datetime:H:i',
     ];
 
     /**
@@ -80,8 +80,13 @@ class Appointment extends Model
     protected function appointment(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('m/d/Y'),
-            set: fn ($value) => Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d'),
+            get: function () { 
+                $date = Carbon::parse($this->attributes['appointment_date'])->format('m/d/Y');
+                $time = Carbon::parse($this->attributes['appointment_time'])->format('h:i A');
+
+                return $date.' - '.$time;
+            },
+            // set: fn ($value) => Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d'),
         );
     }
 

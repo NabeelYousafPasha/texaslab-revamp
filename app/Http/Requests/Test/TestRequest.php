@@ -63,7 +63,11 @@ class TestRequest extends FormRequest
         ];
     }
 
-    public function attributes()
+    /**
+     *
+     * @return array
+     */
+    public function attributes(): array
     {
         // $resultKpis = ResultKpi::ofTest()->pluck('name', 'id')->toArray();
         // $resultKpisFields = Arr::prependKeysWith($resultKpis, 'test_result_kpis.');
