@@ -129,7 +129,7 @@
                         {{ in_array($testId, $panelTests ?? []) ? 'selected' : '' }} 
                     />
                         <span class="text-white-dark">{{ $testId .' - '. $testName }}</span>
-                    </label>
+                    </option>
                 @endforeach
             </select>
 

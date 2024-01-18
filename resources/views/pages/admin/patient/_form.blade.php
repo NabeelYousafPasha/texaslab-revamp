@@ -70,21 +70,22 @@
         <label for="gender">Gender</label>
 
         <div class="relative">
-            @foreach ($genders as $genderValue => $genderName)
-                <label class="inline-flex mt-1 cursor-pointer">
-                    <input 
-                        type="radio" 
-                        id="gender_{{ $genderName }}"
-                        name="gender" 
+            <select 
+                id="gender"
+                name="gender" 
+                class="select2"
+                placeholder="Choose Gender..."
+            >
+                @foreach ($genders as $genderValue => $genderName)
+                    <option
                         class="form-radio" 
                         value="{{ $genderValue }}"
-                        {{ old('gender') == $genderValue ? 'checked' : '' }}
-                        
+                        {{ in_array($genderValue, old('gender') ?? []) ? 'selected' : '' }} 
                     />
-                    <span class="text-white-dark">{{ $genderName }}</span>
-                </label>
-            @endforeach
-            
+                        <span class="text-white-dark">{{ $genderName }}</span>
+                    </option>
+                @endforeach
+            </select>
             
             @error('gender')
                 <span>

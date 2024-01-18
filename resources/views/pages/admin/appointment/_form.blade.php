@@ -22,7 +22,7 @@
                         {{ in_array($locationId, old('tests') ?? []) ? 'selected' : '' }}
                     />
                         <span class="text-white-dark">{{ $locationId .' - '. $locationName }}</span>
-                    </label>
+                    </option>
                 @endforeach
             </select>
 
@@ -57,7 +57,7 @@
                         {{ in_array($testId, $panelTests ?? []) ? 'selected' : '' }} 
                     />
                         <span class="text-white-dark">{{ $testId .' - '. $testName }}</span>
-                    </label>
+                    </option>
                 @endforeach
             </select>
 
@@ -91,7 +91,7 @@
                         {{ in_array($providerId, old('providers') ?? []) ? 'selected' : '' }} 
                     />
                         <span class="text-white-dark">{{ $providerId .' - '. $providerName }}</span>
-                    </label>
+                    </option>
                 @endforeach
             </select>
 
@@ -125,7 +125,7 @@
                         {{ in_array($panelId, old('panels') ?? []) ? 'selected' : '' }} 
                     />
                         <span class="text-white-dark">{{ $panelId .' - '. $panelName }}</span>
-                    </label>
+                    </option>
                 @endforeach
             </select>
 

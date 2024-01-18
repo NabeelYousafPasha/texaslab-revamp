@@ -254,7 +254,7 @@
                         {{ in_array($icdCodeId, $testIcdCodes ?? []) ? 'selected' : '' }} 
                     />
                         <span class="text-white-dark">{{ $icdCode }}</span>
-                    </label>
+                    </option>
                 @endforeach
             </select>
 
