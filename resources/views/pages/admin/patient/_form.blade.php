@@ -1,5 +1,8 @@
 <div x-data="patientForm" class="space-y-3">
 
+    <div class="grid grid-cols-2 gap-4 justify-between">
+
+    
     <div class="form-field @error('first_name') has-error @enderror">
         <label for="first_name">First Name</label>
 
@@ -80,7 +83,7 @@
                     <option
                         class="form-radio" 
                         value="{{ $genderValue }}"
-                        {{ in_array($genderValue, old('gender') ?? []) ? 'selected' : '' }} 
+                        {{ ($genderValue == old('gender')) ? 'selected' : '' }} 
                     />
                         <span class="text-white-dark">{{ $genderName }}</span>
                     </option>
@@ -225,6 +228,8 @@
                 </span>
             @enderror
         </div>
+    </div>
+
     </div>
 </div>
 
