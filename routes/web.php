@@ -16,6 +16,7 @@ use App\Http\Controllers\{
     UserController,
     LocationController,
     PatientController,
+    PatientInsuranceController,
 };
 use App\Http\Middleware\{
     Authenticate,
@@ -76,13 +77,21 @@ Route::group([
      */
     Route::resource('/panels', PanelController::class);
 
-
     /**
      *
      * Route Prefix: /admin/patients
      * Route Name: admin.patients.
      */
     Route::resource('/patients', PatientController::class);
+
+    /**
+     *
+     * Route Prefix: /admin/patient/insurances
+     * Route Name: admin.patient.insurances.
+     */
+    Route::resource('/patients/{patient}/insurances', PatientInsuranceController::class, [
+        'names' => 'patient.insurances',
+    ]);
 
     /**
      *

@@ -65,4 +65,13 @@ class Patient extends Model
     {
         return $this->hasMany(Appointment::class);
     }
+
+    /**
+     * 
+     * @return BelongsTo
+     */
+    public function insurances(): HasMany
+    {
+        return $this->hasMany(PatientInsurance::class);
+    }
 }

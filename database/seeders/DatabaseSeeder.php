@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
 
             IcdCodeSeeder::class,
+
+            InsurancePlanSeeder::class,
         ]);
     }
 }

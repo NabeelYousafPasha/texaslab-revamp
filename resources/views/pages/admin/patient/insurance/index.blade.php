@@ -1,9 +1,9 @@
 <x-layout.default>
     
-    <div x-data="patients">
+    <div x-data="patientInsurances">
         <ul class="flex space-x-2 rtl:space-x-reverse">
             <li>
-                <a href="javascript:;" class="text-primary hover:underline">Patient</a>
+                <a href="javascript:;" class="text-primary hover:underline">Patient Insurance</a>
             </li>
         </ul>
 
@@ -11,11 +11,11 @@
 
             <div class="flow-root">  
                 <div class="float-left">
-                    <h5 class="font-semibold text-lg dark:text-white-light">PATIENT</h5>
+                    <h5 class="font-semibold text-lg dark:text-white-light">PATIENT INSURANCE</h5>
                 </div>
                 <div class="float-right">
                     <a 
-                        href="{{ route('admin.patients.create') }}"
+                        href="{{ route('admin.patient.insurances.create', ['patient' => $patient,]) }}"
                         class="btn btn-outline-primary"
                     >
                         + Add New
@@ -25,43 +25,30 @@
             
             <div class="table-responsive mt-3">
                 <table 
-                    id="patientsTable" 
+                    id="patientInsurancesTable" 
                     class="whitespace-nowrap table-hover table-bordered"
                 >
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Gender</th>
+                            <th>Name</th>
+                            <th>Details</th>
+                            <th>Details</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($patients ?? [] as $row => $patient)
+                        @foreach ($patientInsurances ?? [] as $row => $patientInsurance)
                             <tr>
                                 <td>{{ ++$row }}</td>
-                                <td>{{ $patient->first_name }}</td>
-                                <td>{{ $patient->last_name }}</td>
-                                <td>{{ $patient->gender }}</td>
+                                <td>{{ $patientInsurance->name }}</td>
+                                <td>{{ $patientInsurance->name }}</td>
+                                <td>{{ $patientInsurance->name }}</td>
                                 <td class="text-center">
                                     <ul class="flex items-center gap-2">
                                         <li>
                                             <a 
-                                                href="{{ route('admin.patient.insurances.index', ['patient' => $patient,]) }}" 
-                                                x-tooltip="Insurances"
-                                            >
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2 14C2 10.2288 2 8.34315 3.17157 7.17157C4.34315 6 6.22876 6 10 6H14C17.7712 6 19.6569 6 20.8284 7.17157C21.4816 7.82475 21.7706 8.69989 21.8985 10M22 14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22878 22 4.34314 22 3.17157 20.8284C2.51839 20.1752 2.22937 19.3001 2.10149 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                                    <path d="M16 6C16 4.11438 16 3.17157 15.4142 2.58579C14.8284 2 13.8856 2 12 2C10.1144 2 9.17157 2 8.58579 2.58579C8 3.17157 8 4.11438 8 6" stroke="currentColor" stroke-width="1.5"></path>
-                                                    <path d="M17 9C17 9.55228 16.5523 10 16 10C15.4477 10 15 9.55228 15 9C15 8.44772 15.4477 8 16 8C16.5523 8 17 8.44772 17 9Z" fill="currentColor"></path>
-                                                    <path d="M9 9C9 9.55228 8.55228 10 8 10C7.44772 10 7 9.55228 7 9C7 8.44772 7.44772 8 8 8C8.55228 8 9 8.44772 9 9Z" fill="currentColor"></path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a 
-                                                href="{{ route('admin.patients.edit', ['patient' => $patient,]) }}" 
+                                                href="{{ route('admin.patient.insurances.edit', ['patient' => $patient, 'insurance' => $patientInsurance,]) }}" 
                                                 x-tooltip="Edit"
                                             >
                                                 <svg width="24" height="24" viewBox="0 0 24 24"
@@ -106,7 +93,7 @@
                                                 </x-slot>
                                             
                                                 <form 
-                                                    action="{{ route('admin.patients.destroy', ['patient' => $patient,]) }}"
+                                                    action="{{ route('admin.patient.insurances.destroy', ['patient' => $patient, 'insurance' => $patientInsurance,]) }}"
                                                     method="POST"
                                                 >
                                                     @csrf
@@ -134,10 +121,10 @@
         <script src="/assets/js/simple-datatables.js"></script>
         <script>
             document.addEventListener("alpine:init", () => {
-                Alpine.data("patients", () => ({
+                Alpine.data("patientInsurances", () => ({
                     datatable: null,
                     init() {
-                        this.datatable = new simpleDatatables.DataTable('#patientsTable', {
+                        this.datatable = new simpleDatatables.DataTable('#patientInsurancesTable', {
                             sortable: false,
                             searchable: true,
                             perPage: 10,

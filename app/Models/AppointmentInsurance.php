@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int $id
- * @property string $code
- * @property string $name
+ * @property int $appointment_id
+ * @property int $patient_id
+ * @property int $patient_insurance_id
  * @property ?\Illuminate\Support\Carbon $created_at
  * @property ?\Illuminate\Support\Carbon $updated_at
  */
-class IcdCode extends Model
+class AppointmentInsurance extends Model
 {
     use HasFactory;
 
@@ -23,8 +23,9 @@ class IcdCode extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'code',
-        'name',
+        'appointment_id',
+        'patient_id',
+        'patient_insurance_id',
     ];
 
     /**
@@ -36,20 +37,4 @@ class IcdCode extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-
-
-    /**
-     * |--------------------------------------------------------------------------
-     * | RELATIONSHIPS
-     * |--------------------------------------------------------------------------
-     */
-
-    /**
-     *
-     * @return BelongsToMany
-     */
-    public function tests(): BelongsToMany
-    {
-        return $this->belongsToMany(Test::class, 'test_icd_code', 'icd_code_id', 'test_id');
-    }
 }
