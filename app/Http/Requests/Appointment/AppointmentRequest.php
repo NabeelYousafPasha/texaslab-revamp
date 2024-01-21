@@ -35,18 +35,16 @@ class AppointmentRequest extends FormRequest
             'tests' => ['required', 'array',],
             'tests.*' => ['required', 'numeric', Rule::in(Test::pluck('id')->toArray()),],
 
-            'providers' => ['required', 'array',],
-            'providers.*' => ['required', 'numeric', Rule::in(LocationProvider::pluck('id')->toArray()),],
+            // 'providers' => ['required', 'array',],
+            // 'providers.*' => ['required', 'numeric', Rule::in(LocationProvider::pluck('id')->toArray()),],
 
             'panels' => ['required', 'array',],
             'panels.*' => ['required', 'numeric', Rule::in(Panel::pluck('id')->toArray()),],
 
             'appointment_date' => ['required', 'date_format:Y-m-d',],
             'appointment_time' => ['required', 'date_format:H:i'],
-
-            'insurance.name' => ['required',],
-
-        ] + (new PatientRequest())->rules();
+        ];
+        // + (new PatientRequest())->rules();
     }
 
     /**
@@ -63,6 +61,7 @@ class AppointmentRequest extends FormRequest
             'appointment_date' => 'Appointment Date',
             'appointment_time' => 'Appointment Time',
         
-        ] + (new PatientRequest())->attributes();
+        ];
+        // + (new PatientRequest())->attributes();
     }
 }

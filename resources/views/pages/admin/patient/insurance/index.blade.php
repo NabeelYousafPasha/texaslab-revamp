@@ -32,8 +32,7 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Details</th>
-                            <th>Details</th>
+                            <th>Worker Compensation</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -42,8 +41,7 @@
                             <tr>
                                 <td>{{ ++$row }}</td>
                                 <td>{{ $patientInsurance->name }}</td>
-                                <td>{{ $patientInsurance->name }}</td>
-                                <td>{{ $patientInsurance->name }}</td>
+                                <td>{{ $patientInsurance->is_worker_compensated }}</td>
                                 <td class="text-center">
                                     <ul class="flex items-center gap-2">
                                         <li>

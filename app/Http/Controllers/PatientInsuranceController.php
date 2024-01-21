@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\InsuranceResponsibleRelationshipEnum;
 use App\Http\Requests\PatientInsurance\PatientInsuranceRequest;
 use App\Models\{
     InsurancePlan,
@@ -38,6 +39,7 @@ class PatientInsuranceController extends Controller
         return view('pages.admin.patient.insurance.form')->with([
             'form' => $form,
             'insurancePlans' => InsurancePlan::pluck('name', 'id'),
+            'insuranceResponsibleRelationsips' => InsuranceResponsibleRelationshipEnum::array(),
         ]);
     }
 
@@ -46,7 +48,11 @@ class PatientInsuranceController extends Controller
      */
     public function store(PatientInsuranceRequest $request, Patient $patient)
     {
-        dd($request->all());
+        PatientInsurance::create($request->validated() + [
+            'patient_id' => $patient->id,
+        ]);
+
+        return redirect()->route('admin.patient.insurances.index', ['patient' => $patient,]);
     }
 
     /**

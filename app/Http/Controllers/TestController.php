@@ -73,7 +73,7 @@ class TestController extends Controller
     {
         $this->testService->store($request->validated());
 
-        return redirect()->route('admin.tests.index', [], Response::HTTP_CREATED);
+        return redirect()->route('admin.tests.index');
     }
 
     /**

@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('patient_id')->constrained('patients');
             $table->string('name');
+            $table->string('responsible_relationship');
+            $table->string('subscriber_member_id');
+            $table->string('carrier_code');
             $table->string('address');
             $table->string('city');
             $table->string('state');
-            $table->string('zip_code');
+            $table->string('zipcode');
             $table->string('employer_no');
             $table->string('ssn')->nullable();
             $table->boolean('is_worker_compensated')->default(0);

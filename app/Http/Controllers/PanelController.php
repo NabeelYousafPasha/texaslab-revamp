@@ -75,7 +75,7 @@ class PanelController extends Controller
         $panel = $this->panelService->store($request->validated());
         $this->panelService->syncPanelTests($panel, $request->validated('tests'));
 
-        return redirect()->route('admin.panels.index', [], Response::HTTP_CREATED);
+        return redirect()->route('admin.panels.index');
     }
 
     /**

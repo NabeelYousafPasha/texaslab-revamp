@@ -4,7 +4,12 @@
 
     
     <div class="form-field @error('first_name') has-error @enderror">
-        <label for="first_name">First Name</label>
+        <label 
+            for="first_name"
+            class="@error('first_name') text-danger @enderror"
+        >
+            First Name
+        </label>
 
         <div class="relative">
             <input 
@@ -26,7 +31,12 @@
     </div>
 
     <div class="form-field @error('last_name') has-error @enderror">
-        <label for="last_name">Last Name</label>
+        <label 
+            for="last_name"
+            class="@error('last_name') text-danger @enderror"
+        >
+            Last Name
+        </label>
 
         <div class="relative">
             <input 
@@ -48,7 +58,12 @@
     </div>
 
     <div class="form-field @error('email') has-error @enderror">
-        <label for="email">Email</label>
+        <label 
+            for="email"
+            class="@error('email') text-danger @enderror"
+        >
+            Email
+        </label>
 
         <div class="relative">
             <input 
@@ -70,7 +85,12 @@
     </div>
 
     <div class="form-field @error('gender') has-error @enderror">
-        <label for="gender">Gender</label>
+        <label 
+            for="gender"
+            class="@error('gender') text-danger @enderror"
+        >
+            Gender
+        </label>
 
         <div class="relative">
             <select 
@@ -99,7 +119,12 @@
     </div>
 
     <div class="form-field @error('dob') has-error @enderror">
-        <label for="dob">DOB</label>
+        <label 
+            for="dob"
+            class="@error('dob') text-danger @enderror"
+        >
+            DOB
+        </label>
 
         <div class="relative">
             <input 
@@ -121,7 +146,12 @@
     </div>
 
     <div class="form-field @error('cell_phone') has-error @enderror">
-        <label for="cell_phone">Cell Phone</label>
+        <label 
+            for="cell_phone"
+            class="@error('cell_phone') text-danger @enderror"
+        >
+            Cell Phone
+        </label>
 
         <div class="relative">
             <input 
@@ -143,7 +173,12 @@
     </div>
 
     <div class="form-field @error('address') has-error @enderror">
-        <label for="address">Address</label>
+        <label 
+            for="address"
+            class="@error('address') text-danger @enderror"
+        >
+            Address
+        </label>
 
         <div class="relative">
             <input 
@@ -165,7 +200,12 @@
     </div>
 
     <div class="form-field @error('state') has-error @enderror">
-        <label for="state">State</label>
+        <label 
+            for="state"
+            class="@error('state') text-danger @enderror"
+        >
+            State
+        </label>
 
         <div class="relative">
             <input 
@@ -187,7 +227,12 @@
     </div>
 
     <div class="form-field @error('city') has-error @enderror">
-        <label for="city">City</label>
+        <label 
+            for="city"
+            class="@error('city') text-danger @enderror"
+        >
+            City
+        </label>
 
         <div class="relative">
             <input 
@@ -209,7 +254,12 @@
     </div>
 
     <div class="form-field @error('zipcode') has-error @enderror">
-        <label for="zipcode">Zipcode</label>
+        <label 
+            for="zipcode"
+            class="@error('zipcode') text-danger @enderror"
+        >
+            Zipcode
+        </label>
 
         <div class="relative">
             <input 

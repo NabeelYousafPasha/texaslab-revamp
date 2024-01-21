@@ -6,7 +6,12 @@
         x-data="{
             locations: {{ $locations }}
         }">
-            <label for="location_id">Location</label>
+            <label 
+                for="location_id"
+                class="@error('location_id') text-danger @enderror"
+            >
+                Location
+            </label>
         
             <div class="relative">
                 <select 
@@ -40,7 +45,12 @@
         x-data="{
             locationTests: {{ $locationTests }}
         }">
-            <label for="tests">Tests</label>
+            <label 
+                for="tests"
+                class="@error('tests') text-danger @enderror"
+            >
+                Tests
+            </label>
         
             <div class="relative">
                 <select 
@@ -75,7 +85,12 @@
         x-data="{
             locationProviders: {{ $locationProviders }}
         }">
-            <label for="providers">Provider</label>
+            <label 
+                for="providers"
+                class="@error('providers') text-danger @enderror"
+            >
+                Provider
+            </label>
         
             <div class="relative">
                 <select 
@@ -109,7 +124,12 @@
         x-data="{
             locationTests: {{ $locationTests }}
         }">
-            <label for="panels">Panels</label>
+            <label 
+                for="panels"
+                class="@error('panels') text-danger @enderror"
+            >
+                Panels
+            </label>
         
             <div class="relative">
                 <select 
@@ -140,7 +160,12 @@
         </div>
 
         <div class="form-field @error('appointment_date') has-error @enderror">
-            <label for="appointment_date">Appointment Date</label>
+            <label 
+                for="appointment_date"
+                class="@error('appointment_date') text-danger @enderror"
+            >
+                Appointment Date
+            </label>
 
             <div class="relative">
                 <input 
@@ -162,7 +187,12 @@
         </div>
 
         <div class="form-field @error('appointment_time') has-error @enderror">
-            <label for="appointment_time">Appointment Time</label>
+            <label 
+                for="appointment_time"
+                class="@error('appointment_time') text-danger @enderror"
+            >
+                Appointment Time
+            </label>
 
             <div class="relative">
                 <input 

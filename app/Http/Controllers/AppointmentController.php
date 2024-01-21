@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\GenderEnum;
+use App\Enums\{
+    GenderEnum,
+    InsuranceResponsibleRelationshipEnum,
+};
 use App\Http\Requests\Appointment\AppointmentRequest;
 use App\Http\Requests\Patient\PatientRequest;
+use App\Http\Requests\PatientInsurance\PatientInsuranceRequest;
 use App\Models\{
     Appointment,
+    InsurancePlan,
     Location,
     LocationProvider,
     Panel,
@@ -58,13 +63,18 @@ class AppointmentController extends Controller
             'locationProviders' => LocationProvider::pluck('first_name', 'id'),
             'locationPanels' => Panel::pluck('name', 'id'),
             'genders' => GenderEnum::array(),
+            'insurancePlans' => InsurancePlan::pluck('name', 'id'),
+            'insuranceResponsibleRelationsips' => InsuranceResponsibleRelationshipEnum::array(),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AppointmentRequest $request)
+    public function store(
+        AppointmentRequest $request,
+        PatientRequest $patientRequest,
+    )
     {
         $patientFields = array_keys((new PatientRequest())->rules());
 

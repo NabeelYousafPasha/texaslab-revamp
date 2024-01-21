@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\PatientInsurance;
 
+use App\Enums\InsuranceResponsibleRelationshipEnum;
 use App\Models\InsurancePlan;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -25,6 +26,11 @@ class PatientInsuranceRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255',],
+
+            'responsible_relationship' => ['required', 'string', Rule::in(InsuranceResponsibleRelationshipEnum::values()),],
+            'subscriber_member_id' => ['required', 'string', 'max:255',],
+            'carrier_code' => ['required', 'string', 'max:255',],
+
             'address' => ['required', 'string', 'max:255',],
             'city' => ['required', 'string', 'max:255',],
             'state' => ['required', 'string', 'max:255',],
@@ -47,6 +53,9 @@ class PatientInsuranceRequest extends FormRequest
     {
         return [
             'name' => 'Name',
+            'responsible_relationship' => 'Relationship with Responsible Party',
+            'subscriber_member_id' => 'Subscriber Member ID',
+            'carrier_code' => 'Carrier Code',
             'address' => 'Address',
             'city' => 'City',
             'state' => 'State',
@@ -56,5 +65,14 @@ class PatientInsuranceRequest extends FormRequest
             'is_worker_compensated' => 'Worker Compensation',
             'insurance_plans' => 'Insurance Plans',
         ];   
+    }
+
+    public function prepareForValidation() 
+    {
+        if ($this->has('is_worker_compensated')) {
+            $this->merge([
+                'is_worker_compensated' => 1,
+            ]);
+        }
     }
 }

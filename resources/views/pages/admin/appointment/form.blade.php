@@ -39,14 +39,6 @@
                         @includeIf('pages.admin.patient._form')
                     </div>
 
-                    <div class="mb-10"></div>
-
-                    <div class="w-full bg-white rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5">
-                        <h5 class="text-[#3b3f5c] text-xl font-semibold mb-4 dark:text-white-light">Insurance Details</h5>
-                        
-                        @includeIf('pages.admin.appointment.insurance._form')
-                    </div>
-
                     <button 
                         type="submit" 
                         class="btn btn-primary mt-6"
