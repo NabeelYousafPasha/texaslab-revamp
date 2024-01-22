@@ -49,10 +49,12 @@ class PatientInsuranceController extends Controller
      */
     public function store(PatientInsuranceRequest $request, Patient $patient)
     {
+        // create patient insurances
         $patientInsurance = PatientInsurance::create(Arr::except($request->validated(), 'insurance_plans') + [
             'patient_id' => $patient->id,
         ]);
 
+        // assign selected insurance_plans
         $patientInsurance->insurance_plans()->attach($request->validated('insurance_plans'));
 
         return redirect()->route('admin.patient.insurances.index', ['patient' => $patient,]);

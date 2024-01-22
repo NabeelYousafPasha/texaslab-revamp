@@ -47,7 +47,7 @@ class AppointmentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         $form = [
             'id' => 'create_appointment',
@@ -56,16 +56,30 @@ class AppointmentController extends Controller
             'method' => 'POST',
         ];
 
-        return view('pages.admin.appointment.form')->with([
-            'form' => $form,
-            'locations' => Location::pluck('name', 'id'),
+        $step = $request->query('step', 1);
+
+        $data = [];
+
+        if ($step == 1) {
+            $data = array_merge($data, [
+                'locations' => Location::pluck('name', 'id'),
+                'genders' => GenderEnum::array(),
+                'insurancePlans' => InsurancePlan::pluck('name', 'id'),
+                'insuranceResponsibleRelationsips' => InsuranceResponsibleRelationshipEnum::array(),
+            ]);
+        }
+
+        $data = array_merge($data, [
             'locationTests' => Test::pluck('name', 'id'),
             'locationProviders' => LocationProvider::pluck('first_name', 'id'),
             'locationPanels' => Panel::pluck('name', 'id'),
-            'genders' => GenderEnum::array(),
-            'insurancePlans' => InsurancePlan::pluck('name', 'id'),
-            'insuranceResponsibleRelationsips' => InsuranceResponsibleRelationshipEnum::array(),
         ]);
+
+        return view('pages.admin.appointment.form')->with([
+            'form' => $form, 
+        ])->with(
+            $data
+        );
     }
 
     /**
