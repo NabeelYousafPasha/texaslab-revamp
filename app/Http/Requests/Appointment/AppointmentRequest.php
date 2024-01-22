@@ -35,8 +35,8 @@ class AppointmentRequest extends FormRequest
             'tests' => ['required', 'array',],
             'tests.*' => ['required', 'numeric', Rule::in(Test::pluck('id')->toArray()),],
 
-            // 'providers' => ['required', 'array',],
-            // 'providers.*' => ['required', 'numeric', Rule::in(LocationProvider::pluck('id')->toArray()),],
+            'providers' => ['required', 'array',],
+            'providers.*' => ['required', 'numeric', Rule::in(LocationProvider::pluck('id')->toArray()),],
 
             'panels' => ['required', 'array',],
             'panels.*' => ['required', 'numeric', Rule::in(Panel::pluck('id')->toArray()),],

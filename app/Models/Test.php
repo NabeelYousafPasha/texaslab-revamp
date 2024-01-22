@@ -83,7 +83,8 @@ class Test extends Model
      */
     public function icd_codes(): BelongsToMany
     {
-        return $this->belongsToMany(IcdCode::class, 'test_icd_code', 'test_id', 'icd_code_id');
+        return $this->belongsToMany(IcdCode::class, 'test_icd_code', 'test_id', 'icd_code_id')
+            ->withTimestamps();
     }
 
     /**

@@ -46,6 +46,7 @@ class LocationProvider extends Model
      */
     public function appointments(): BelongsToMany
     {
-        return $this->belongsToMany(Appointment::class, 'appointment_location_providers', 'location_provider_id', 'appointment_id');
+        return $this->belongsToMany(Appointment::class, 'appointment_location_providers', 'location_provider_id', 'appointment_id')
+            ->withTimestamps();
     }
 }

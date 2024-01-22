@@ -10,6 +10,7 @@ use App\Models\{
     PatientInsurance,
 };
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class PatientInsuranceController extends Controller
 {
@@ -48,9 +49,11 @@ class PatientInsuranceController extends Controller
      */
     public function store(PatientInsuranceRequest $request, Patient $patient)
     {
-        PatientInsurance::create($request->validated() + [
+        $patientInsurance = PatientInsurance::create(Arr::except($request->validated(), 'insurance_plans') + [
             'patient_id' => $patient->id,
         ]);
+
+        $patientInsurance->insurance_plans()->attach($request->validated('insurance_plans'));
 
         return redirect()->route('admin.patient.insurances.index', ['patient' => $patient,]);
     }

@@ -120,7 +120,8 @@ class Appointment extends Model
      */
     public function tests(): BelongsToMany
     {
-        return $this->belongsToMany(Test::class, 'appointment_tests', 'appointment_id', 'test_id');
+        return $this->belongsToMany(Test::class, 'appointment_tests', 'appointment_id', 'test_id')
+            ->withTimestamps();
     }
 
     /**
@@ -129,7 +130,8 @@ class Appointment extends Model
      */
     public function panels(): BelongsToMany
     {
-        return $this->belongsToMany(Panel::class, 'appointment_panels', 'appointment_id', 'panel_id');
+        return $this->belongsToMany(Panel::class, 'appointment_panels', 'appointment_id', 'panel_id')
+            ->withTimestamps();
     }
 
     /**
@@ -138,6 +140,7 @@ class Appointment extends Model
      */
     public function location_providers(): BelongsToMany
     {
-        return $this->belongsToMany(LocationProvider::class, 'appointment_location_providers', 'appointment_id', 'location_provider_id');
+        return $this->belongsToMany(LocationProvider::class, 'appointment_location_providers', 'appointment_id', 'location_provider_id')
+            ->withTimestamps();
     }
 }

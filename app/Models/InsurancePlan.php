@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int $id
@@ -35,4 +36,20 @@ class InsurancePlan extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    /**
+     * |--------------------------------------------------------------------------
+     * | RELATIONSHIPS
+     * |--------------------------------------------------------------------------
+     */
+
+    /**
+     *
+     * @return BelongsToMany
+     */
+    public function patient_insurances(): BelongsToMany
+    {
+        return $this->belongsToMany(PatientInsurance::class, 'patient_insurance_plan', 'insurance_plan_id', 'patient_insurance_id')
+            ->withTimestamps();
+    }
 }

@@ -74,5 +74,9 @@ class PatientInsuranceRequest extends FormRequest
                 'is_worker_compensated' => 1,
             ]);
         }
+
+        // $this->merge([
+        //     'patient_id' => $this->route('patient')->id,
+        // ]);
     }
 }

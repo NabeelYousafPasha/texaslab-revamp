@@ -50,6 +50,7 @@ class IcdCode extends Model
      */
     public function tests(): BelongsToMany
     {
-        return $this->belongsToMany(Test::class, 'test_icd_code', 'icd_code_id', 'test_id');
+        return $this->belongsToMany(Test::class, 'test_icd_code', 'icd_code_id', 'test_id')
+            ->withTimestamps();
     }
 }

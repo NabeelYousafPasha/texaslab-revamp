@@ -60,6 +60,7 @@ class Panel extends Model
      */
     public function appointments(): BelongsToMany
     {
-        return $this->belongsToMany(Appointment::class, 'appointment_panels', 'panel_id', 'appointment_id');
+        return $this->belongsToMany(Appointment::class, 'appointment_panels', 'panel_id', 'appointment_id')
+            ->withTimestamps();
     }
 }
