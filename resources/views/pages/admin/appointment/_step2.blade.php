@@ -26,8 +26,8 @@
                         <option
                             class="form-radio" 
                             value="{{ $testId }}"
-                            {{ in_array($testId, old('tests') ?? []) ? 'selected' : '' }} 
-                            {{ in_array($testId, $panelTests ?? []) ? 'selected' : '' }} 
+                            @selected(in_array($testId, (old('tests') ?? [])))
+                            @selected(in_array($testId, ($appointmentTests ?? [])))
                         />
                             <span class="text-white-dark">{{ $testId .' - '. $testName }}</span>
                         </option>
@@ -66,7 +66,8 @@
                         <option
                             class="form-radio" 
                             value="{{ $providerId }}"
-                            {{ in_array($providerId, old('providers') ?? []) ? 'selected' : '' }} 
+                            @selected(in_array($providerId, (old('providers') ?? [])))
+                            @selected(in_array($providerId, ($appointmentlocationProviders ?? [])))
                         />
                             <span class="text-white-dark">{{ $providerId .' - '. $providerName }}</span>
                         </option>
@@ -105,7 +106,8 @@
                         <option
                             class="form-radio" 
                             value="{{ $panelId }}"
-                            {{ in_array($panelId, old('panels') ?? []) ? 'selected' : '' }} 
+                            @selected(in_array($panelId, (old('panels') ?? [])))
+                            @selected(in_array($panelId, ($appointmentPanels ?? [])))
                         />
                             <span class="text-white-dark">{{ $panelId .' - '. $panelName }}</span>
                         </option>

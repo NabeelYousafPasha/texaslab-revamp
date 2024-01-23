@@ -98,7 +98,14 @@ Route::group([
      * Route Prefix: /admin/appointments
      * Route Name: admin.appointments.
      */
-    Route::resource('/appointments', AppointmentController::class);
+    Route::group([
+        'prefix' => 'appointments',
+        'as' => 'appointments.',
+    ], function () {
+        Route::get('/', [AppointmentController::class, 'index'])->name('index');
+        Route::get('/create/{step?}', [AppointmentController::class, 'create'])->name('create');
+        Route::post('/{step?}', [AppointmentController::class, 'store'])->name('store');
+    });
 
 
     /***********

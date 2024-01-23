@@ -12,7 +12,7 @@ enum GenderEnum: string
 
     case Female = 'F';
 
-    case Others = 'O';
+    case Other = 'O';
 
     /**
      * @return array<string,string>

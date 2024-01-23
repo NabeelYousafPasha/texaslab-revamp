@@ -29,7 +29,7 @@ class AppointmentRequest extends FormRequest
      */
     public function rules(): array
     {
-        $step = $this->query('step', 'step1');
+        $step = $this->route('step', 'step1');
 
         if (! in_array($step, ['step1', 'step2', 'step3',])) {
             abort(404, 'Step is Invalid');
@@ -56,7 +56,7 @@ class AppointmentRequest extends FormRequest
             ],
 
             'step3' => [
-                'location_id' => ['required', 'numeric', Rule::exists(Location::class, 'id'),],
+                //
             ],
         ];
 
@@ -84,8 +84,8 @@ class AppointmentRequest extends FormRequest
     public function prepareForValidation() 
     {    
         $this->merge([
-            'step' => $this->query('step', 'step1'),
             'token' => csrf_token(),
+            'created_by' => auth()->id(),
         ]);
     }
 }

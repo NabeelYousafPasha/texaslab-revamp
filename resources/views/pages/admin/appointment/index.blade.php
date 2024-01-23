@@ -48,10 +48,10 @@
                                 <td>{{ $appointment->patient->last_name }}</td>
                                 <td>{{ $appointment->patient->email }}</td>
                                 <td>{{ $appointment->patient->dob }}</td>
-                                <td>{{ $appointment->patient->gender }}</td>
+                                <td>{{ $appointment->patient->gender->name }}</td>
                                 <td>{{ $appointment->appointment }}</td>
                                 <td class="text-center">
-                                    <ul class="flex items-center gap-2">
+                                    {{-- <ul class="flex items-center gap-2">
                                         <li>
                                             <a 
                                                 href="{{ route('admin.appointments.edit', ['appointment' => $appointment,]) }}" 
@@ -113,7 +113,7 @@
                                                 </form>
                                             </x-confirm>
                                         </li>
-                                    </ul>
+                                    </ul> --}}
                                 </td>
                             </tr>
                         @endforeach

@@ -19,13 +19,13 @@
                 placeholder="Choose Location"
                 @required(true)
             >
-                <option value="">Please Select a Location first</option>
+                <option value="">Please Select a Location</option>
                 @foreach ($locations ?? [] as $locationId => $locationName)
                     <option
                         class="form-radio" 
                         value="{{ $locationId }}"
                         @selected($locationId == old('location_id'))
-                        @selected($locationId == $currentAppointment->location_id ?? '')
+                        @selected($locationId == ($appointment->location_id ?? ''))
                     />
                         <span class="text-white-dark">{{ $locationId .' - '. $locationName }}</span>
                     </option>
@@ -58,7 +58,7 @@
                     placeholder="Appointment Date"
                     class="form-input"
                     
-                    value="{{ old('appointment_date', $currentAppointment->appointment_date ?? '') }}"
+                    value="{{ old('appointment_date', $appointment->appointment_date ?? '') }}"
                 />
                 
                 @error('appointment_date')
@@ -85,7 +85,7 @@
                     placeholder="Appointment Time"
                     class="form-input"
                     
-                    value="{{ old('appointment_time', $currentAppointment->appointment_time ?? '') }}"
+                    value="{{ old('appointment_time', $appointment->appointment_time ?? '') }}"
                 />
                 
                 @error('appointment_time')

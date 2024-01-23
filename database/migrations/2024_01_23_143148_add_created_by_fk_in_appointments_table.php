@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('appointments', function (Blueprint $table) {
-            $table->after('appointment_time', function($table) {
-                $table->string('token');
-                $table->string('step')->nullable();
+            $table->after('step', function($table) {
+                $table->foreignId('created_by')->constrained('users');
             });
         });
     }
@@ -25,10 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('appointments', function (Blueprint $table) {
-            $table->dropColumn([
-                'token',
-                'step',
-            ]);
+            $table->dropConstrainedForeignId('created_by');
         });
     }
 };

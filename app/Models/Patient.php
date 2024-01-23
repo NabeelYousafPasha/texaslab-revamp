@@ -37,6 +37,8 @@ class Patient extends Model
         'city',
         'state',
         'zipcode',
+        'model_type',
+        'model_id',
     ];
 
     /**
@@ -48,7 +50,7 @@ class Patient extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'gender' => GenderEnum::class,
-        'dob' => 'date',
+        // 'dob' => 'date',
     ];
 
     /**

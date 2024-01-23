@@ -43,7 +43,7 @@
                                 <td>{{ ++$row }}</td>
                                 <td>{{ $patient->first_name }}</td>
                                 <td>{{ $patient->last_name }}</td>
-                                <td>{{ $patient->gender }}</td>
+                                <td>{{ $patient->gender->name }}</td>
                                 <td class="text-center">
                                     <ul class="flex items-center gap-2">
                                         <li>

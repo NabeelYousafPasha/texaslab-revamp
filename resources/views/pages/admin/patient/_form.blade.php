@@ -103,7 +103,8 @@
                     <option
                         class="form-radio" 
                         value="{{ $genderValue }}"
-                        {{ ($genderValue == old('gender')) ? 'selected' : '' }} 
+                        @selected($genderValue == old('gender'))
+                        @selected($genderValue == ($patient->gender->value ?? ''))
                     />
                         <span class="text-white-dark">{{ $genderName }}</span>
                     </option>

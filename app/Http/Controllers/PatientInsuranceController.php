@@ -19,7 +19,7 @@ class PatientInsuranceController extends Controller
      */
     public function index(Patient $patient)
     {
-        return view('pages.admin.patient.insurance.index')->with([
+        return view('pages.admin.insurance.index')->with([
             'patient' => $patient,
             'patientInsurances' => $patient->insurances,
         ]);
@@ -37,7 +37,7 @@ class PatientInsuranceController extends Controller
             'method' => 'POST',
         ];
 
-        return view('pages.admin.patient.insurance.form')->with([
+        return view('pages.admin.insurance.form')->with([
             'form' => $form,
             'insurancePlans' => InsurancePlan::pluck('name', 'id'),
             'insuranceResponsibleRelationsips' => InsuranceResponsibleRelationshipEnum::array(),

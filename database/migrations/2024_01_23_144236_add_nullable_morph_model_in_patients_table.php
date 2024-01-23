@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('appointments', function (Blueprint $table) {
-            $table->after('appointment_time', function($table) {
-                $table->string('token');
-                $table->string('step')->nullable();
+        Schema::table('patients', function (Blueprint $table) {
+            $table->after('zipcode', function($table) {
+                $table->nullableMorphs('model');
             });
         });
     }
@@ -24,11 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('appointments', function (Blueprint $table) {
-            $table->dropColumn([
-                'token',
-                'step',
-            ]);
+        Schema::table('patients', function (Blueprint $table) {
+            $table->dropMorphs('model');
         });
     }
 };

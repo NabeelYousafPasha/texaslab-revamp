@@ -35,6 +35,7 @@ class Appointment extends Model
         'appointment_time',
         'token',
         'step',
+        'created_by',
     ];
 
     /**
@@ -102,13 +103,46 @@ class Appointment extends Model
     /**
      *
      * @param Builder $builder
+     * 
+     * @return Builder
+     */
+    public function scopeOfInCompleted(Builder $builder): Builder
+    {
+        return $builder->whereNotNull('step');
+    }
+    
+    /**
+     *
+     * @param Builder $builder
+     * 
+     * @return Builder
+     */
+    public function scopeOfCompleted(Builder $builder): Builder
+    {
+        return $builder->whereNull('step');
+    }
+    
+    /**
+     *
+     * @param Builder $builder
      * @param string $step
      * 
      * @return Builder
      */
-    public function scopeOfModel(Builder $builder, string $step): Builder
+    public function scopeOfStep(Builder $builder, string $step): Builder
     {
         return $builder->where('step', '=', $step);
+    }
+    
+    /**
+     *
+     * @param Builder $builder
+     * 
+     * @return Builder
+     */
+    public function scopeByAuthUser(Builder $builder): Builder
+    {
+        return $builder->where('created_by', '=', auth()->id());
     }
     
     /**

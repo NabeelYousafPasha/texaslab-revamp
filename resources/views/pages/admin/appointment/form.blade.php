@@ -19,6 +19,17 @@
                 </div>
             </div>
             
+            @if ($appointment)
+                <div class="mt-3 mb-3">
+                    <div class="flex items-center p-3.5 rounded text-white" style="background: rgb(188,26,78);background: linear-gradient(135deg, rgba(188,26,78,1) 0%, rgba(0,79,230,1) 100%);">
+                        <span class="ltr:pr-2 rtl:pl-2">
+                            <strong class="ltr:mr-1 rtl:ml-1">IN PROGRESS!</strong>
+                            You have 1 Appointment (Date: {{ $appointment->appointment_date }} Time: {{ $appointment->appointment_time }}) not completed
+                        </span>
+                    </div>
+                </div>
+            @endif
+
             <div class="mt-3 mb-3">
                 <x-helpers.form
                     :id="$form['id']"
@@ -28,15 +39,14 @@
                     :spoofed-type="$form['_method'] ?? NULL"
                 >
 
-                <div class="mb-5" x-data="{ tab: '{{ $step }}' }">
+                <div class="mb-5">
                     <div>
                         <ul class="flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]">
                             <li>
                                 <a 
-                                    href="javascript:;"
+                                    href="{{ route('admin.appointments.create', ['step' => 'step1',]) }}"
                                     class="p-5 py-3 -mb-[1px] flex items-center relative before:transition-all before:duration-700 before:absolute hover:text-secondary before:bottom-0 before:w-0 before:left-0 before:right-0 before:m-auto before:h-[1px] before:bg-secondary hover:before:w-full"
-                                    :class="{ 'before:!w-full text-secondary': tab === 'step1' }"
-                                    @click="tab='step1'"
+                                    :class="{ 'before:!w-full text-secondary': {{ $step == 'step1' }} }"
                                 >
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ltr:mr-2 rtl:ml-2">
@@ -51,10 +61,9 @@
                             </li>
                             <li>
                                 <a 
-                                    href="javascript:;"
+                                    href="{{ route('admin.appointments.create', ['step' => 'step2',]) }}"
                                     class="p-5 py-3 -mb-[1px] flex items-center relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-0 before:bottom-0 before:left-0 before:right-0 before:m-auto before:h-[1px] before:bg-secondary hover:before:w-full"
-                                    :class="{ 'before:!w-full text-secondary': tab === 'step2' }"
-                                    @click="tab='step2'"
+                                    :class="{ 'before:!w-full text-secondary': {{ $step == 'step2' }} }"
                                 >
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ltr:mr-2 rtl:ml-2"
@@ -71,10 +80,9 @@
                             </li>
                             <li>
                                 <a 
-                                    href="javascript:;"
+                                    href="{{ route('admin.appointments.create', ['step' => 'step3',]) }}"
                                     class="p-5 py-3 -mb-[1px] flex items-center relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-0 before:bottom-0 before:left-0 before:right-0 before:m-auto before:h-[1px] before:bg-secondary hover:before:w-full"
-                                    :class="{ 'before:!w-full text-secondary': tab === 'step3' }"
-                                    @click="tab='step3'"
+                                    :class="{ 'before:!w-full text-secondary': {{ $step == 'step3' }} }"
                                 >
 
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -97,7 +105,7 @@
                     </div>
 
                     <div class="flex-1 text-sm ">
-                        <template x-if="tab === 'step1'">
+                        <template x-if="{{ $step == 'step1' }}">
                             <div>
                                 <div class="w-full bg-white rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5">            
                                     @includeIf('pages.admin.appointment._step1')
@@ -112,7 +120,7 @@
                                 </div>
                             </div>
                         </template>
-                        <template x-if="tab === 'step2'">
+                        <template x-if="{{ $step == 'step2' }}">
                             <div>
                                 <div class="w-full bg-white rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5">            
                                     @includeIf('pages.admin.appointment._step2')
@@ -121,14 +129,13 @@
                                 <div class="mb-4"></div>
                             </div>
                         </template>
-                        <template x-if="tab === 'step3'">
+                        <template x-if="{{ $step == 'step3' }}">
                             <div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                    culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <div class="w-full bg-white rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5">            
+                                    @includeIf('pages.admin.insurance._form')
+                                </div>
+
+                                <div class="mb-4"></div>
                             </div>
                         </template>
                     </div>
