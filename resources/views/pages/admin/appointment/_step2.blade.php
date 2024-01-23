@@ -4,7 +4,7 @@
 
         <div class="form-field space-y-3 @error('tests') has-error @enderror" 
         x-data="{
-            locationTests: {{ $locationTests }}
+            locationTests: {{ $locationTests ?? '' }}
         }">
             <label 
                 for="tests"
@@ -22,7 +22,7 @@
                     multiple="multiple"
                 >
                     <option value="">Please Select a Location first</option>
-                    @foreach ($locationTests as $testId => $testName)
+                    @foreach ($locationTests ?? [] as $testId => $testName)
                         <option
                             class="form-radio" 
                             value="{{ $testId }}"
@@ -44,7 +44,7 @@
 
         <div class="form-field space-y-3 @error('providers') has-error @enderror" 
         x-data="{
-            locationProviders: {{ $locationProviders }}
+            locationProviders: {{ $locationProviders ?? '' }}
         }">
             <label 
                 for="providers"
@@ -62,7 +62,7 @@
                     multiple="multiple"
                 >
                     <option value="">Please Select a Location first</option>
-                    @foreach ($locationProviders as $providerId => $providerName)
+                    @foreach ($locationProviders ?? [] as $providerId => $providerName)
                         <option
                             class="form-radio" 
                             value="{{ $providerId }}"
@@ -83,7 +83,7 @@
 
         <div class="form-field space-y-3 @error('panels') has-error @enderror" 
         x-data="{
-            locationTests: {{ $locationTests }}
+            locationPanels: {{ $locationPanels ?? '' }}
         }">
             <label 
                 for="panels"

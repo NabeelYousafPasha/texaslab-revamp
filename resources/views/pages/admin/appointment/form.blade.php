@@ -28,7 +28,7 @@
                     :spoofed-type="$form['_method'] ?? NULL"
                 >
 
-                <div class="mb-5" x-data="{ tab: 'step1' }">
+                <div class="mb-5" x-data="{ tab: '{{ $step }}' }">
                     <div>
                         <ul class="flex flex-wrap mt-3 mb-5 border-b border-white-light dark:border-[#191e3a]">
                             <li>

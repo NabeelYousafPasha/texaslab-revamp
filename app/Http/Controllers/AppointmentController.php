@@ -47,36 +47,51 @@ class AppointmentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(Request $request, ?Appointment $appointment = null)
     {
-        $form = [
-            'id' => 'create_appointment',
-            'name' => 'create_appointment',
-            'action' => route('admin.appointments.store'),
-            'method' => 'POST',
-        ];
+        $step = $request->query('step', 'step1');
 
-        $step = $request->query('step', 1);
+        if (! in_array($step, ['step1', 'step2', 'step3',])) {
+            abort(404, 'Step is Invalid');
+        }
 
         $data = [];
 
-        if ($step == 1) {
-            $data = array_merge($data, [
-                'locations' => Location::pluck('name', 'id'),
-                'genders' => GenderEnum::array(),
-                'insurancePlans' => InsurancePlan::pluck('name', 'id'),
-                'insuranceResponsibleRelationsips' => InsuranceResponsibleRelationshipEnum::array(),
-            ]);
+        $currentAppointment = Appointment::ofCurrentToken()->latest()->first();
+
+        if (! is_null($currentAppointment)) {
+            $step = $currentAppointment->step;
         }
 
         $data = array_merge($data, [
-            'locationTests' => Test::pluck('name', 'id'),
-            'locationProviders' => LocationProvider::pluck('first_name', 'id'),
-            'locationPanels' => Panel::pluck('name', 'id'),
+            'locations' => Location::pluck('name', 'id'),
+            'genders' => GenderEnum::array(),
+            'insurancePlans' => InsurancePlan::pluck('name', 'id'),
+            'insuranceResponsibleRelationsips' => InsuranceResponsibleRelationshipEnum::array(),
         ]);
+
+        $location = $currentAppointment->location;
+
+        if ($step == 'step2') {
+
+            $data = array_merge($data, [
+                'locationTests' => $location->tests()->pluck('tests.name as name', 'tests.id as id'),
+                'locationProviders' => $location->providers()->pluck('location_providers.first_name', 'location_providers.id as id'),
+                'locationPanels' => $location->panels()->pluck('panels.name as name', 'panels.id as id'),
+            ]);
+        }
+
+        $form = [
+            'id' => 'create_appointment',
+            'name' => 'create_appointment',
+            'action' => route('admin.appointments.store', ['step' => $step]),
+            'method' => 'POST',
+        ];
 
         return view('pages.admin.appointment.form')->with([
             'form' => $form, 
+            'step' => $step ?? 'step1',
+            'currentAppointment' => $currentAppointment ?? NULL,
         ])->with(
             $data
         );
@@ -85,26 +100,41 @@ class AppointmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(
-        AppointmentRequest $request,
-        PatientRequest $patientRequest,
-    )
+    public function store(AppointmentRequest $request)
     {
         $patientFields = array_keys((new PatientRequest())->rules());
 
-        // create a new patient
-        $patient = new Patient();
-        $patient->fill($request->only($patientFields))
-            ->save();
+        $step = $request->query('step', 'step1');
 
-        // create an appointment and associate it with recently created patient
-        $this->appointmentService
-            ->savePatientAppointment(
-                $patient->id, 
-                $request->except($patientFields)
-            );
+        if ($step == 'step1') {
+            
+            // create a new patient
+            $patient = new Patient();
+            $patient->fill($request->only($patientFields))
+                ->save();
+            $patient = $patient->refresh();
 
-        return redirect()->route('admin.appointments.index');
+            // create an appointment and associate it with recently created patient
+            $patientAppointment = $this->appointmentService
+                ->savePatientAppointment(
+                    $patient->id, 
+                    $request->except($patientFields) + ['step' => 'step2',]
+                );
+
+            $step = 'step2';
+
+            return redirect()->route('admin.appointments.create', [
+                'step' => $step,
+                'patient' => $patient,
+                'appointment' => $patientAppointment,
+                'locationId' => $request->validated('location_id'),
+            ]);
+        }
+        
+
+        return redirect()->route('admin.appointments.index', [
+            'step' => $step,
+        ]);
     }
 
     /**

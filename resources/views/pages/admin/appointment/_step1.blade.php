@@ -2,7 +2,7 @@
 
     <div class="form-field space-y-3 @error('location_id') has-error @enderror" 
     x-data="{
-        locations: {{ $locations }}
+        locations: {{ $locations ?? '' }}
     }">
         <label 
             for="location_id"
@@ -20,11 +20,12 @@
                 @required(true)
             >
                 <option value="">Please Select a Location first</option>
-                @foreach ($locations as $locationId => $locationName)
+                @foreach ($locations ?? [] as $locationId => $locationName)
                     <option
                         class="form-radio" 
                         value="{{ $locationId }}"
-                        {{ ($locationId == old('location_id')) ? 'selected' : '' }}
+                        @selected($locationId == old('location_id'))
+                        @selected($locationId == $currentAppointment->location_id ?? '')
                     />
                         <span class="text-white-dark">{{ $locationId .' - '. $locationName }}</span>
                     </option>
@@ -57,7 +58,7 @@
                     placeholder="Appointment Date"
                     class="form-input"
                     
-                    value="{{ old('appointment_date', $appointment->appointment_date ?? '') }}"
+                    value="{{ old('appointment_date', $currentAppointment->appointment_date ?? '') }}"
                 />
                 
                 @error('appointment_date')
@@ -84,7 +85,7 @@
                     placeholder="Appointment Time"
                     class="form-input"
                     
-                    value="{{ old('appointment_time', $appointment->appointment_time ?? '') }}"
+                    value="{{ old('appointment_time', $currentAppointment->appointment_time ?? '') }}"
                 />
                 
                 @error('appointment_time')

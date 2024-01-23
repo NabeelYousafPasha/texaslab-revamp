@@ -76,7 +76,17 @@ class Test extends Model
     {
         return $this->belongsTo(Status::class);
     }
-    
+
+    /**
+     *
+     * @return BelongsToMany
+     */
+    public function locations(): BelongsToMany
+    {
+        return $this->belongsToMany(Location::class, 'location_tests', 'test_id', 'location_id')
+            ->withTimestamps(); 
+    }
+
     /**
      *
      * @return BelongsToMany
@@ -93,6 +103,7 @@ class Test extends Model
      */
     public function appointments(): BelongsToMany
     {
-        return $this->belongsToMany(Appointment::class, 'appointment_tests', 'test_id', 'appointment_id');
+        return $this->belongsToMany(Appointment::class, 'appointment_tests', 'test_id', 'appointment_id')
+            ->withTimestamps(); 
     }
 }

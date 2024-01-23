@@ -99,7 +99,7 @@
                 class="select2"
                 placeholder="Choose Gender..."
             >
-                @foreach ($genders as $genderValue => $genderName)
+                @foreach ($genders ?? [] as $genderValue => $genderName)
                     <option
                         class="form-radio" 
                         value="{{ $genderValue }}"

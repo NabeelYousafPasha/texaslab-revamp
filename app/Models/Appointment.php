@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +33,8 @@ class Appointment extends Model
         'patient_id',
         'appointment_date',
         'appointment_time',
+        'token',
+        'step',
     ];
 
     /**
@@ -42,8 +45,8 @@ class Appointment extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-        'appointment_date' => 'date',
-        'appointment_time' => 'datetime:H:i',
+        // 'appointment_date' => 'date',
+        // 'appointment_time' => 'datetime:H:i',
     ];
 
     /**
@@ -88,6 +91,35 @@ class Appointment extends Model
             },
             // set: fn ($value) => Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d'),
         );
+    }
+
+    /**
+     * |--------------------------------------------------------------------------
+     * | SCOPES
+     * |--------------------------------------------------------------------------
+     */
+    
+    /**
+     *
+     * @param Builder $builder
+     * @param string $step
+     * 
+     * @return Builder
+     */
+    public function scopeOfModel(Builder $builder, string $step): Builder
+    {
+        return $builder->where('step', '=', $step);
+    }
+    
+    /**
+     *
+     * @param Builder $builder
+     * 
+     * @return Builder
+     */
+    public function scopeOfCurrentToken(Builder $builder): Builder
+    {
+        return $builder->where('token', '=', csrf_token());
     }
 
     /**

@@ -58,6 +58,16 @@ class Panel extends Model
      *
      * @return BelongsToMany
      */
+    public function locations(): BelongsToMany
+    {
+        return $this->belongsToMany(Location::class, 'location_panels', 'panel_id', 'location_id')
+            ->withTimestamps(); 
+    }
+
+    /**
+     *
+     * @return BelongsToMany
+     */
     public function appointments(): BelongsToMany
     {
         return $this->belongsToMany(Appointment::class, 'appointment_panels', 'panel_id', 'appointment_id')
