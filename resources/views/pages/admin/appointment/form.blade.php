@@ -78,7 +78,7 @@
                                     Appointment Details
                                 </a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a 
                                     href="{{ route('admin.appointments.create', ['step' => 'step3',]) }}"
                                     class="p-5 py-3 -mb-[1px] flex items-center relative before:transition-all before:duration-700 hover:text-secondary before:absolute before:w-0 before:bottom-0 before:left-0 before:right-0 before:m-auto before:h-[1px] before:bg-secondary hover:before:w-full"
@@ -100,7 +100,7 @@
 
                                     Insurance Details
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
 
@@ -129,7 +129,7 @@
                                 <div class="mb-4"></div>
                             </div>
                         </template>
-                        <template x-if="{{ $step == 'step3' }}">
+                        {{-- <template x-if="{{ $step == 'step3' }}">
                             <div>
                                 <div class="w-full bg-white rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5">            
                                     @includeIf('pages.admin.insurance._form')
@@ -137,7 +137,7 @@
 
                                 <div class="mb-4"></div>
                             </div>
-                        </template>
+                        </template> --}}
                     </div>
                 </div>
                     

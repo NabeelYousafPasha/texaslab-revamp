@@ -58,7 +58,7 @@ class AppointmentController extends Controller
             'insuranceResponsibleRelationsips' => InsuranceResponsibleRelationshipEnum::array(),
         ]);
 
-        $currentAppointment = Appointment::OfInCompleted()
+        $currentAppointment = Appointment::OfIncompletedStep()
                 ->ofCurrentToken()
                 ->byAuthUser()
                 ->latest()
@@ -114,7 +114,7 @@ class AppointmentController extends Controller
     {
         $patientFields = array_keys((new PatientRequest())->rules());
 
-        $currentAppointment = Appointment::OfInCompleted()
+        $currentAppointment = Appointment::OfIncompletedStep()
                 ->ofCurrentToken()
                 ->byAuthUser()
                 ->latest()

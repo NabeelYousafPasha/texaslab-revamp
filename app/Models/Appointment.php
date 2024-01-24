@@ -106,7 +106,7 @@ class Appointment extends Model
      * 
      * @return Builder
      */
-    public function scopeOfInCompleted(Builder $builder): Builder
+    public function scopeOfIncompletedStep(Builder $builder): Builder
     {
         return $builder->whereNotNull('step');
     }
@@ -117,7 +117,7 @@ class Appointment extends Model
      * 
      * @return Builder
      */
-    public function scopeOfCompleted(Builder $builder): Builder
+    public function scopeOfCompletedStep(Builder $builder): Builder
     {
         return $builder->whereNull('step');
     }
