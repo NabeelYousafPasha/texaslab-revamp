@@ -96,6 +96,20 @@
                         </li>
                         <li class="nav-item">
                             <a 
+                                href="{{ route('admin.locations.index') }}" 
+                                class="group"
+                            >
+                                <div class="flex items-center">
+                                    <span
+                                        class="ltr:pl-1 rtl:pr-1 text-black dark:text-[#506690] dark:group-hover:text-white-dark"
+                                    >
+                                        Locations
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a 
                                 href="{{ route('admin.patients.index') }}" 
                                 class="group"
                             >

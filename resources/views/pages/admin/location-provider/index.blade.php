@@ -1,9 +1,9 @@
 <x-layout.default>
     
-    <div x-data="locations">
+    <div x-data="locationProviders">
         <ul class="flex space-x-2 rtl:space-x-reverse">
             <li>
-                <a href="javascript:;" class="text-primary hover:underline">Locations</a>
+                <a href="javascript:;" class="text-primary hover:underline">Location Providers</a>
             </li>
         </ul>
 
@@ -11,11 +11,11 @@
 
             <div class="flow-root">  
                 <div class="float-left">
-                    <h5 class="font-semibold text-lg dark:text-white-light">LOCATIONS</h5>
+                    <h5 class="font-semibold text-lg dark:text-white-light">LOCATION PROVIDERS</h5>
                 </div>
                 <div class="float-right">
                     <a 
-                        href="{{ route('admin.locations.create') }}"
+                        href="{{ route('admin.location.providers.create', ['location' => $location,]) }}"
                         class="btn btn-outline-primary"
                     >
                         + Add New
@@ -25,64 +25,30 @@
             
             <div class="table-responsive mt-3">
                 <table 
-                    id="locationsTable" 
+                    id="locationProvidersTable" 
                     class="whitespace-nowrap table-hover table-bordered"
                 >
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Status</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>NPI (National Provider Identifier)</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($locations ?? [] as $row => $location)
+                        @foreach ($locationProviders ?? [] as $row => $locationProvider)
                             <tr>
                                 <td>{{ ++$row }}</td>
-                                <td>{{ $location->name }}</td>
-                                <td>{{ $location->address }}</td>
-                                <td>
-                                    <div class="mt-2" x-data="{ isChecked: false }">
-                                        <label class="w-12 h-6 relative">
-                                            <input
-                                                type="checkbox"
-                                                x-model="isChecked"
-                                                class="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer"
-                                                id="custom_switch_checkbox4"
-                                            />
-                                            <span
-                                                for="custom_switch_checkbox4"
-                                                x-bind:class="{ 'bg-[#ebedf2] dark:bg-dark': !isChecked, 'bg-primary': isChecked }"
-                                                class="block h-full rounded-full before:absolute before:left-1 before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 before:transition-all before:duration-300"
-                                            ></span>
-                                            <input type="hidden" x-bind:value="isChecked ? '1' : '0'" name="location_status" />
-                                        </label>
-                                    </div>                                    
-                                </td>
+                                <td>{{ $locationProvider->first_name }}</td>
+                                <td>{{ $locationProvider->last_name }}</td>
+                                <td>{{ $locationProvider->npi }}</td>
                                 <td class="text-center">
                                     <ul class="flex items-center gap-2">
                                         <li>
                                             <a 
-                                                href="{{ route('admin.location.providers.index', ['location' => $location,]) }}" 
-                                                x-tooltip="Location Providers"
-                                            >
-                                                <svg width="24" height="24" viewBox="0 0 24 24" 
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg"
-                                                    class="w-4.5 h-4.5 text-success"
-                                                >
-                                                    <path d="M9 14.2354V17.0001C9 19.7615 11.2386 22.0001 14 22.0001H14.8824C16.7691 22.0001 18.3595 20.7311 18.8465 19.0001" stroke="currentColor" stroke-width="1.5"></path>
-                                                    <path d="M5.42857 3H5.3369C5.02404 3 4.86761 3 4.73574 3.01166C3.28763 3.13972 2.13972 4.28763 2.01166 5.73574C2 5.86761 2 6.02404 2 6.3369V7.23529C2 11.1013 5.13401 14.2353 9 14.2353C12.7082 14.2353 15.7143 11.2292 15.7143 7.521V6.3369C15.7143 6.02404 15.7143 5.86761 15.7026 5.73574C15.5746 4.28763 14.4267 3.13972 12.9785 3.01166C12.8467 3 12.6902 3 12.3774 3H12.2857" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                                    <circle cx="19" cy="16" r="3" stroke="currentColor" stroke-width="1.5"></circle>
-                                                    <path d="M12 2V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                                    <path d="M6 2V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a 
-                                                href="#"
+                                                href="{{ route('admin.location.providers.edit', ['location' => $location, 'locationProvider' => $locationProvider,]) }}"
                                                 x-tooltiip="Edit"
                                             >
                                                 <svg width="24" height="24" viewBox="0 0 24 24"
@@ -127,7 +93,7 @@
                                                 </x-slot>
                                             
                                                 <form 
-                                                    action="{{ route('admin.locations.destroy', ['location' => $location,]) }}"
+                                                    action="{{ route('admin.location.providers.destroy', ['location' => $location, 'locationProvider' => $locationProvider,]) }}"
                                                     method="POST"
                                                 >
                                                     @csrf
@@ -156,10 +122,10 @@
         <script src="/assets/js/simple-datatables.js"></script>
         <script>
             document.addEventListener("alpine:init", () => {
-                Alpine.data("locations", () => ({
+                Alpine.data("locationProviders", () => ({
                     datatable: null,
                     init() {
-                        this.datatable = new simpleDatatables.DataTable('#locationsTable', {
+                        this.datatable = new simpleDatatables.DataTable('#locationProvidersTable', {
                             sortable: false,
                             searchable: true,
                             perPage: 10,

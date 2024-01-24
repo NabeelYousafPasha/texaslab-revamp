@@ -10,7 +10,7 @@
     <div x-data="location">
         <ul class="flex space-x-2 rtl:space-x-reverse">
             <li>
-                <a href="javascript:;" class="text-primary hover:underline">Location</a>
+                <a href="javascript:;" class="text-primary hover:underline">Locations</a>
             </li>
         </ul>
 
@@ -18,7 +18,7 @@
 
             <div class="flow-root">  
                 <div class="float-left">
-                    <h5 class="font-semibold text-lg dark:text-white-light">LOCATION</h5>
+                    <h5 class="font-semibold text-lg dark:text-white-light">LOCATIONS</h5>
                 </div>
             </div>
             

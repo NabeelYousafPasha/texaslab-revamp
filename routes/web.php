@@ -15,6 +15,7 @@ use App\Http\Controllers\{
     TestController,
     UserController,
     LocationController,
+    LocationProviderController,
     PatientController,
     PatientInsuranceController,
 };
@@ -109,17 +110,29 @@ Route::group([
         Route::get('/print/requisition', [AppointmentController::class, 'printRequisition'])->name('print-requisition');
     });
 
+    /**
+     *
+     * Route Prefix: /admin/locations
+     * Route Name: admin.locations.
+     */
+    Route::resource('/locations', LocationController::class);
+
+    /**
+     *
+     * Route Prefix: /admin/locations/providers
+     * Route Name: admin.location.providers.
+     * Parameters: {location}, {locatiionProviders}
+     */
+    Route::resource('/locations/{location}/providers', LocationProviderController::class, [
+        'names' => 'location.providers',
+    ])->parameters([
+        'providers' => 'locationProvider',
+    ]);;
+
 
     /***********
      * ZOHAIB Routes
      **********/
-    /**
-     *
-     * Route Prefix: /admin/panels
-     * Route Name: admin.panels.
-     */
-    Route::resource('/locations', LocationController::class);
-
     Route::view('/admin', 'home');
     Route::get('/admin/patient-appointments', [DataController::class, 'patientAppointment'])->name('patientAppointment');
     Route::view('/', 'index');
