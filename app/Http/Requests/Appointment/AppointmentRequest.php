@@ -4,9 +4,11 @@ namespace App\Http\Requests\Appointment;
 
 use App\Http\Requests\Patient\PatientRequest;
 use App\Models\{
+    Appointment,
     Location,
     LocationProvider,
     Panel,
+    Patient,
     Test,
 };
 use Illuminate\Foundation\Http\FormRequest;
@@ -35,13 +37,35 @@ class AppointmentRequest extends FormRequest
             abort(404, 'Step is Invalid');
         }
 
+        $patientRequest = (new PatientRequest())->rules();
+
+        if ($currentAppointmentPatient = Appointment::OfIncompletedStep()
+        ->ofCurrentToken()
+        ->byAuthUser()
+        ->latest()
+        ->first()?->patient) {
+
+            // update patient email validation rules, to ignore uniique email for current patient
+            $patientRequest['email'] = [
+                'required', 
+                'string', 
+                'max:255', 
+                'email', 
+                Rule::unique(Patient::class, 'email')
+                    ->ignore($currentAppointmentPatient->id, 'id'),
+            ];
+        }
+
+        
         $rules = [
             'step1' => [
                 'location_id' => ['required', 'numeric', Rule::exists(Location::class, 'id'),],
                 'appointment_date' => ['required', 'date_format:Y-m-d',],
                 'appointment_time' => ['required', 'date_format:H:i'],
 
-                ...(new PatientRequest())->rules(),
+                ...$patientRequest
+            ] + [
+                
             ],
 
             'step2' => [

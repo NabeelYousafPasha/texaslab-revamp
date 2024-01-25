@@ -15,6 +15,7 @@ use App\Models\{
     Patient,
 };
 use App\Services\AppointmentService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

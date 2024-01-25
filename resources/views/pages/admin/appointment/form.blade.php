@@ -33,7 +33,7 @@
                             <strong><u>Appointment</u></strong>
                         </a>
 
-                        scheduled <strong> (Date: {{ $appointment->appointment_date }} Time: {{ $appointment->appointment_time }}) </strong> 
+                        scheduled <strong> ({{ $appointment->appointment }}) </strong> 
                         in DRAFT status
                     </span>
                 </div>

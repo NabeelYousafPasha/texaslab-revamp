@@ -85,7 +85,7 @@
                     placeholder="Appointment Time"
                     class="form-input"
                     
-                    value="{{ old('appointment_time', $appointment->appointment_time ?? '') }}"
+                    value="{{ old('appointment_time', $appointment->appointment_timeslot ?? '') }}"
                 />
                 
                 @error('appointment_time')

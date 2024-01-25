@@ -84,11 +84,25 @@ class Appointment extends Model
     protected function appointment(): Attribute
     {
         return Attribute::make(
-            get: function () { 
-                $date = Carbon::parse($this->attributes['appointment_date'])->format('m/d/Y');
-                $time = Carbon::parse($this->attributes['appointment_time'])->format('h:i A');
+            get: function () {            
+                $date = Carbon::parse($this->attributes['appointment_date'])->format('Y-m-d');
+                $time = Carbon::parse($this->attributes['appointment_time'])->format('h:i:s A');
 
                 return $date.' - '.$time;
+            },
+            // set: fn ($value) => Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d'),
+        );
+    }
+
+    /**
+     *
+     * @return Attribute
+     */
+    protected function appointmentTimeslot(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return Carbon::parse($this->attributes['appointment_time'])->format('H:i');
             },
             // set: fn ($value) => Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d'),
         );
