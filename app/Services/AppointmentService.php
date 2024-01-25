@@ -14,19 +14,37 @@ class AppointmentService
     /**
      *
      * @param integer $patientId
-     * @param array $data
+     * @param array $appoiintmentData
      * 
      * @return Appointment
      */
-    public function savePatientAppointment(int $patientId, array $data): Appointment
+    public function createPatientAppointment(int $patientId, array $appoiintmentData): Appointment
     {
         $patientAppointment = new Appointment();
 
         $patientAppointment->fill([
             'patient_id' => $patientId,
-            ...$data
+            ...$appoiintmentData
         ])->save();
 
         return $patientAppointment->refresh();
+    }
+
+    /**
+     *
+     * @param Appointment $appointment
+     * @param integer $patientId
+     * @param array $appoiintmentData
+     * 
+     * @return Appointment
+     */
+    public function updatePatientAppointment(Appointment $appointment, int $patientId, array $appoiintmentData): Appointment
+    {
+        $appointment->fill([
+            'patient_id' => $patientId,
+            ...$appoiintmentData
+        ])->save();
+
+        return $appointment->refresh();
     }
 }

@@ -16,6 +16,7 @@ use App\Models\{
 };
 use App\Services\AppointmentService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AppointmentController extends Controller
 {
@@ -45,8 +46,9 @@ class AppointmentController extends Controller
      */
     public function create(string $step = 'step1')
     {   
+        // step must be valid
         if (! in_array($step, ['step1', 'step2', 'step3',])) {
-            abort(404, 'Step is Invalid');
+            abort(Response::HTTP_NOT_FOUND, 'Step is Invalid');
         }
 
         $data = [];
@@ -64,7 +66,15 @@ class AppointmentController extends Controller
                 ->latest()
                 ->first();
 
+        // step1 must be filled
+        if (is_null($currentAppointment) && in_array($step, ['step2', 'step3'])) {
+            
+            return abort(Response::HTTP_NOT_FOUND, 'Step is Invalid');
+
+        }
+
         if (! is_null($currentAppointment)) {
+            
             $appointmentLocation = $currentAppointment->location;
             $appointmentPatient = $currentAppointment->patient;
 
@@ -86,7 +96,6 @@ class AppointmentController extends Controller
                 $data = array_merge($data, [
                     'patientInsurances' => $appointmentPatient->insurances,
                 ]);
-
             }
         }
 
@@ -124,24 +133,41 @@ class AppointmentController extends Controller
             
             // create a new patient
             $patient = new Patient();
+            
+            if (! is_null($currentAppointment)) {
+
+                // update existing patient
+                $patient = Patient::find($currentAppointment->patient_id);
+            }
+
             $patient->fill($request->only($patientFields))
                 ->save();
             $patient = $patient->refresh();
 
+            // update step
             $step = 'step2';
 
             // create an appointment and associate it with recently created patient
-            $patientAppointment = $this->appointmentService
-                ->savePatientAppointment(
+            $patientAppointment = (is_null($currentAppointment)) 
+                ? $this->appointmentService->createPatientAppointment(
+                    $patient->id, 
+                    $request->except($patientFields) + ['step' => $step,]
+                )
+                : $this->appointmentService->updatePatientAppointment(
+                    $currentAppointment,
                     $patient->id, 
                     $request->except($patientFields) + ['step' => $step,]
                 );
 
-            // update patient created via event
-            $patient->update([
-                'model_type' => Appointment::class,
-                'model_id' => $patientAppointment->id,
-            ]);
+            // only one time event    
+            if (is_null($currentAppointment)) {
+
+                // update patient created via event
+                $patient->update([
+                    'model_type' => Appointment::class,
+                    'model_id' => $patientAppointment->id,
+                ]);
+            }
 
             return redirect()->route('admin.appointments.create', [
                 'step' => $step,
@@ -191,7 +217,7 @@ class AppointmentController extends Controller
      */
     public function show(Appointment $appointment)
     {
-        //
+        dd($appointment);
     }
 
     /**
