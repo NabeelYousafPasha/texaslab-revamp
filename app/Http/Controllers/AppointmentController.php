@@ -208,9 +208,7 @@ class AppointmentController extends Controller
             }
         }
 
-        return redirect()->route('admin.appointments.index', [
-            'step' => $step,
-        ]);
+        return redirect()->route('admin.appointments.index');
     }
 
     /**

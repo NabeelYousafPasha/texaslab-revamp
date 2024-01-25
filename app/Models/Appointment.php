@@ -84,7 +84,7 @@ class Appointment extends Model
     protected function appointment(): Attribute
     {
         return Attribute::make(
-            get: function () {            
+            get: function () {
                 $date = Carbon::parse($this->attributes['appointment_date'])->format('Y-m-d');
                 $time = Carbon::parse($this->attributes['appointment_time'])->format('h:i:s A');
 
