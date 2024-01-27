@@ -11,7 +11,13 @@
 
             <div class="flow-root">  
                 <div class="float-left">
-                    <h5 class="font-semibold text-lg dark:text-white-light">ICD CODES</h5>
+                    <ol class="flex text-gray-500 font-semibold dark:text-white-dark">
+                        <li>
+                            <a href="javascript:;">
+                                ICD CODES
+                            </a>
+                        </li>
+                    </ol>
                 </div>
                 <div class="float-right">
                     <a 

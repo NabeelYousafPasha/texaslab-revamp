@@ -14,7 +14,18 @@
 
             <div class="flow-root">  
                 <div class="float-left">
-                    <h5 class="font-semibold text-lg dark:text-white-light">LOCATION PROVIDERS</h5>
+                    <ol class="flex text-gray-500 font-semibold dark:text-white-dark">
+                        <li>
+                            <a href="javascript:;">
+                                LOCATION PROVIDERS
+                            </a>
+                        </li>
+                        <li class="before:content-['/'] before:px-1.5">
+                            <a href="javascript:;" class="text-black dark:text-white-light hover:text-black/70 dark:hover:text-white-light/70">
+                                {{ $location->name }}
+                            </a>
+                        </li>
+                    </ol>
                 </div>
             </div>
             

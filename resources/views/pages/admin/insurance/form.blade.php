@@ -7,7 +7,7 @@
     <div x-data="patientInsurances">
         <ul class="flex space-x-2 rtl:space-x-reverse">
             <li>
-                <a href="javascript:;" class="text-primary hover:underline">Patient Insurance</a>
+                <a href="javascript:;" class="text-primary hover:underline">Insurances</a>
             </li>
         </ul>
 
@@ -15,7 +15,18 @@
 
             <div class="flow-root">  
                 <div class="float-left">
-                    <h5 class="font-semibold text-lg dark:text-white-light">PATIENT INSURANCE</h5>
+                    <ol class="flex text-gray-500 font-semibold dark:text-white-dark">
+                        <li>
+                            <a href="javascript:;">
+                                INSURANCES
+                            </a>
+                        </li>
+                        <li class="before:content-['/'] before:px-1.5">
+                            <a href="javascript:;" class="text-black dark:text-white-light hover:text-black/70 dark:hover:text-white-light/70">
+                                {{ $patient->email }}
+                            </a>
+                        </li>
+                    </ol>
                 </div>
             </div>
             

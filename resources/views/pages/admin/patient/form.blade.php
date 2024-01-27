@@ -7,7 +7,7 @@
     <div x-data="panels">
         <ul class="flex space-x-2 rtl:space-x-reverse">
             <li>
-                <a href="javascript:;" class="text-primary hover:underline">Patient</a>
+                <a href="javascript:;" class="text-primary hover:underline">Patients</a>
             </li>
         </ul>
 
@@ -15,7 +15,13 @@
 
             <div class="flow-root">  
                 <div class="float-left">
-                    <h5 class="font-semibold text-lg dark:text-white-light">PATIENT</h5>
+                    <ol class="flex text-gray-500 font-semibold dark:text-white-dark">
+                        <li>
+                            <a href="javascript:;">
+                                PATIENTS
+                            </a>
+                        </li>
+                    </ol>
                 </div>
             </div>
             
