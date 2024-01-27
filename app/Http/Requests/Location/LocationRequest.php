@@ -32,6 +32,12 @@ class LocationRequest extends FormRequest
             'phone' => ['required', 'string', 'max:20'],
             'clia' => ['required', 'string', 'max:255'],
             'sales_rep_code' => ['required', 'string', 'max:255'],
+
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'state' => 'nullable|string|max:255',
+            'zipcode' => 'nullable|string|max:10',
+            'status' => 'required|boolean',
             
             'tests' => ['required', 'array',],
             'tests.*' => ['required', 'numeric', Rule::in(Test::pluck('id')->toArray()),],

@@ -14,9 +14,9 @@ use App\Models\{
 class LocationService
 {
     /**
+     * Store basic location details
      *
      * @param array $data
-     * 
      * @return Location
      */
     public function storeLocation(array $data): Location
@@ -28,14 +28,35 @@ class LocationService
     }
 
     /**
+     * Update location details
+     *
+     * @param Location $location
+     * @param array $data
+     * @return Location
+     */
+    public function updateLocation(Location $location, array $data): Location
+    {
+        $location->update($data);
+
+        return $location;
+    }
+
+    /**
+     * Store location timing details
      *
      * @param array $timingData
      * @param integer $locationId
-     * 
      * @return LocationTiming
      */
     public function storeLocationTiming(array $timingData, int $locationId): LocationTiming
     {
+        $existingTiming = LocationTiming::where('location_id', $locationId)->first();
+
+        if ($existingTiming) {
+            $existingTiming->update($timingData);
+            return $existingTiming;
+        }
+        
         $locationTiming = new LocationTiming($timingData);
         $locationTiming->location_id = $locationId;
         $locationTiming->save();
@@ -43,35 +64,44 @@ class LocationService
         return $locationTiming;
     }
 
+
     /**
+     * Store location day timing details
      *
-     * @param [type] $data
+     * @param array $data
      * @param integer $locationId
-     * 
      * @return void
      */
-    public function storeLocationDayTiming($data, int $locationId)
+    public function storeLocationDayTiming(array $data, int $locationId)
     {
         $daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-        
+
         foreach ($daysOfWeek as $day) {
+            $startKey = $day . '-start-time';
+            $endKey = $day . '-end-time';
+        
             if (isset($data[$day . '_status'])) {
-                $locationDayTiming = new LocationDayTiming();
-                $locationDayTiming->location_id = $locationId;
-                $locationDayTiming->day_of_week = $day;
-                $locationDayTiming->start_time = $data[$day . '-start-time']; // Use specific key for start time
-                $locationDayTiming->end_time = $data[$day . '-end-time'];     // Use specific key for end time
-                $locationDayTiming->status = $data[$day . '_status'];
-                $locationDayTiming->save();
+                $dayTimingData = [
+                    'location_id' => $locationId,
+                    'day_of_week' => $day,
+                    'start_time' => $data[$startKey],
+                    'end_time' => $data[$endKey],
+                    'status' => $data[$day . '_status'],
+                ];
+        
+                LocationDayTiming::updateOrCreate(
+                    ['location_id' => $locationId, 'day_of_week' => $day],
+                    $dayTimingData
+                );
             }
         }
     }
 
     /**
+     * Store location terms details
      *
      * @param array $data
      * @param integer $locationId
-     * 
      * @return LocationTerm
      */
     public function storeLocationTerms(array $data, int $locationId): LocationTerm
@@ -84,10 +114,10 @@ class LocationService
     }
 
     /**
+     * Store location tests details
      *
      * @param array $tests
      * @param integer $locationId
-     * 
      * @return void
      */
     public function storeLocationTests(array $tests, int $locationId)
@@ -97,14 +127,14 @@ class LocationService
                 'location_id' => $locationId,
                 'test_id' => $testId,
             ]);
-        };
+        }
     }
 
     /**
+     * Store location panels details
      *
      * @param array $panels
      * @param integer $locationId
-     * 
      * @return void
      */
     public function storeLocationPanels(array $panels, int $locationId)
@@ -114,6 +144,6 @@ class LocationService
                 'location_id' => $locationId,
                 'panel_id' => $panelId,
             ]);
-        };
+        }
     }
 }

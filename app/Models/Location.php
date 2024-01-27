@@ -51,6 +51,15 @@ class Location extends Model
      */
     public function dayTimings(): HasMany
     {
+        return $this->hasMany(LocationDayTiming::class, 'location_id');
+    }
+
+    /**
+     *
+     * @return HasMany
+     */
+    public function locationTiming(): HasMany
+    {
         return $this->hasMany(LocationTiming::class, 'location_id');
     }
 
