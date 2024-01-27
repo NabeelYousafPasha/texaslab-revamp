@@ -49,7 +49,44 @@
             </div>
         </div>
     </div>
+    @php
+        if(isset($locationData->locationTiming)){
+            $locationTimingData = [
+                'start' => optional($locationData->locationTiming->first())->start_time,
+                'end' => optional($locationData->locationTiming->first())->end_time,
+                'blockstart' => optional($locationData->locationTiming->first())->block_start_time,
+                'blockend' => optional($locationData->locationTiming->first())->block_end_time,
+            ];
+        }else{
+            $locationTimingData = [];
+        }
+        if(isset($locationData->locationTiming)){
+            $locationDayTimingData = [
+                'mondaystart' => optional($locationData->dayTimings->where('day_of_week', 'monday')->first())->start_time,
+                'mondayend' => optional($locationData->dayTimings->where('day_of_week', 'monday')->first())->end_time,
 
+                'tuesdaystart' => optional($locationData->dayTimings->where('day_of_week', 'tuesday')->first())->start_time,
+                'tuesdayend' => optional($locationData->dayTimings->where('day_of_week', 'tuesday')->first())->end_time,
+
+                'wednesdaystart' => optional($locationData->dayTimings->where('day_of_week', 'wednesday')->first())->start_time,
+                'wednesdayend' => optional($locationData->dayTimings->where('day_of_week', 'wednesday')->first())->end_time,
+
+                'thursdaystart' => optional($locationData->dayTimings->where('day_of_week', 'thursday')->first())->start_time,
+                'thursdayend' => optional($locationData->dayTimings->where('day_of_week', 'thursday')->first())->end_time,
+
+                'fridaystart' => optional($locationData->dayTimings->where('day_of_week', 'friday')->first())->start_time,
+                'fridayend' => optional($locationData->dayTimings->where('day_of_week', 'friday')->first())->end_time,
+
+                'saturdaystart' => optional($locationData->dayTimings->where('day_of_week', 'saturday')->first())->start_time,
+                'saturdayend' => optional($locationData->dayTimings->where('day_of_week', 'saturday')->first())->end_time,
+
+                'sundaystart' => optional($locationData->dayTimings->where('day_of_week', 'sunday')->first())->start_time,
+                'sundayend' => optional($locationData->dayTimings->where('day_of_week', 'sunday')->first())->end_time,
+            ];
+        }else{
+            $locationDayTimingData = [];
+        }
+    @endphp
     @push('scripts')
         <!-- script -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -65,27 +102,28 @@
                 }));
 
                 Alpine.data("form", () => ({
+                    fields: @json($locationTimingData),
                     init() {
                         flatpickr(document.getElementById('start-time'), {
-                            defaultDate: this.start,
+                            defaultDate: this.fields.start,
                             noCalendar: true,
                             enableTime: true,
                             dateFormat: 'H:i'
                         })
                         flatpickr(document.getElementById('end-time'), {
-                            defaultDate: this.end,
+                            defaultDate: this.fields.end,
                             noCalendar: true,
                             enableTime: true,
                             dateFormat: 'H:i'
                         })
                         flatpickr(document.getElementById('block-start-time'), {
-                            defaultDate: this.blockstart,
+                            defaultDate: this.fields.blockstart,
                             noCalendar: true,
                             enableTime: true,
                             dateFormat: 'H:i'
                         })
                         flatpickr(document.getElementById('block-end-time'), {
-                            defaultDate: this.blockend,
+                            defaultDate: this.fields.blockend,
                             noCalendar: true,
                             enableTime: true,
                             dateFormat: 'H:i'
@@ -94,6 +132,7 @@
                 }));
 
                 Alpine.data("appointmenttime", () => ({
+                    fields: @json($locationDayTimingData),
                     init() {
                         flatpickr(document.getElementById('monday-start-time'), {
                             defaultDate: this.mondaystart,
