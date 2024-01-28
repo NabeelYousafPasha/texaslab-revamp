@@ -25,7 +25,6 @@
             
             <div class="mt-3">
                 <div class="grid grid-cols-2 gap-4 justify-between mt-3">
-
                     <div class="w-full bg-white rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 space-y-3">
                         <h5 class="text-[#3b3f5c] text-xl font-semibold mb-4 dark:text-white-light">
                             Appointment Details
@@ -201,7 +200,7 @@
                                         placeholder="First Name"
                                         class="form-input"
                                         
-                                        value="{{ old('first_name', $locationProvider->first_name ?? '') }}"
+                                        value="{{ old('first_name', $appointmentLocationProvider->first_name ?? '') }}"
                                     />
                                     
                                     @error('first_name')
@@ -228,7 +227,7 @@
                                         placeholder="Last Name"
                                         class="form-input"
                                         
-                                        value="{{ old('last_name', $locationProvider->last_name ?? '') }}"
+                                        value="{{ old('last_name', $appointmentLocationProvider->last_name ?? '') }}"
                                     />
                                     
                                     @error('last_name')
@@ -256,7 +255,7 @@
                                     placeholder="NPI (National Provider Identifier)"
                                     class="form-input"
                                     
-                                    value="{{ old('npi', $locationProvider->npi ?? '') }}"
+                                    value="{{ old('npi', $appointmentLocationProvider->npi ?? '') }}"
                                 />
                                 
                                 @error('npi')
@@ -267,7 +266,67 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div class="grid grid-cols-1 gap-4 justify-between mt-3">
+                    <div class="w-full bg-white rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 space-y-3">
+                        <h5 class="text-[#3b3f5c] text-xl font-semibold mb-4 dark:text-white-light">
+                            Test(s)
+                        </h5>
+
+                        <div class="grid grid-cols-2 gap-4 justify-between">
+                            @foreach ($appointmentTests ?? [] as $test)
+                                <div class="form-field @error('name') has-error @enderror">
+                                    <label for="name">Name</label>
+                            
+                                    <div class="relative">
+                                        <input 
+                                            id="name" 
+                                            name="name"
+                                            type="text"
+                                            placeholder="Name of Test"
+                                            class="form-input"
+                                            
+                                            value="{{ old('name', $test->name ?? '') }}"
+                                        />
+                                        
+                                        @error('name')
+                                            <span>
+                                                <p class="text-danger mt-1">{{ $message }}</p>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            
+                                <div class="form-field space-y-3 @error('test_reference_option') has-error @enderror">
+                                    <label for="test_reference_option">Reference Option</label>
+                                
+                                    <div class="relative">
+                                        @foreach ($testReferenceOptions ?? [] as $testReferenceOptionCode => $testReferenceOptionName)
+                                            <label class="inline-flex mt-1 cursor-pointer">
+                                                <input 
+                                                    type="radio" 
+                                                    id="test_reference_option_{{ $testReferenceOptionCode }}"
+                                                    name="test_reference_option[{{ $test->id }}]" 
+                                                    class="form-radio" 
+                                                    value="{{ $testReferenceOptionCode }}"
+
+                                                    {{ old('test_reference_option') == $testReferenceOptionCode ? 'checked' : '' }}
+                                                />
+                                                <span class="text-white-dark">{{ $testReferenceOptionName }}</span>
+                                            </label>
+                                        @endforeach
+
+                                        @error('test_reference_option')
+                                            <span>
+                                                <p class="text-danger mt-1">{{ $message }}</p>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div> 
+                            @endforeach
+                        </div>                        
+                    </div>
                 </div>
             </div>
         </div>

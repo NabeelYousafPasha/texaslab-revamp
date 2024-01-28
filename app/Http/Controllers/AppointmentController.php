@@ -245,7 +245,6 @@ class AppointmentController extends Controller
 
     public function requisition(Appointment $appointment) 
     {
-
         // dd($appointment->location_providers);
         if (! is_null($appointment->step)) {
             dd('appointment not completed, please edit and complete from draft to completed');
@@ -255,8 +254,12 @@ class AppointmentController extends Controller
             'appointment' => $appointment,
             'appointmentLocation' => $appointment->location,
             'appointmentPatient' => $appointment->patient,
-            'appointmentLocatiionProvider' => $appointment->location_providers,
+            'appointmentLocationProvider' => $appointment->location_providers()->first(),
             'appointmentTests' => $appointment->tests,
+            'testReferenceOptions' => [
+                'in-house' => 'In House',
+                'reference-lab' => 'Reference Lab',
+            ],
         ]);
     }
 }
