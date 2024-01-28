@@ -55,7 +55,6 @@ class AppointmentRequest extends FormRequest
                     ->ignore($currentAppointmentPatient->id, 'id'),
             ];
         }
-
         
         $rules = [
             'step1' => [

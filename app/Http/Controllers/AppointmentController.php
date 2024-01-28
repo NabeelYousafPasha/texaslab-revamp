@@ -45,7 +45,7 @@ class AppointmentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(string $step = 'step1')
+    public function create(Request $request, string $step = 'step1')
     {   
         // step must be valid
         if (! in_array($step, ['step1', 'step2', 'step3',])) {
@@ -241,5 +241,22 @@ class AppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         //
+    }
+
+    public function requisition(Appointment $appointment) 
+    {
+
+        // dd($appointment->location_providers);
+        if (! is_null($appointment->step)) {
+            dd('appointment not completed, please edit and complete from draft to completed');
+        }
+
+        return view('pages.admin.appointment.requisition')->with([
+            'appointment' => $appointment,
+            'appointmentLocation' => $appointment->location,
+            'appointmentPatient' => $appointment->patient,
+            'appointmentLocatiionProvider' => $appointment->location_providers,
+            'appointmentTests' => $appointment->tests,
+        ]);
     }
 }
