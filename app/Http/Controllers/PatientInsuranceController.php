@@ -38,6 +38,7 @@ class PatientInsuranceController extends Controller
         ];
 
         return view('pages.admin.insurance.form')->with([
+            'patient' => $patient,
             'form' => $form,
             'insurancePlans' => InsurancePlan::pluck('name', 'id'),
             'insuranceResponsibleRelationsips' => InsuranceResponsibleRelationshipEnum::array(),

@@ -38,7 +38,7 @@
 
                     :spoofed-type="$form['_method'] ?? NULL"
                 >
-                    @includeIf('pages.admin.patient.insurance._form')
+                    @includeIf('pages.admin.insurance._form')
 
                     <button 
                         type="submit" 
