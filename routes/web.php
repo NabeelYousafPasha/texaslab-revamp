@@ -22,7 +22,6 @@ use App\Http\Controllers\{
 use App\Http\Middleware\{
     Authenticate,
 };
-use Illuminate\Http\Request;
 
 /**
  *
@@ -125,7 +124,7 @@ Route::group([
      *
      * Route Prefix: /admin/locations/providers
      * Route Name: admin.location.providers.
-     * Parameters: {location}, {locatiionProviders}
+     * Parameters: {location}, {locationProviders}
      */
     Route::resource('/locations/{location}/providers', LocationProviderController::class, [
         'names' => 'location.providers',
