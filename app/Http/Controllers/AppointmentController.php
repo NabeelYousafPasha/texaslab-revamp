@@ -10,12 +10,13 @@ use App\Http\Requests\Appointment\AppointmentRequest;
 use App\Http\Requests\Patient\PatientRequest;
 use App\Models\{
     Appointment,
+    IcdCode,
     InsurancePlan,
     Location,
     Patient,
 };
 use App\Services\AppointmentService;
-use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -261,5 +262,49 @@ class AppointmentController extends Controller
                 'reference-lab' => 'Reference Lab',
             ],
         ]);
+    }
+
+
+    public function requisitionPrint(Appointment $appointment) 
+    {
+        // dd($appointment->location_providers);
+        if (! is_null($appointment->step)) {
+            dd('appointment not completed, please edit and complete from draft to completed');
+        }
+
+        $logo = asset('/storage/logos/lab-img.png');
+        $img = file_get_contents(public_path('storage/logos/lab-img.png'));
+        $base64Logo = 'data:image/'.pathinfo($logo, PATHINFO_EXTENSION).';base64,'.base64_encode($img);
+
+        $icdCodes = IcdCode::whereIn('id', $appointment->tests->pluck('id'))->pluck('code', 'id');
+
+        $data = [
+            'appointment' => $appointment,
+            'location' => $appointment->location,
+            'patient' => $appointment->patient,
+            'appointmentLocationProvider' => $appointment->location_providers()->first(),
+            'appointmentTests' => $appointment->tests,
+            
+            'testReferenceOptions' => [
+                'in-house' => 'In House',
+                'reference-lab' => 'Reference Lab',
+            ],
+            'genders' => GenderEnum::array(),
+            'labLogo' => $base64Logo,
+            'icdCodesString' => implode(',', $icdCodes->toArray()),
+        ];
+
+        // dd($data);
+
+        // return view('pdf.appointment.requisition', $data);
+
+        $pdf = Pdf::setOptions([
+            'logOutputFile' => null, 
+            'isHtml5ParserEnabled' => true, 
+            'isRemoteEnabled' => true,
+        ])
+        ->loadView('pdf.appointment.requisition', $data);
+
+        return $pdf->stream();
     }
 }

@@ -17,6 +17,11 @@
                                 APPOINTMENTS
                             </a>
                         </li>
+                        <li class="before:content-['/'] before:px-1.5">
+                            <a href="javascript:;" class="text-black dark:text-white-light hover:text-black/70 dark:hover:text-white-light/70">
+                                Requisition
+                            </a>
+                        </li>
                     </ol>
                 </div>
                 <div class="float-right">
@@ -155,7 +160,7 @@
                                 for="address"
                                 class="@error('address') text-danger @enderror"
                             >
-                                Appointment Time
+                                Location Address
                             </label>
                 
                             <div class="relative">
@@ -163,10 +168,10 @@
                                     id="address" 
                                     name="address"
                                     type="text"
-                                    placeholder="Appointment Time"
+                                    placeholder="Location Address"
                                     class="form-input"
                                     
-                                    value="{{ old('address', $appointmentLocation->addressslot ?? '') }}"
+                                    value="{{ old('address', $appointmentLocation->address ?? '') }}"
                                 />
                                 
                                 @error('address')
@@ -327,6 +332,21 @@
                             @endforeach
                         </div>                        
                     </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="panel mt-6">
+            <div class="flex w-full">
+                <div class="flex items-center justify-center w-1/2">
+                    <a 
+                        href="{{ route('admin.appointments.requisition.print', ['appointment' => $appointment,]) }}" 
+                        x-tooltip="Requisition Print"
+                        class="btn btn-primary rounded-full"
+                    >
+                        Print Requisition
+                    </a>
                 </div>
             </div>
         </div>

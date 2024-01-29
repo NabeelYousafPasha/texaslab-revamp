@@ -110,6 +110,8 @@ Route::group([
         Route::get('/{appointment}', [AppointmentController::class, 'show'])->name('show');
 
         Route::get('/{appointment}/requisition', [AppointmentController::class, 'requisition'])->name('requisition');
+        Route::get('/{appointment}/requisition/print', [AppointmentController::class, 'requisitionPrint'])->name('requisition.print');
+        
     });
 
     /**
