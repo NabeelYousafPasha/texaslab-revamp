@@ -249,4 +249,13 @@ class LocationController extends Controller
         return redirect()->route('admin.locations.index')
                 ->withSuccess(__('Location delete successfully.'));
     }
+
+    public function updateLocationStatus($locationId)
+    {
+        $status = request()->input('status');
+
+        Location::where('id', $locationId)->update(['status' => $status]);
+
+        return response()->json(['message' => $status]);
+    }
 }

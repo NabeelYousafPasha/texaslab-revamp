@@ -44,23 +44,26 @@
                                 <td>{{ $location->name }}</td>
                                 <td>{{ $location->address }}</td>
                                 <td>
-                                    <div class="mt-2" x-data="{ isChecked: false }">
+                                    <div class="mt-2" x-data="{ isChecked: {{ $location->status == 1 ? 'true' : 'false' }} }">
                                         <label class="w-12 h-6 relative">
                                             <input
                                                 type="checkbox"
                                                 x-model="isChecked"
                                                 class="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer"
-                                                id="custom_switch_checkbox4"
+                                                id="custom_switch_checkbox{{ $location->id }}"
+                                                @change="updateLocationStatus({{ $location->id }}, isChecked)"
                                             />
                                             <span
-                                                for="custom_switch_checkbox4"
+                                                for="custom_switch_checkbox{{ $location->id }}"
                                                 x-bind:class="{ 'bg-[#ebedf2] dark:bg-dark': !isChecked, 'bg-primary': isChecked }"
                                                 class="block h-full rounded-full before:absolute before:left-1 before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 before:transition-all before:duration-300"
                                             ></span>
                                             <input type="hidden" x-bind:value="isChecked ? '1' : '0'" name="location_status" />
                                         </label>
-                                    </div>                                    
-                                </td>
+                                        <span x-text="isChecked ? 'Active' : 'Inactive'"></span>
+                                    </div>
+                                </td>                                
+                                
                                 <td class="text-center">
                                     <ul class="flex items-center gap-2">
                                         <li>
@@ -180,6 +183,24 @@
                     }
                 }));
             });
+            function updateLocationStatus(locationId, isChecked) {
+                fetch(`/admin/update-location-status/${locationId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    body: JSON.stringify({
+                        status: isChecked ? 1 : 0,
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
         </script>
     @endpush  
     

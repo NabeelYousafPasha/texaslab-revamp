@@ -116,6 +116,7 @@ Route::group([
      * Route Name: admin.locations.
      */
     Route::resource('/locations', LocationController::class);
+    Route::any('/update-location-status/{locationId}', [LocationController::class, 'updateLocationStatus']);
 
     /**
      *

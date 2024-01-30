@@ -372,7 +372,7 @@
                                 placeholder="Time interval"
                                 class="form-input"
                                 x-init="() => { 
-                                    fields.timeinterval = '{{ old('time_interval', isset($locationData->locationTiming) ? $locationData->locationTiming->first()->time_interval : '') }}';
+                                    fields.timeinterval = '{{ old('time_interval', isset($locationData->locationTiming) && $locationData->locationTiming->first() && $locationData->locationTiming->first()->time_interval !== null ? $locationData->locationTiming->first()->time_interval : '') }}';
                                     $watch('fields.time_interval', () => showError = false);
                                 }"
                             />
@@ -393,7 +393,7 @@
                                 x-model="fields.blocklimit"
                                 class="form-input"
                                 x-init="() => { 
-                                    fields.blocklimit = '{{ old('block_limit', isset($locationData->locationTiming) ? $locationData->locationTiming->first()->block_limit : '') }}';
+                                    fields.blocklimit = '{{ old('block_limit', isset($locationData->locationTiming) && $locationData->locationTiming->first() && $locationData->locationTiming->first()->block_limit !== null ? $locationData->locationTiming->first()->block_limit : '') }}';
                                     $watch('fields.block_limit', () => showError = false);
                                 }"
                             />
@@ -805,10 +805,6 @@
                             x-model="fields.terms_and_conditions"
                             class="hidden" 
                             type="hidden"
-                            x-init="() => { 
-                                fields.terms_and_conditions = '{{ old('terms_and_conditions', isset($locationData->locationTiming) ? $locationData->locationTiming->first()->block_limit : '') }}';
-                                $watch('fields.terms_and_conditions', () => showError = false);
-                            }"
                         >
 
                             
