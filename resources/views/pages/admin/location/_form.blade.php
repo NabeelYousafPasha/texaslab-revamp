@@ -30,7 +30,7 @@
                                 x-bind:class="{ 'form-input': true, 'border-red-500': showError }"
                                 class="form-input"
                                 x-on:input="fields.name = $event.target.value"
-                                x-init="fields.name = '{{ old('name', isset($locationData) ? $locationData->name : '') }}'"
+                                x-init="fields.name = '{{ old('name', isset($locationData) ? addslashes($locationData->name) : '') }}'"
                             />
                         
                             @error('name')
@@ -38,7 +38,8 @@
                                     <p class="text-danger mt-1">{{ $message }}</p>
                                 </span>
                             @enderror
-                        </div>                        
+                        </div>
+                                               
 
                         <div x-data="{ showError: @error('phone') true @else false @enderror }" class="wd-49 form-field">
                             <input
@@ -110,31 +111,41 @@
                             @enderror
                         </div>
                     </div>
-                    
-
                     <div class="mt-3 form-field space-y-3 @error('tests') has-error @enderror" x-data="{ tests: {{ $tests }} }">
                         <label for="tests"><b>Tests</b></label>  
                         <div x-data="{ showError: @error('tests') true @else false @enderror }" class="relative">
-                            <select 
-                                id="tests"
-                                name="tests[]" 
-                                class="selectize searchable-select"
-                                placeholder="Choose Test(s)..."
-                                multiple="multiple"
-                                x-model="selectedTests"
-                                x-bind:class="{ 'has-error': showError }"
-                                x-init="() => { $watch('selectedTests', () => showError = false) }"
-                            >
-                                @foreach ($tests as $testId => $testName)
-                                    <option
-                                        value="{{ $testId }}"
-                                        {{ in_array($testId, old('tests') ?? []) ? 'selected' : '' }}
-                                    >
-                                        {{ $testId }} - {{ $testName }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        
+                            <div class="select-test">
+                                <select 
+                                    id="tests"
+                                    name="tests[]" 
+                                    class="selectize searchable-select"
+                                    placeholder="Choose Test(s)..."
+                                    multiple="multiple"
+                                    x-model="selectedTests"
+                                    x-bind:class="{ 'has-error': showError }"
+                                    x-init="() => { $watch('selectedTests', () => showError = false) }"
+                                >
+                                @php
+                                    if(isset($locationData)){
+                                        $locationTests = $locationData->locationTests->pluck('test_id')->toArray();
+                                    }
+                                @endphp
+                                    @foreach ($tests as $testId => $testName)
+                                        <option
+                                            value="{{ $testId }}"
+                                            @if(!empty($locationTests))
+                                                @if(in_array($testId,$locationTests))
+                                                    selected
+                                                @endif
+                                            @endif
+                                        >
+                                            {{ $testId }} - {{ $testName }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            
+
                             @error('tests')
                                 <span x-show="showError">
                                     <p class="text-danger mt-1">{{ $message }}</p>
@@ -142,7 +153,7 @@
                             @enderror
                         </div>
                                               
-                    </div>  
+                    </div>   
 
                     <div class="mt-3 form-field space-y-3 @error('panels') has-error @enderror" x-data="{ panels: {{ $panels }} }">
                         <label for="panels"><b>Panels</b></label>
@@ -400,7 +411,7 @@
                     <div class="grid grid-cols-1 sm:flex justify-between gap-5 mt-3">
                         <div class="flex flex-wd-10">
                             <p class="mb-2"><b>Monday</b></p>
-                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && $locationData->dayTimings->where('day_of_week', 'monday')->first()->status == 1 ? 'true' : 'false' }} }">
+                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && $locationData->dayTimings->where('day_of_week', 'monday')->isNotEmpty() && $locationData->dayTimings->where('day_of_week', 'monday')->first()->status == 1 ? 'true' : 'false' }} }">
                                 <label class="w-12 h-6 relative">
                                     <input
                                         type="checkbox"
@@ -452,7 +463,7 @@
                     <div class="grid grid-cols-1 sm:flex justify-between gap-5 mt-3">
                         <div class="flex flex-wd-10">
                             <p class="mb-2"><b>Tuesday</b></p>
-                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && $locationData->dayTimings->where('day_of_week', 'tuesday')->first()->status == 1 ? 'true' : 'false' }} }">
+                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && $locationData->dayTimings->where('day_of_week', 'tuesday')->isNotEmpty() && $locationData->dayTimings->where('day_of_week', 'tuesday')->first()->status == 1 ? 'true' : 'false' }} }">
                                 <label class="w-12 h-6 relative">
                                     <input
                                         type="checkbox"
@@ -505,7 +516,7 @@
                     <div class="grid grid-cols-1 sm:flex justify-between gap-5 mt-3">
                         <div class="flex flex-wd-10">
                             <p class="mb-2"><b>Wednesday</b></p>
-                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && $locationData->dayTimings->where('day_of_week', 'wednesday')->first()->status == 1 ? 'true' : 'false' }} }">
+                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && $locationData->dayTimings->where('day_of_week', 'wednesday')->isNotEmpty() && $locationData->dayTimings->where('day_of_week', 'wednesday')->first()->status == 1 ? 'true' : 'false' }} }">
                                 <label class="w-12 h-6 relative">
                                     <input
                                         type="checkbox"
@@ -559,7 +570,7 @@
                     <div class="grid grid-cols-1 sm:flex justify-between gap-5 mt-3">
                         <div class="flex flex-wd-10">
                             <p class="mb-2"><b>Thursday</b></p>
-                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && $locationData->dayTimings->where('day_of_week', 'thursday')->first()->status == 1 ? 'true' : 'false' }} }">
+                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && $locationData->dayTimings->where('day_of_week', 'thursday')->isNotEmpty() && $locationData->dayTimings->where('day_of_week', 'thursday')->first()->status == 1 ? 'true' : 'false' }} }">
                                 <label class="w-12 h-6 relative">
                                     <input
                                         type="checkbox"
@@ -612,7 +623,7 @@
                     <div class="grid grid-cols-1 sm:flex justify-between gap-5 mt-3">
                         <div class="flex flex-wd-10">
                             <p class="mb-2"><b>Friday</b></p>
-                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && $locationData->dayTimings->where('day_of_week', 'friday')->first()->status == 1 ? 'true' : 'false' }} }">
+                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && optional($locationData->dayTimings->where('day_of_week', 'friday')->first())->status == 1 ? 'true' : 'false' }} }">
                                 <label class="w-12 h-6 relative">
                                     <input
                                         type="checkbox"
@@ -666,7 +677,7 @@
                     <div class="grid grid-cols-1 sm:flex justify-between gap-5 mt-3">
                         <div class="flex flex-wd-10">
                             <p class="mb-2"><b>Saturday</b></p>
-                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && $locationData->dayTimings->where('day_of_week', 'saturday')->first()->status == 1 ? 'true' : 'false' }} }">
+                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && optional($locationData->dayTimings->where('day_of_week', 'saturday')->first())->status == 1 ? 'true' : 'false' }} }">
                                 <label class="w-12 h-6 relative">
                                     <input
                                         type="checkbox"
@@ -719,7 +730,7 @@
                     <div class="grid grid-cols-1 sm:flex justify-between gap-5 mt-3">
                         <div class="flex flex-wd-10">
                             <p class="mb-2"><b>sunday</b></p>
-                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && $locationData->dayTimings->where('day_of_week', 'sunday')->first()->status == 1 ? 'true' : 'false' }} }">
+                            <div class="mt-2" x-data="{ isChecked: {{ isset($locationData->dayTimings) && optional($locationData->dayTimings->where('day_of_week', 'sunday')->first())->status == 1 ? 'true' : 'false' }} }">
                                 <label class="w-12 h-6 relative">
                                     <input
                                         type="checkbox"

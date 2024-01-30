@@ -123,7 +123,7 @@ class LocationController extends Controller
         }
 
         // Store location tests
-        // $this->locationService->storeLocationTests($request->input('tests'), $location->id);
+        $this->locationService->storeLocationTests($request->input('tests'), $location->id);
 
         if ($request->filled('panels') && is_array($request->input('panels'))) {
             // Store location panels
@@ -148,7 +148,7 @@ class LocationController extends Controller
     {
         $tests = Test::pluck('name', 'id');
         $panels = Panel::pluck('name', 'id');
-        $locationData = Location::with('dayTimings', 'tests', 'panels', 'locationTiming')
+        $locationData = Location::with('dayTimings', 'locationTests', 'panels', 'locationTiming')
                 ->where('id', '=', $location->id)
                 ->first();
         $form = [
@@ -228,11 +228,11 @@ class LocationController extends Controller
         }
 
         // Update location tests
-        // $this->locationService->storeLocationTests($request->input('tests'), $location->id);
+        $this->locationService->updateLocationTests($request->input('tests'), $location->id);
 
         if ($request->filled('panels') && is_array($request->input('panels'))) {
             // Update location panels
-            // $this->locationService->storeLocationPanels($request->input('panels'), $location->id);
+            $this->locationService->storeLocationPanels($request->input('panels'), $location->id);
         }
 
         return redirect()->route('admin.locations.index');

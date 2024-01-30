@@ -67,6 +67,15 @@ class Location extends Model
      *
      * @return HasMany
      */
+    public function locationTests(): HasMany
+    {
+        return $this->hasMany(LocationTest::class, 'location_id');
+    }
+
+    /**
+     *
+     * @return HasMany
+     */
     public function providers(): HasMany
     {
         return $this->hasMany(LocationProvider::class, 'location_id');

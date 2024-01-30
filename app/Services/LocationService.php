@@ -10,6 +10,7 @@ use App\Models\{
     LocationTest,
     LocationPanel
 };
+use Carbon\Carbon;
 
 class LocationService
 {
@@ -122,13 +123,47 @@ class LocationService
      */
     public function storeLocationTests(array $tests, int $locationId)
     {
-        foreach ($tests ?? [] as $testId) {
-            LocationTest::create([
+        $now = Carbon::now();
+        $dataToInsert = [];
+        foreach ($tests as $testId) {
+            $dataToInsert[] = [
                 'location_id' => $locationId,
                 'test_id' => $testId,
-            ]);
+                'updated_at' => $now,
+                'created_at' => $now,
+            ];
         }
+        LocationTest::insert($dataToInsert);
     }
+
+    public function updateLocationTests(array $tests, int $locationId)
+    {
+        $existingRecords = LocationTest::where('location_id', $locationId)->get();
+        foreach ($existingRecords as $existingRecord) {
+            $check = !in_array($existingRecord->test_id, $tests);
+            if (!in_array($existingRecord->test_id, $tests)) {
+                $existingRecord->delete();
+            }
+        }
+    
+        foreach ($tests as $testId) {
+            $existingRecord = LocationTest::where('location_id', $locationId)
+                ->where('test_id', $testId)
+                ->first();
+    
+            if ($existingRecord) {
+                $existingRecord->update([
+                    // Update any additional fields if needed
+                ]);
+            } else {
+                LocationTest::create([
+                    'location_id' => $locationId,
+                    'test_id' => $testId,
+                ]);
+            }
+        }
+    }    
+
 
     /**
      * Store location panels details
@@ -140,10 +175,20 @@ class LocationService
     public function storeLocationPanels(array $panels, int $locationId)
     {
         foreach ($panels ?? [] as $panelId) {
-            LocationPanel::create([
-                'location_id' => $locationId,
-                'panel_id' => $panelId,
-            ]);
+            $existingRecord = LocationPanel::where('location_id', $locationId)
+                ->where('panel_id', $panelId)
+                ->first();
+    
+            if ($existingRecord) {
+                $existingRecord->update([
+                ]);
+            } else {
+                LocationPanel::create([
+                    'location_id' => $locationId,
+                    'panel_id' => $panelId,
+                ]);
+            }
         }
     }
+    
 }
