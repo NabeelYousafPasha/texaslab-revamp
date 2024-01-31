@@ -190,7 +190,10 @@
                 }));
             });
             function updateLocationStatus(locationId, isChecked) {
-                fetch(`/admin/update-location-status/${locationId}`, {
+                console.error('locationId:', locationId);
+                console.error('isChecked:', isChecked);
+                
+                fetch(`/api/admin/location-status/${locationId}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -202,6 +205,7 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    console.error('data:', data);
                 })
                 .catch(error => {
                     console.error('Error:', error);

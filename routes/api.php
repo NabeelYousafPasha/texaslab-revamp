@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\API\{
+    LocationController,
+};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +20,18 @@ use App\Http\Controllers\FormController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-// Route::get('/store-appointment', [FormController::class, 'storeAppointment']);
+
+/**
+ *
+ * Auth & Admin routes
+ *
+ * Route Prefix: /api/admin/
+ */
+Route::group([
+    // 'middleware' => 'auth',
+    'prefix' => '/admin/',
+], function () {
+
+    Route::post('/location-status/{location}', [LocationController::class, 'updateLocationStatus']);
+
+});
