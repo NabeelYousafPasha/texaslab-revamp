@@ -50,7 +50,7 @@
                                     x-show="open" 
                                     x-transition 
                                     x-transition.duration.300
-                                    class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-4xl my-8"
+                                    class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-2xl my-8"
                                 >
                                     <div
                                         class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3"
@@ -77,22 +77,6 @@
                                             
                                             @includeIf('pages.admin.appointment.filters.form')
 
-                                        </div>
-                                        <div class="flex justify-end items-center mt-8">
-                                            <button 
-                                                type="button" 
-                                                class="btn btn-outline-danger"
-                                                @click="toggle"
-                                            >
-                                                Reset
-                                            </button>
-                                            <button 
-                                                type="button" 
-                                                class="btn btn-primary ltr:ml-4 rtl:mr-4"
-                                                @click="toggle"
-                                            >
-                                                Search
-                                            </button>
                                         </div>
                                     </div>
                                 </div>

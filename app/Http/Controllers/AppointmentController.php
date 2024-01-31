@@ -14,6 +14,7 @@ use App\Models\{
     InsurancePlan,
     Location,
     Patient,
+    Test,
 };
 use App\Services\AppointmentService;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -36,10 +37,13 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::with('patient')->get();
+        $appointments = Appointment::with('patient');
 
         return view('pages.admin.appointment.index')->with([
-            'appointments' => $appointments,
+            'appointments' => $appointments->get(),
+
+            'locations' => Location::pluck('name', 'id'),
+            'tests' => Test::pluck('name', 'id'),
         ]);
     }
 
@@ -242,6 +246,76 @@ class AppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         //
+    }
+
+    public function filter(Request $request) 
+    {
+
+        $appointments = Appointment::query();
+
+        $appointments->ofCompletedStep();
+
+        if ($request->filled('id')) {
+            $appointments->where('id', '=', $request->get('id'));
+        }
+
+        if ($request->filled('from')) {
+            $appointments->whereDate('appointment_date', '>=', $request->get('from'));
+        }
+
+        if ($request->filled('to')) {
+            $appointments->whereDate('appointment_date', '<=', $request->get('to'));
+        }
+
+        $appointments->with([
+            'patient' => function($query) use ($request) {
+
+                if ($request->filled('first_name')) {
+                    $query->where('first_name', '=', $request->get('first_name'));
+                }
+
+                if ($request->filled('last_name')) {
+                    $query->where('last_name', '=', $request->get('last_name'));
+                }
+
+                if ($request->filled('dob')) {
+                    $query->whereDate('dob', '=', $request->get('dob'));
+                }
+            },
+        ]);
+
+        if ($request->filled('locations')) {
+
+            $appointments->whereIn('appointments.location_id', $request->get('locations'));
+        }
+
+        if ($request->filled('test')) {
+
+            $appointments->with([
+                'tests' => function($query) use ($request) {
+                    $query->where('tests.id', '=', $request->get('test'));
+                },
+            ]);
+        }
+
+
+        return view('pages.admin.appointment.index')->with([
+            'appointments' => $appointments->get(),
+
+            'locations' => Location::pluck('name', 'id'),
+            'tests' => Test::pluck('name', 'id'),
+
+            'filters' => [
+                'id' => $request->get('id'),
+                'from' => $request->get('from'),
+                'to' => $request->get('to'),
+                'first_name' => $request->get('first_name'),
+                'last_name' => $request->get('last_name'),
+                'dob' => $request->get('dob'),
+                'locations' => $request->get('locations'),
+                'test' => $request->get('test'),
+            ],
+        ]);
     }
 
     public function requisition(Appointment $appointment) 

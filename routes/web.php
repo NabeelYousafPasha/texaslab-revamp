@@ -106,6 +106,8 @@ Route::group([
         Route::get('/create/{step?}', [AppointmentController::class, 'create'])->name('create');
         Route::post('/{step?}', [AppointmentController::class, 'store'])->name('store');
 
+        Route::get('/filter', [AppointmentController::class, 'filter'])->name('filter');
+        
         Route::get('/{appointment}', [AppointmentController::class, 'show'])->name('show');
 
         Route::get('/{appointment}/requisition', [AppointmentController::class, 'requisition'])->name('requisition');

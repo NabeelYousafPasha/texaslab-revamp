@@ -4,14 +4,14 @@
     method="{{ $method }}"
     action="{{ $action }}"
     {{ $enctypeFormAttribute() }}
->
-    @csrf
-    
+>   
     @if ($spoofedType ?? false)
         @method($spoofedType)
     @endif
 
     <div class="space-y-3">
         {{ $slot }}
+
+        @csrf
     </div>
 </form>
