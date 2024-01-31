@@ -53,12 +53,12 @@
 
     <div class="form-field space-y-3 @error('status_id') has-error @enderror" x-data="
     {
-        statuses: {{ $statuses }}
+        statuses: {{ $statuses ?? '' }}
     }">
         <label for="status_id">Status</label>
     
         <div class="relative">
-            @foreach ($statuses as $statusId => $statusName)
+            @foreach ($statuses ?? [] as $statusId => $statusName)
                 <label class="inline-flex mt-1 cursor-pointer">
                     <input 
                         type="radio" 
@@ -109,7 +109,7 @@
 
     <div class="form-field space-y-3 @error('tests') has-error @enderror" x-data="
     {
-        tests: {{ $tests }}
+        tests: {{ $tests ?? '' }}
     }">
         <label for="tests">Tests</label>
     
@@ -121,7 +121,7 @@
                 placeholder="Choose Test(s)..."
                 multiple="multiple"
             >
-                @foreach ($tests as $testId => $testName)
+                @foreach ($tests ?? [] as $testId => $testName)
                     <option
                         class="form-radio" 
                         value="{{ $testId }}"
