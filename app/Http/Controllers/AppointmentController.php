@@ -246,10 +246,7 @@ class AppointmentController extends Controller
 
     public function requisition(Appointment $appointment) 
     {
-        // dd($appointment->location_providers);
-        if (! is_null($appointment->step)) {
-            dd('appointment not completed, please edit and complete from draft to completed');
-        }
+        abort_if(! is_null($appointment->step), Response::HTTP_NOT_FOUND, 'Step(s) Not Completed');
 
         return view('pages.admin.appointment.requisition')->with([
             'appointment' => $appointment,
@@ -267,10 +264,7 @@ class AppointmentController extends Controller
 
     public function requisitionPrint(Appointment $appointment) 
     {
-        // dd($appointment->location_providers);
-        if (! is_null($appointment->step)) {
-            dd('appointment not completed, please edit and complete from draft to completed');
-        }
+        abort_if(! is_null($appointment->step), Response::HTTP_NOT_FOUND, 'Step(s) Not Completed');
 
         $logo = asset('/storage/logos/lab-img.png');
         $img = file_get_contents(public_path('storage/logos/lab-img.png'));
