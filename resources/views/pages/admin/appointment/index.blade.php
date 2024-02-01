@@ -82,8 +82,15 @@
                             </div>
                         </div>
                         
+                        @php
+                            $reportRoute = route('reports.appointments.view');
+
+                            if (isset($filters)) {
+                                $reportRoute = route('reports.appointments.view', $filters);
+                            }
+                        @endphp
                         <a 
-                            href="{{ route('reports.appointments.view', [$filters ?? '']) }}"
+                            href="{{ $reportRoute }}"
                             class="btn btn-outline-info" 
                         >
                             Excel Report
