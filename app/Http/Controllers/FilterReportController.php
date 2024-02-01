@@ -8,7 +8,11 @@ class FilterReportController extends Controller
 {
     public function appointmentView(Request $request) 
     {
-        return view('pages.reports.appointment.view');
+        $columns = config('custom.appointment.REPORT_COLLUMNS');
+
+        return view('pages.reports.appointment.view')->with([
+            'columns' => $columns,
+        ]);
     }
 
     public function appointmentDownload(Request $request) 

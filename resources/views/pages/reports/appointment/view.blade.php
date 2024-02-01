@@ -30,8 +30,34 @@
             </div>
         </div>
 
-        <div class="panel mt-6">
-            <div class="mt-3">
+        <div class="mt-6">
+            <div class="grid sm:grid-cols-1 xl:grid-cols-1 gap-6 mb-6">
+
+                <div class="panel h-full">
+                    <div class="flex items-center justify-between dark:text-white-light mb-5">
+                        <h5 class="font-semibold text-lg">
+                            Columns 
+                        </h5>
+                    </div>
+                    <div class="mb-3">
+                        <div class="flex flex-wrap flex-row dark:text-white-light gap-8">
+                            @foreach ($columns as $columnValue => $column)
+                                <label class="inline-flex">
+                                    <input 
+                                        id="{{ $columnValue }}"
+                                        name="columns[{{ $columnValue }}]"
+                                        type="checkbox" 
+                                        value="{{ $columnValue }}"
+                                        class="form-checkbox outline-primary" 
+                                        @checked($column['checked'] ?? FALSE)
+                                    />
+                                    <span>{{ $column['display_name'] }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
