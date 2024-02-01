@@ -31,12 +31,11 @@
         </div>
 
         <div class="panel mt-6">
-            <div class="mb-0">
-                <div class="flex items-center gap-2">
+            <div class="flex flex-wrap items-center gap-2">
                     <div x-data="modal">
                         <button 
                             type="button" 
-                            class="btn btn-warning" 
+                            class="btn btn-outline-warning" 
                             @click="toggle"
                         >
                             Filters
@@ -82,7 +81,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        
+                        <a 
+                            href="{{ route('reports.appointments.view', [$filters ?? '']) }}"
+                            class="btn btn-outline-info" 
+                        >
+                            Excel Report
+                        </a>
                 </div>
             </div>
         </div>

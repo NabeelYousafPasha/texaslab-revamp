@@ -23,7 +23,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AppointmentController extends Controller
 {
-
     /**
      *
      * @param AppointmentService $appointmentService
@@ -297,7 +296,6 @@ class AppointmentController extends Controller
                 },
             ]);
         }
-
 
         return view('pages.admin.appointment.index')->with([
             'appointments' => $appointments->get(),
