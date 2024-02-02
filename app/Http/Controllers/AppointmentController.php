@@ -43,6 +43,7 @@ class AppointmentController extends Controller
 
             'locations' => Location::pluck('name', 'id'),
             'tests' => Test::pluck('name', 'id'),
+            'columns' => config('custom.appointment.REPORT_COLLUMNS'),
         ]);
     }
 
@@ -313,6 +314,7 @@ class AppointmentController extends Controller
                 'locations' => $request->get('locations'),
                 'test' => $request->get('test'),
             ],
+            'columns' => config('custom.appointment.REPORT_COLLUMNS'),
         ]);
     }
 

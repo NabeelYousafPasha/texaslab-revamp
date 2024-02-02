@@ -31,57 +31,103 @@
         </div>
 
         <div class="panel mt-6">
-            <div class="flex flex-wrap items-center gap-2">
-                    <div x-data="modal">
+            <div class="grid grid-cols-2 gap-2">
+
+                <div class="flex flex-row gap-2">
+                    <div class="item" x-data="modal">
+                        <!-- button -->
                         <button 
                             type="button" 
-                            class="btn btn-outline-warning" 
-                            @click="toggle"
+                            class="btn btn-secondary" 
+                            @click="toggleModal"
                         >
                             Filters
                         </button>
-                        <div
-                            :class="open && '!block'" 
-                            class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto"
-                        >
+                
+                        <!-- modal -->
+                        <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="open && '!block'">
                             <div class="flex items-start justify-center min-h-screen px-4">
                                 <div 
                                     x-show="open" 
                                     x-transition 
-                                    x-transition.duration.300
-                                    class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-2xl my-8"
+                                    x-transition.duration.300 
+                                    class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8"
                                 >
-                                    <div
-                                        class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3"
+                                    <div 
+                                        class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-5"
                                     >
                                         <div class="font-bold text-lg">
                                             Filters
                                         </div>
-                                        <button type="button" class="text-white-dark hover:text-dark"
-                                            @click="toggle">
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                                                class="w-6 h-6">
-                                                <line x1="18" y1="6" x2="6" y2="18">
-                                                </line>
-                                                <line x1="6" y1="6" x2="18" y2="18">
-                                                </line>
+                                        <button type="button" class="text-white-dark hover:text-dark" @click="toggleModal">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px"
+                                                height="24px" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="w-6 h-6"
+                                            >
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
                                             </svg>
                                         </button>
                                     </div>
+    
                                     <div class="p-5">
-                                        <div class="dark:text-white-dark/70 text-base font-medium text-[#1f2937]">
-                                            
-                                            @includeIf('pages.admin.appointment.filters.form')
-
-                                        </div>
+                                        @includeIf('pages.admin.appointment.filters.form')
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+                    </div>      
+                </div>
+
+                <div class="flex flex-row-reverse gap-2">
+                    <div class="item">  
+                        <div class="relative inline-flex align-middle flex-col items-start justify-center">
+                            <div class="relative">
+                                <div x-data="dropdown" @click.outside="open = false" class="dropdown">
+                                    <button 
+                                        type="button" 
+                                        class="btn dropdown-toggle btn-dark rounded-none"
+                                        @click="toggle"
+                                    >
+                                        Columns
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="w-4 h-4 ltr:ml-2 rtl:mr-2 inline-block shrink-0">
+                                            <path d="M19 9L12 15L5 9" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                    <ul 
+                                        x-cloak 
+                                        x-show="open" 
+                                        x-transition 
+                                        x-transition.duration.300ms
+                                        class="ltr:right-0 rtl:left-0 whitespace-nowrap space-y-2 py-2"
+                                    >
+                                        @foreach ($columns ?? [] as $columnValue => $column)
+                                            <li>
+                                                <label class="flex flex-row gap-2 ml-2 mr-2">
+                                                    <input 
+                                                        id="{{ $columnValue }}"
+                                                        name="columns[{{ $columnValue }}]"
+                                                        type="checkbox" 
+                                                        value="{{ $columnValue }}"
+                                                        class="form-checkbox outline-primary" 
+                                                        @checked($column['checked'] ?? FALSE)
+                                                    />
+                                                    <span>{{ $column['display_name'] }}</span>
+                                                </label>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
                         @php
                             $reportRoute = route('reports.appointments.view');
 
@@ -95,13 +141,16 @@
                         >
                             Excel Report
                         </a>
+                    </div>
                 </div>
+
             </div>
         </div>
 
         <div class="panel mt-6">
             <div class="mt-3">
-                <div class="table-responsive mt-3">
+
+                <div class="table-responsive mt-3 pt-3">
                     <table 
                         id="appointmentsTable" 
                         class="whitespace-nowrap table-hover table-bordered"
@@ -217,6 +266,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
 
     @push('scripts')
@@ -248,8 +298,8 @@
                 }));
                 Alpine.data("modal", (initialOpenState = false) => ({
                     open: initialOpenState,
-
-                    toggle() {
+    
+                    toggleModal() {
                         this.open = !this.open;
                     },
                 }));
