@@ -41,7 +41,12 @@
                             class="btn btn-secondary" 
                             @click="toggleModal"
                         >
-                            Filters
+                            Filters 
+                            @if (isset($filters))
+                                <span class="badge absolute ltr:right-0 rtl:left-0 -top-3 bg-danger p-0.5 px-1.5 rounded-full">
+                                    {{ ' 1+' }}
+                                </span>
+                            @endif
                         </button>
                 
                         <!-- modal -->

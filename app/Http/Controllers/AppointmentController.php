@@ -18,6 +18,7 @@ use App\Models\{
 };
 use App\Services\AppointmentService;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -36,7 +37,11 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::with('patient');
+        $appointments = Appointment::query();
+        
+        $appointments->whereHas('patient');
+
+        $appointments->with('patient');
 
         return view('pages.admin.appointment.index')->with([
             'appointments' => $appointments->get(),
@@ -250,7 +255,6 @@ class AppointmentController extends Controller
 
     public function filter(Request $request) 
     {
-
         $appointments = Appointment::query();
 
         $appointments->ofCompletedStep();
@@ -267,36 +271,41 @@ class AppointmentController extends Controller
             $appointments->whereDate('appointment_date', '<=', $request->get('to'));
         }
 
-        $appointments->with([
-            'patient' => function($query) use ($request) {
+        $appointments->whereHas('patient', function (Builder $query) use ($request) {
+            
+            if ($request->filled('first_name')) {
+                $query->where('first_name', 'LIKE', $request->get('first_name').'%');
+            }
 
-                if ($request->filled('first_name')) {
-                    $query->where('first_name', '=', $request->get('first_name'));
-                }
+            if ($request->filled('last_name')) {
+                $query->where('last_name', 'LIKE', $request->get('last_name').'%');
+            }
 
-                if ($request->filled('last_name')) {
-                    $query->where('last_name', '=', $request->get('last_name'));
-                }
+            if ($request->filled('dob')) {
+                $query->whereDate('dob', '=', $request->get('dob'));
+            }
 
-                if ($request->filled('dob')) {
-                    $query->whereDate('dob', '=', $request->get('dob'));
-                }
-            },
-        ]);
+            return $query;
+        });
 
         if ($request->filled('locations')) {
 
             $appointments->whereIn('appointments.location_id', $request->get('locations'));
         }
 
-        if ($request->filled('test')) {
+        $appointments->whereHas('tests', function (Builder $query) use ($request) {
+        
+            if ($request->filled('test')) {
+                $query->where('tests.id', '=', $request->get('test'));
 
-            $appointments->with([
-                'tests' => function($query) use ($request) {
-                    $query->where('tests.id', '=', $request->get('test'));
-                },
-            ]);
-        }
+                return $query;
+            }
+        });
+        
+        $appointments->with([
+            'patient',
+            'tests',
+        ]);
 
         return view('pages.admin.appointment.index')->with([
             'appointments' => $appointments->get(),
@@ -304,6 +313,7 @@ class AppointmentController extends Controller
             'locations' => Location::pluck('name', 'id'),
             'tests' => Test::pluck('name', 'id'),
 
+            'columns' => config('custom.appointment.REPORT_COLLUMNS'),
             'filters' => [
                 'id' => $request->get('id'),
                 'from' => $request->get('from'),
@@ -314,7 +324,6 @@ class AppointmentController extends Controller
                 'locations' => $request->get('locations'),
                 'test' => $request->get('test'),
             ],
-            'columns' => config('custom.appointment.REPORT_COLLUMNS'),
         ]);
     }
 

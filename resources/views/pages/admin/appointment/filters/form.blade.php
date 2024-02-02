@@ -151,7 +151,7 @@
                             type="date"
                             class="form-input flex-1"
                             
-                            value="{{ old('from', $filter['from'] ?? '') }}"
+                            value="{{ old('from', $filters['from'] ?? '') }}"
                         />
                         
                         @error('from')
