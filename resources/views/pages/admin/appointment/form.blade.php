@@ -148,7 +148,7 @@
                         <template x-if="isTabStep('step3')">
                             <div>
                                 <div class="w-full bg-white rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5">            
-                                    @includeIf('pages.admin.insurance._form')
+                                    @includeIf('pages.admin.appointment._step3')
                                 </div>
 
                                 <div class="mb-4"></div>
