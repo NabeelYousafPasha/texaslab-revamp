@@ -28,6 +28,8 @@ class PatientInsurance extends Model
         'employer_no',
         'ssn',
         'is_worker_compensated',
+        'model_type',
+        'model_id',
     ];
 
     /**

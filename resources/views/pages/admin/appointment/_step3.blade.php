@@ -1,7 +1,7 @@
 <div x-data="step3Form">
 
-    <div class="form-field @error('is_free') has-error @enderror">
-        <label for="is_free">
+    <div class="form-field @error('payment_via') has-error @enderror">
+        <label for="payment_via">
             Payment Via
         </label>
 
@@ -9,35 +9,31 @@
             <label class="inline-flex mt-1 cursor-pointer mr-2">
                 <input 
                     type="radio" 
-                    name="is_free" 
+                    name="payment_via" 
                     class="form-radio" 
-                    value="1"
+                    value="cash"
                     x-ref="paymentViaCash"
                     
                     x-on:click="hideInsuranceFields"
-                    {{ old('is_free') == 1 ? 'checked' : '' }}
-
-                    {{ isset($test) && (bool) $test->is_free == 1 ? 'checked' : '' }}
+                    @checked(old('payment_via') == 'cash')
                 />
                 <span class="text-white-dark">Cash</span>
             </label>
             <label class="inline-flex mt-1 cursor-pointer mr-2">
                 <input 
                     type="radio" 
-                    name="is_free" 
+                    name="payment_via" 
                     class="form-radio" 
-                    value="0"
+                    value="insurance"
                     x-ref="paymentViaInsurance"
                     
                     x-on:click="showInsuranceFields"
-                    {{ old('is_free') != null && old('is_free') == 0 ? 'checked' : '' }}
-                    
-                    {{ isset($test) && (bool) $test->is_free == 0 ? 'checked' : '' }}
+                    @checked(old('payment_via') == 'insurance')
                 />
                 <span class="text-white-dark">Insurance</span>
             </label>
 
-            @error('is_free')
+            @error('payment_via')
                 <span>
                     <p class="text-danger mt-1">{{ $message }}</p>
                 </span>

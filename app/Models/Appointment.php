@@ -35,6 +35,7 @@ class Appointment extends Model
         'appointment_time',
         'token',
         'step',
+        'payment_via',
         'created_by',
     ];
 

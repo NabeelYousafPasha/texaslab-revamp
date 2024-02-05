@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\{
+    AppointmentPaymentViaEnum,
     GenderEnum,
     InsuranceResponsibleRelationshipEnum,
 };
@@ -106,6 +107,7 @@ class AppointmentController extends Controller
 
                 $data = array_merge($data, [
                     'patientInsurances' => $appointmentPatient->insurances,
+                    'appointmentPaymentVia' => AppointmentPaymentViaEnum::array(),
                 ]);
             }
         }
@@ -213,8 +215,19 @@ class AppointmentController extends Controller
             if ($step == 'step3') {
 
                 $currentAppointment->update([
+                    'payment_via' => $request->validated('payment_via'),
                     'step' => NULL,
                 ]);
+
+                // if ($request->validated('payment_via') == AppointmentPaymentViaEnum::INSURANCE) {
+                    $currentAppointment
+                        ->patient
+                        ->insurances()
+                        ->create(array_merge($request->validated(), [
+                            'model_type' => Appointment::class,
+                            'model_id' => $currentAppointment->id,
+                        ]));
+                // }
             }
         }
 

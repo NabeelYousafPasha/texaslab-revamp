@@ -2,7 +2,11 @@
 
 namespace App\Http\Requests\Appointment;
 
-use App\Http\Requests\Patient\PatientRequest;
+use App\Enums\AppointmentPaymentViaEnum;
+use App\Http\Requests\{
+    Patient\PatientRequest,
+    PatientInsurance\PatientInsuranceRequest,
+};
 use App\Models\{
     Appointment,
     Location,
@@ -79,7 +83,8 @@ class AppointmentRequest extends FormRequest
             ],
 
             'step3' => [
-                //
+                'payment_via' => ['required', 'string', Rule::in(AppointmentPaymentViaEnum::values()),],
+                ...(new PatientInsuranceRequest())->rules(),
             ],
         ];
 
